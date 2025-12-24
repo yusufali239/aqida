@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Китаб ат-Тамхид | Имам аль-Ламиши</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #c0392b;
+            --bg-color: #fdfbf7; /* Цвет старой бумаги */
+            --sidebar-width: 280px;
+            --text-color: #333;
+            --light-border: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Amiri', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: white;
+            border-left: 1px solid var(--light-border);
+            padding: 2rem 1rem;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100%;
+            overflow-y: auto;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        .sidebar h1 {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 1rem;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links button {
+            width: 100%;
+            text-align: right;
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links button:hover, .nav-links button.active {
+            background-color: #f0f0f0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-right: var(--sidebar-width);
+            padding: 3rem 4rem;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .chapter {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .chapter.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-family: 'Tajawal', sans-serif;
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-border);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .highlight-box {
+            background-color: #fff;
+            border: 1px solid #dcdcdc;
+            border-right: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            background-color: #fffdf2;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-color);
+        }
+
+        .term {
+            font-weight: bold;
+            color: var(--primary-color);
+            background-color: #e8ecef;
+            padding: 0 5px;
+            border-radius: 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-left: none;
+                border-bottom: 1px solid var(--light-border);
+            }
+            .main-content {
+                margin-right: 0;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <h1>Дарс (Учебный план)</h1>
+        <ul class="nav-links">
+            <li><button onclick="showChapter('intro')" class="active">1. Введение и Автор</button></li>
+            <li><button onclick="showChapter('knowledge')">2. Источники знания</button></li>
+            <li><button onclick="showChapter('creation')">3. Сотворенность мира</button></li>
+            <li><button onclick="showChapter('creator')">4. Доказательство Творца</button></li>
+            <li><button onclick="showChapter('attributes')">5. Атрибуты Аллаха</button></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+
+        <article id="intro" class="chapter active">
+            <h2>1. Об авторе и определение науки Калам</h2>
+            
+            <div class="highlight-box">
+                <strong>Автор:</strong> Шейх, Имам, Сейф аль-Хакк Насир аш-Шариа, Абу ас-Сана Махмуд ибн Зейд аль-Ламиши.
+                <br>Он вырос в Мавераннахре, в селении «Ламиш» (Фергана), которое было одним из центров ученых-матуридитов.
+            </div>
+
+            <h3>Определение науки Калам (تَعْرِيفُ عِلْمِ الكَلَام)</h3>
+            <p>
+                Науки определяются либо по их предмету, либо по их целям.
+            </p>
+            <p>
+                <strong>По предмету:</strong> Это наука, в которой исследуются сущность Аллаха Всевышнего, Его атрибуты и состояния возможных вещей (сотворенного), начиная от начала творения и заканчивая возвращением (Судным днем), на основе закона Ислама.
+            </p>
+            <p>
+                <strong>По цели (согласно Иджи и Ибн Халдуну):</strong> Это наука, дающая способность доказывать религиозные вероубеждения путем приведения доводов и опровержения сомнений.
+            </p>
+            
+            <h3>Тема науки Калам</h3>
+            <p>
+                Темой является <span class="term">Сущность Аллаха</span> (по мнению Кади аль-Армави), так как в ней обсуждаются Его атрибуты. Или же темой является <span class="term">Известное (аль-Маълюм)</span>, так как любое известное может служить доказательством религиозных догм.
+            </p>
+        </article>
+
+        <article id="knowledge" class="chapter">
+            <h2>2. Причины получения знаний (أَسْبابِ العِلْم)</h2>
+            <p>
+                Причины, посредством которых творения постигают истину вещей, бывают трех видов:
+            </p>
+            <ol style="padding-right: 20px; font-size: 1.2rem;">
+                <li><strong>Здоровые чувства (الحواس السليمة)</strong>: Слух, зрение, обоняние, вкус, осязание.</li>
+                <li><strong>Прямой разум (العقول المستقيمة)</strong>: Познание того, что целое больше части, происходит разумом, а не чувствами.</li>
+                <li><strong>Правдивые сообщения (الأخبار الصادقة)</strong>: Сообщения пророков или мутаватир (массовая передача).</li>
+            </ol>
+
+            <div class="highlight-box">
+                <strong>Опровержение софистов (Суфустаийя):</strong>
+                <br>Они утверждают, что истины вещей не существует, или мы не можем её познать. Мы говорим им: «Имеет ли ваше утверждение истину?». Если они скажут «нет» — они опровергли сами себя. Если «да» — то они подтвердили наличие истины.
+            </div>
+        </article>
+
+        <article id="creation" class="chapter">
+            <h2>3. Доказательство сотворенности мира (حُدُوثِ العَالَم)</h2>
+            <p>
+                Мир (аль-Алам) — это всё, что существует помимо Аллаха. И он состоит из двух категорий: <span class="term">Субстанции (А'ян)</span> и <span class="term">Акциденции (А'рад)</span>.
+            </p>
+
+            <h3>Определения:</h3>
+            <ul>
+                <li><strong>Акциденция (аль-Арад):</strong> То, что не существует само по себе (например, цвет, движение, покой). Оно не вечно и меняется.</li>
+                <li><strong>Субстанция (аль-Джаухар):</strong> То, что существует само по себе и принимает на себя акциденции.</li>
+                <li><strong>Тело (аль-Джисм):</strong> Составное из двух и более частей.</li>
+            </ul>
+
+            <h3>Доказательство:</h3>
+            <p>
+                Мы видим, что тела не свободны от изменений (движение сменяется покоем, цвет меняется). То, что не свободно от изменений (хавадис), само является сотворенным (хадис). Следовательно, весь мир сотворен.
+            </p>
+        </article>
+
+        <article id="creator" class="chapter">
+            <h2>4. Утверждение Творца и Его единства</h2>
+            <p>
+                Раз мир сотворен, у него должен быть Создатель (Мухдис). Невозможно, чтобы мир создал сам себя, так как небытие не может действовать.
+            </p>
+            
+            <h3>Доказательство Единства (Бурхан ат-Таману')</h3>
+            <p>
+                Если бы существовало два бога, то неизбежно возник бы конфликт:
+                <br>Если один захочет создать жизнь в теле, а другой — смерть, то:
+            </p>
+            <ul>
+                <li>Либо исполнятся желания обоих (невозможно, так как это объединение противоположностей).</li>
+                <li>Либо не исполнится ничье желание (это указывает на бессилие обоих).</li>
+                <li>Либо исполнится желание одного, а другого нет (тот, чье желание не исполнилось — бессилен и не может быть Богом).</li>
+            </ul>
+            <p>
+                Это подтверждает аят: <em>«Если бы на них [небесах и земле] были иные божества, кроме Аллаха, то они разрушились бы»</em> (Аль-Анбия: 22).
+            </p>
+        </article>
+
+        <article id="attributes" class="chapter">
+            <h2>5. Атрибуты Аллаха (Цыфат)</h2>
+            
+            <h3>Отрицание недостатков (Танзих)</h3>
+            <p>
+                Создатель мира не является ни <span class="term">акциденцией</span> (так как она не вечна), ни <span class="term">телом</span> (так как тело состоит из частей и нуждается в месте), ни <span class="term">субстанцией</span>.
+            </p>
+            <p>
+                Аллах не находится в каком-то месте (макан) и не имеет направления (джиха), так как Он существовал до создания места. Утверждение направления ограничивает Его.
+            </p>
+
+            <h3>Утверждение Атрибутов</h3>
+            <p>
+                Ахлю-Сунна валь-Джамаа утверждают, что у Аллаха есть вечные атрибуты: 
+                <strong>Жизнь, Знание, Могущество, Слух, Зрение, Воля, Речь и Творение (Таквин).</strong>
+            </p>
+            
+            <div class="highlight-box">
+                <strong>Спор с мутазилитами:</strong> Мутазилиты отрицают вечные атрибуты, говоря, что Аллах Знающий Своей сущностью, а не отдельным атрибутом «Знание». Мы же говорим: нельзя сказать «Ученый без знания», как нельзя сказать «Богатый без денег». Атрибуты не являются ни самой Сущностью, ни чем-то отдельным от Нее (в смысле, что они не могут существовать без Нее).
+            </div>
+
+            <h3>Речь Аллаха (Калам)</h3>
+            <p>
+                Коран — это речь Аллаха, она вечна и несотворенна. Это внутренний смысл (Калам Нафси), который не состоит из звуков и букв, но выражается на разных языках (арабском, иврите и т.д.). Мутазилиты же ложно утверждают, что Коран сотворен.
+            </p>
+        </article>
+
+    </main>
+
+    <script>
+        function showChapter(chapterId) {
+            // Скрываем все главы
+            const chapters = document.querySelectorAll('.chapter');
+            chapters.forEach(ch => ch.classList.remove('active'));
+
+            // Убираем активный класс с кнопок
+            const buttons = document.querySelectorAll('.nav-links button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Показываем нужную главу
+            document.getElementById(chapterId).classList.add('active');
+            
+            // Подсвечиваем активную кнопку
+            const activeButton = document.querySelector(`button[onclick="showChapter('${chapterId}')"]`);
+            if(activeButton) {
+                activeButton.classList.add('active');
+            }
+
+            // Прокрутка наверх (для мобильных)
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
