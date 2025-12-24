@@ -1,265 +1,1057 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>تمهيد الدلائل – الإمام اللامشي</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>تمهيد الدلائل — اللامشي (نسخة موبايل)</title>
 
-<style>
-:root{
- --gold:#c9a24d;
- --ink:#1b1f2a;
- --muted:#5c6370;
- --paper:#ffffff;
- --paper2:#f8f8f9;
- --line:#e5e7eb;
- --radius:14px;
- --max:980px;
- --fs:18px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
- font-family:'Amiri','Traditional Arabic',serif;
- background:#f4f5f7;
- color:var(--ink);
- font-size:var(--fs);
- line-height:2.05;
-}
-a{text-decoration:none;color:inherit}
-header{
- max-width:var(--max);
- margin:1.5rem auto 1rem;
- padding:1.6rem;
- background:var(--paper);
- border:1px solid var(--line);
- border-radius:var(--radius);
-}
-header h1{text-align:center;font-size:2rem}
-header .sub{text-align:center;color:var(--muted)}
-nav{
- position:sticky;top:0;z-index:100;
- background:var(--paper);
- border-bottom:1px solid var(--line);
-}
-nav .wrap{
- max-width:var(--max);
- margin:auto;
- display:flex;
- gap:.6rem;
- padding:.6rem;
- overflow-x:auto;
-}
-nav a{
- padding:.5rem .9rem;
- border:1px solid var(--line);
- border-radius:999px;
- font-weight:700;
- background:var(--paper2);
-}
-main{max-width:var(--max);margin:1.2rem auto;padding:0 .8rem}
-.section{
- background:var(--paper);
- border:1px solid var(--line);
- border-radius:var(--radius);
- padding:1.2rem;
- margin:1rem 0;
-}
-.section h2{
- font-size:1.6rem;
- border-bottom:2px solid var(--gold);
- display:inline-block;
- padding-bottom:.2rem;
- margin-bottom:.8rem;
-}
-.block{
- background:var(--paper2);
- border:1px solid var(--line);
- border-radius:12px;
- padding:1rem;
- margin:.7rem 0;
-}
-.block h3{color:var(--gold);margin-bottom:.3rem}
-.chapter{
- border:1px solid var(--line);
- border-radius:12px;
- margin:.7rem 0;
- overflow:hidden;
-}
-.chapter-head{
- display:flex;
- justify-content:space-between;
- padding:.7rem .9rem;
- background:var(--paper2);
-}
-.chapter-head b{font-size:1.1rem}
-.toggle{
- border:1px solid var(--line);
- background:var(--paper);
- padding:.35rem .8rem;
- border-radius:999px;
- font-weight:700;
- cursor:pointer;
-}
-.chapter-content{
- display:none;
- padding:.9rem;
- border-top:1px dashed var(--line);
-}
-.chapter.active .chapter-content{display:block}
-footer{
- max-width:var(--max);
- margin:2rem auto;
- text-align:center;
- color:var(--muted);
- font-size:.95rem;
-}
-@media(max-width:768px){
- body{font-size:17px}
- header h1{font-size:1.6rem}
-}
-</style>
+  <!--
+    Mobile-first, single-file site.
+    Features:
+    - Bottom navigation for phone
+    - One-tap accordion toggles (no accidental close while selecting text)
+    - Search with results list + jump + highlight
+    - Reading mode + simple mode + theme toggle
+    - Persist open chapters + settings via localStorage
+    - Print/PDF clean styles
+  -->
+
+  <style>
+    :root{
+      --bg0:#0f2027;
+      --bg1:#203a43;
+      --bg2:#2c5364;
+
+      --paper:#ffffff;
+      --paper2:#f7f9fc;
+      --ink:#0f172a;
+      --muted:#475569;
+
+      --brand:#1e3c72;
+      --brand2:#2a5298;
+      --gold:#ffd700;
+
+      --radius:16px;
+      --shadow: 0 10px 24px rgba(0,0,0,.12);
+
+      --tap: 48px; /* minimum tap target */
+      --line: 2.05;
+      --fs: 16px;
+
+      --border: rgba(15, 23, 42, .12);
+      --card: rgba(255,255,255,.96);
+    }
+
+    html{ scroll-behavior:smooth; }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: 'Amiri','Traditional Arabic', serif;
+      font-size: var(--fs);
+      line-height: var(--line);
+      color: var(--ink);
+      background: linear-gradient(135deg, var(--bg0) 0%, var(--bg1) 50%, var(--bg2) 100%);
+      min-height:100vh;
+      padding-bottom: calc(84px + env(safe-area-inset-bottom)); /* space for bottom bar */
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ===== Top app bar (compact on phone) ===== */
+    .appbar{
+      position: sticky;
+      top:0;
+      z-index: 1500;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.92);
+      border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+    .appbar-inner{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: .65rem .85rem;
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      justify-content: space-between;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.65rem;
+      min-width:0;
+    }
+    .logo{
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 100%);
+      box-shadow: 0 8px 18px rgba(30,60,114,.25);
+      display:grid;
+      place-items:center;
+      color: white;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+    .titles{
+      min-width:0;
+    }
+    .titles h1{
+      margin:0;
+      font-size: 1.05rem;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .titles .sub{
+      margin-top:.1rem;
+      font-size: .85rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+
+    .app-actions{
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+      flex:0 0 auto;
+    }
+
+    .iconbtn{
+      width: var(--tap);
+      height: var(--tap);
+      border:1px solid rgba(0,0,0,.10);
+      border-radius: 14px;
+      background: rgba(255,255,255,.95);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      user-select:none;
+      font-size: 18px;
+    }
+    .iconbtn:active{ transform: scale(.98); }
+
+    /* ===== Container ===== */
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 14px 12px;
+    }
+
+    /* ===== Hero ===== */
+    .hero{
+      background: rgba(255,255,255,.92);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .hero-top{
+      padding: 1.1rem 1rem;
+      background: linear-gradient(135deg, rgba(30,60,114,.98) 0%, rgba(42,82,152,.98) 100%);
+      color: white;
+      position: relative;
+    }
+    .hero-top:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at 20% 20%, rgba(255,215,0,.22), transparent 45%),
+                  radial-gradient(circle at 80% 35%, rgba(255,255,255,.14), transparent 50%);
+      pointer-events:none;
+    }
+    .hero-top h2{
+      margin:0 0 .25rem;
+      font-size: 1.35rem;
+      position:relative;
+      z-index:1;
+    }
+    .hero-top p{
+      margin:0;
+      opacity:.95;
+      position:relative;
+      z-index:1;
+      font-size: .98rem;
+    }
+    .hero-meta{
+      padding: .9rem 1rem;
+      display:flex;
+      flex-direction: column;
+      gap:.55rem;
+      background: rgba(255,255,255,.92);
+    }
+    .chiprow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .chip{
+      padding: .35rem .7rem;
+      border-radius: 999px;
+      background: rgba(30,60,114,.08);
+      border: 1px solid rgba(30,60,114,.18);
+      color: var(--brand);
+      font-weight: 900;
+      font-size: .92rem;
+    }
+
+    /* ===== Search ===== */
+    .searchbox{
+      display:flex;
+      gap:.6rem;
+      align-items:center;
+      margin-top:.25rem;
+    }
+    .searchbox input{
+      flex:1;
+      height: var(--tap);
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,.14);
+      padding: 0 14px;
+      font-family: inherit;
+      font-size: 1rem;
+      background: white;
+      outline:none;
+    }
+    .searchbox input:focus{
+      border-color: rgba(30,60,114,.45);
+      box-shadow: 0 0 0 4px rgba(30,60,114,.14);
+    }
+    .pillbtn{
+      height: var(--tap);
+      padding: 0 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 100%);
+      color:white;
+      font-weight: 900;
+      cursor:pointer;
+      white-space: nowrap;
+    }
+    .pillbtn.secondary{
+      background: white;
+      color: var(--brand);
+      border: 1px solid rgba(30,60,114,.25);
+    }
+    .pillbtn:active{ transform: scale(.99); }
+
+    /* ===== Sections ===== */
+    .section{
+      margin-top: 14px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,.06);
+      overflow:hidden;
+    }
+    .section-head{
+      padding: .95rem 1rem;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap:.75rem;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .section-head h3{
+      margin:0;
+      font-size: 1.15rem;
+      color: var(--brand);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .section-body{ padding: 1rem; }
+
+    .note{
+      background: rgba(30,60,114,.06);
+      border: 1px solid rgba(30,60,114,.14);
+      border-radius: 14px;
+      padding: .9rem;
+      color: #0b224c;
+    }
+    .quote{
+      background: rgba(255,152,0,.08);
+      border: 1px solid rgba(255,152,0,.18);
+      border-right: 5px solid rgba(255,152,0,.65);
+      border-radius: 14px;
+      padding: .9rem;
+      margin-top: .9rem;
+      position: relative;
+      font-style: italic;
+    }
+    .quote:before{
+      content:"❝";
+      position:absolute;
+      top: -8px;
+      right: 10px;
+      opacity:.25;
+      font-size: 2.4rem;
+      color: #ff9800;
+    }
+    .ref{
+      background: rgba(156,39,176,.08);
+      border: 1px solid rgba(156,39,176,.18);
+      border-right: 5px solid rgba(156,39,176,.55);
+      border-radius: 14px;
+      padding: .85rem;
+      margin-top:.9rem;
+      color: #3b0f46;
+      font-size: .98rem;
+    }
+    mark.hl{
+      background: #ffed4e;
+      border-radius: 4px;
+      padding: 0 .12rem;
+    }
+
+    /* ===== Accordion chapters ===== */
+    .chapters{ display:flex; flex-direction: column; gap:.75rem; }
+    .chapter{
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.98);
+      overflow:hidden;
+    }
+    .ch-head{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap:.75rem;
+      padding: .85rem .9rem;
+    }
+    .ch-title{
+      margin:0;
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--brand);
+      flex:1;
+      min-width:0;
+    }
+    .toggle{
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(30,60,114,.22);
+      background: rgba(30,60,114,.08);
+      color: var(--brand);
+      font-weight: 900;
+      cursor:pointer;
+      flex: 0 0 auto;
+    }
+    .toggle:active{ transform: scale(.99); }
+
+    .ch-body{
+      display:none;
+      padding: 0 .95rem .95rem;
+      border-top: 1px dashed rgba(0,0,0,.14);
+    }
+    .chapter.active .ch-body{ display:block; }
+
+    /* ===== Search results panel ===== */
+    .results{
+      display:none;
+      margin-top: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.98);
+      overflow:hidden;
+    }
+    .results-head{
+      padding: .7rem .9rem;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap:.75rem;
+      border-bottom: 1px dashed rgba(0,0,0,.14);
+    }
+    .results-head strong{ color: var(--brand); }
+    .results-list{ padding: .65rem; display:flex; flex-direction:column; gap:.55rem; }
+    .r-item{
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(30,60,114,.06);
+      padding: .7rem .8rem;
+      cursor:pointer;
+    }
+    .r-item:active{ transform: scale(.99); }
+    .r-item .rt{ font-weight: 900; color: var(--brand); margin:0 0 .2rem; font-size: 1.0rem; }
+    .r-item .rs{ margin:0; color: var(--muted); font-size: .95rem; }
+
+    /* ===== Bottom bar (phone) ===== */
+    .bbar{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 2000;
+      display:flex;
+      gap:10px;
+      padding: 10px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 12px 28px rgba(0,0,0,.22);
+      border: 1px solid rgba(0,0,0,.08);
+      backdrop-filter: blur(10px);
+    }
+    .bbar button{
+      flex:1;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(30,60,114,.18);
+      background: rgba(30,60,114,.08);
+      color: var(--brand);
+      font-weight: 900;
+      font-size: 15px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.35rem;
+      user-select:none;
+    }
+    .bbar button:active{ transform: scale(.99); }
+
+    /* ===== Modes ===== */
+    body.reading{
+      --fs: 17px;
+      --line: 2.2;
+    }
+    body.simple .note,
+    body.simple .quote,
+    body.simple .ref,
+    body.simple .r-item{
+      background: rgba(255,255,255,.98) !important;
+    }
+    body.simple .hero-top{
+      background: rgba(30,60,114,.98);
+    }
+
+    /* ===== Dark theme ===== */
+    :root[data-theme="dark"]{
+      --paper: rgba(13,18,24,.94);
+      --paper2: rgba(13,18,24,.92);
+      --ink: #e7eef7;
+      --muted: #b6c2d3;
+      --border: rgba(255,255,255,.12);
+      --card: rgba(13,18,24,.92);
+    }
+    :root[data-theme="dark"] .appbar{ background: rgba(13,18,24,.90); border-bottom-color: rgba(255,255,255,.10); }
+    :root[data-theme="dark"] .iconbtn{ background: rgba(13,18,24,.92); border-color: rgba(255,255,255,.12); color: #e7eef7; }
+    :root[data-theme="dark"] .hero{ background: rgba(13,18,24,.92); border-color: rgba(255,255,255,.10); }
+    :root[data-theme="dark"] .hero-meta{ background: rgba(13,18,24,.92); }
+    :root[data-theme="dark"] .chip{ background: rgba(255,215,0,.12); border-color: rgba(255,215,0,.22); color: #ffd700; }
+    :root[data-theme="dark"] .section{ border-color: rgba(255,255,255,.10); }
+    :root[data-theme="dark"] .section-head{ background: rgba(13,18,24,.92); border-bottom-color: rgba(255,255,255,.10); }
+    :root[data-theme="dark"] .note{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); color: #e7eef7; }
+    :root[data-theme="dark"] .quote{ background: rgba(255,152,0,.10); border-color: rgba(255,152,0,.18); }
+    :root[data-theme="dark"] .ref{ background: rgba(156,39,176,.12); border-color: rgba(156,39,176,.22); color: #efe0f2; }
+    :root[data-theme="dark"] .chapter{ background: rgba(13,18,24,.92); border-color: rgba(255,255,255,.10); }
+    :root[data-theme="dark"] .results{ background: rgba(13,18,24,.92); border-color: rgba(255,255,255,.10); }
+    :root[data-theme="dark"] .r-item{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.10); }
+    :root[data-theme="dark"] .searchbox input{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); color: #e7eef7; }
+    :root[data-theme="dark"] .bbar{ background: rgba(13,18,24,.90); border-color: rgba(255,255,255,.12); }
+    :root[data-theme="dark"] .bbar button{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); color: #e7eef7; }
+
+    /* ===== Desktop tweaks ===== */
+    @media (min-width: 900px){
+      body{ padding-bottom: 18px; }
+      .bbar{ display:none; }
+      .wrap{ padding: 18px 14px; }
+      .appbar-inner{ padding: .7rem 1rem; }
+      .hero-top h2{ font-size: 1.55rem; }
+      .searchbox input{ font-size: 1.02rem; }
+    }
+
+    /* ===== Print/PDF ===== */
+    @media print{
+      .appbar, .bbar, .iconbtn, .pillbtn, .results{ display:none !important; }
+      body{ background: white !important; padding-bottom: 0 !important; }
+      .hero, .section{ box-shadow:none !important; }
+      .ch-body{ display:block !important; }
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Top app bar -->
+  <header class="appbar" id="top">
+    <div class="appbar-inner">
+      <div class="brand" title="تمهيد الدلائل">
+        <div class="logo">ت</div>
+        <div class="titles">
+          <h1>تمهيد الدلائل — اللامشي</h1>
+          <div class="sub">نسخة مريحة للموبايل • بحث سريع • وضع قراءة</div>
+        </div>
+      </div>
+      <div class="app-actions">
+        <button class="iconbtn" id="btnTheme" type="button" title="تبديل الوضع">🌙</button>
+        <button class="iconbtn" id="btnReading" type="button" title="وضع القراءة">👓</button>
+        <button class="iconbtn" id="btnSimple" type="button" title="مظهر بسيط">✨</button>
+      </div>
+    </div>
+  </header>
 
-<header>
-<h1>تمهيد الدلائل في تحقيق مسائل علم الكلام</h1>
-<div class="sub">الإمام أبو الثناء محمود بن زيد اللامشي</div>
-</header>
+  <main class="wrap">
+    <!-- Hero -->
+    <section class="hero" aria-label="الغلاف">
+      <div class="hero-top">
+        <h2>تمهيد الدلائل في تحقيق مسائل علم الكلام</h2>
+        <p>الشيخ الإمام أبو الثناء محمود بن زيد اللامشي</p>
+      </div>
+      <div class="hero-meta">
+        <div class="chiprow">
+          <span class="chip">📱 Mobile-first</span>
+          <span class="chip">🔎 بحث + نتائج</span>
+          <span class="chip">💾 حفظ الحالة</span>
+          <span class="chip">🖨️ طباعة/PDF</span>
+        </div>
 
-<nav>
-<div class="wrap">
-<a href="#bio">ترجمة</a>
-<a href="#intro">مدخل</a>
-<a href="#usul">أصول معرفية</a>
-<a href="#chapters">فصول</a>
-<a href="#proofs">خلاصة الأدلة</a>
-</div>
-</nav>
+        <div class="searchbox" role="search">
+          <input id="q" type="search" placeholder="ابحث… مثال: الدليل، الحكم، حدوث العالم" autocomplete="off" />
+          <button class="pillbtn secondary" id="btnClear" type="button">مسح</button>
+          <button class="pillbtn" id="btnOpenAll" type="button">فتح الكل</button>
+        </div>
 
-<main>
+        <div class="results" id="results" aria-live="polite">
+          <div class="results-head">
+            <strong>نتائج البحث</strong>
+            <span id="rmeta">—</span>
+          </div>
+          <div class="results-list" id="rlist"></div>
+        </div>
+      </div>
+    </section>
 
-<section id="bio" class="section">
-<h2>ترجمة المؤلف</h2>
-<div class="block">
-<p>هو الإمام المتكلم الفقيه أبو الثناء محمود بن زيد اللامشي، من علماء ما وراء النهر، ومن أئمة الماتريدية في القرن السادس الهجري.</p>
-</div>
-<div class="block">
-<h3>نشأته العلمية</h3>
-<p>نشأ في بيئة علمية حنفية ماتريدية، وأخذ عن مشايخ سمرقند وفرغانة، وتأثر بمنهجهم في تقرير العقائد بالعقل والنقل.</p>
-</div>
-</section>
+    <!-- Biography -->
+    <section class="section" id="biography">
+      <div class="section-head">
+        <h3>ترجمة المؤلف</h3>
+        <button class="pillbtn secondary" type="button" data-jump="#biography">↩︎</button>
+      </div>
+      <div class="section-body">
+        <div class="note">
+          <strong>هو الشيخ الإمام الأستاذ الجليل</strong> سيف الحق ناصر الشريعة، أبو الثناء محمود بن زيد اللامشي.
+          نشأ في بلاد ما وراء النهر، وينسب إلى «لامش» من قرى فَرْغَانَةَ.
+        </div>
 
-<section id="intro" class="section">
-<h2>مدخل إلى علم الكلام</h2>
-<div class="block">
-<p>علم الكلام هو العلم الذي يُبحث فيه عن أصول العقائد الدينية بالأدلة العقلية والنقلية، مع دفع الشبه والاعتراضات.</p>
-</div>
-<div class="block">
-<h3>سبب التسمية</h3>
-<p>قيل سُمّي كلاماً لكثرة الجدل فيه، وقيل لبحثه في كلام الله تعالى، وقيل لكونه أدق العلوم كلاماً ونظراً.</p>
-</div>
-</section>
+        <div class="quote">
+          كان يُقارن أحياناً بين أقوال فقهاء سمرقند وفقهاء العراق ويذكر اختلاف مناهجهم في بعض مسائل الأصول.
+        </div>
 
-<section id="usul" class="section">
-<h2>أصول معرفية قبل الاستدلال</h2>
+        <div class="ref">
+          ورد في بعض النسخ أنه توفي سنة <b>522هـ</b> (مع اختلاف في ضبط اليوم في بعض النقول).
+        </div>
+      </div>
+    </section>
 
-<div class="chapter">
-<div class="chapter-head">
-<b>ثبوت حقائق الأشياء</b>
-<button class="toggle">فتح</button>
-</div>
-<div class="chapter-content">
-<div class="block">
-<p>ذهب جمهور العقلاء إلى أن للأشياء حقائق ثابتة تُدرك بالحواس أو بالعقل.</p>
-</div>
-<div class="block">
-<h3>الرد على السوفسطائية</h3>
-<p>إنكار الحقائق يؤدي إلى إنكار نفس هذا القول، فيبطل من أساسه.</p>
-</div>
-</div>
-</div>
+    <!-- Introduction -->
+    <section class="section" id="intro">
+      <div class="section-head">
+        <h3>مدخل</h3>
+        <button class="pillbtn secondary" type="button" data-jump="#intro">↩︎</button>
+      </div>
+      <div class="section-body">
+        <div class="note">
+          قبل الشروع: تعريف علم الكلام وموضوعه وغايته، حتى لا يتوه الطالب قبل أن يبدأ.
+        </div>
+        <div class="chapters">
+          <div class="chapter" id="kalam_def">
+            <div class="ch-head">
+              <div class="ch-title">تعريف علم الكلام</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <p><b>بحسب موضوعه:</b> البحث في ذات الله وصفاته وأحوال الممكنات من المبدأ والمعاد.</p>
+              <p><b>بحسب غايته:</b> الاقتدار على إثبات العقائد بإيراد الحجج ودفع الشبه.</p>
+            </div>
+          </div>
 
-<div class="chapter">
-<div class="chapter-head">
-<b>طرق العلم</b>
-<button class="toggle">فتح</button>
-</div>
-<div class="chapter-content">
-<div class="block">
-<p>طرق العلم ثلاثة: الحس السليم، والعقل الصريح، والخبر الصادق.</p>
-</div>
-<div class="block">
-<p>ولا تعارض بينها عند التحقيق، بل يكمل بعضها بعضاً.</p>
-</div>
-</div>
-</div>
+          <div class="chapter" id="kalam_goal">
+            <div class="ch-head">
+              <div class="ch-title">غاية هذا الفن</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <p>١) الترقي من التقليد إلى الإيقان. ٢) إرشاد المسترشدين. ٣) حفظ قواعد الدين. ٤) أساس العلوم الشرعية.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</section>
+    <!-- Definitions -->
+    <section class="section" id="definitions">
+      <div class="section-head">
+        <h3>التعريفات الأساسية</h3>
+        <button class="pillbtn secondary" type="button" data-jump="#definitions">↩︎</button>
+      </div>
+      <div class="section-body">
+        <div class="chapters">
+          <div class="chapter" id="dalil">
+            <div class="ch-head">
+              <div class="ch-title">الدليل</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <div class="note"><b>لغة:</b> المرشد. <b>اصطلاحاً:</b> ما يُتوصل به من معلوم إلى مطلوب بإحكام النظر.</div>
+              <div class="ref">
+                <b>أقسامه:</b> عقلي (مقدماته عقلية) — سمعي (مركب من عقل وسمع).
+              </div>
+            </div>
+          </div>
 
-<section id="chapters" class="section">
-<h2>فصول الكتاب</h2>
+          <div class="chapter" id="hukm">
+            <div class="ch-head">
+              <div class="ch-title">الحكم</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <div class="note">
+                <b>عند أهل الفن:</b> إثبات أمر لأمر أو نفيه عنه. <br/>
+                <b>أقسامه (العقلي):</b> وجوب — استحالة — إمكان.
+              </div>
+            </div>
+          </div>
 
-<div class="chapter">
-<div class="chapter-head">
-<b>إثبات حدوث العالم</b>
-<button class="toggle">فتح</button>
-</div>
-<div class="chapter-content">
-<div class="block">
-<p>العالم لا يخلو عن الحوادث، وكل ما لا يخلو عن الحوادث فهو حادث.</p>
-</div>
-<div class="block">
-<h3>مقدمة عقلية</h3>
-<p>الأعراض متغيرة، والتغير دليل الحدوث.</p>
-</div>
-</div>
-</div>
+          <div class="chapter" id="wajib">
+            <div class="ch-head">
+              <div class="ch-title">الواجب والمستحيل والممكن</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <div class="note">
+                <b>الواجب:</b> ما لا يقبل الانتفاء. <br/>
+                <b>المستحيل:</b> ما لا يقبل الثبوت. <br/>
+                <b>الممكن:</b> ما يقبل الثبوت والانتفاء.
+              </div>
+              <div class="ref">
+                <b>تنبيه:</b> الواجب بالغير والممتنع بالغير ممكنان بالذات في الأصل.
+              </div>
+            </div>
+          </div>
 
-<div class="chapter">
-<div class="chapter-head">
-<b>إثبات الصانع وقدمه</b>
-<button class="toggle">فتح</button>
-</div>
-<div class="chapter-content">
-<div class="block">
-<p>الحادث لا بد له من محدث، ولا يمكن أن يكون محدثاً لنفسه.</p>
-</div>
-<div class="block">
-<h3>إثبات القدم</h3>
-<p>لو كان الصانع حادثاً لاحتاج إلى محدث، فيلزم التسلسل وهو محال.</p>
-</div>
-</div>
-</div>
+          <div class="chapter" id="ilm">
+            <div class="ch-head">
+              <div class="ch-title">العلم (تمهيد)</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <div class="note">
+                تُذكر أسباب العلم: <b>الحواس السليمة</b>، <b>العقول المستقيمة</b>، <b>الخبر الصادق</b>.
+              </div>
+              <div class="quote">
+                إذا ألغيتَ العقل كله… بأي شيء ستُثبت أن “العقل لا ينفع”؟
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</section>
+    <!-- Chapters -->
+    <section class="section" id="chapters">
+      <div class="section-head">
+        <h3>فصول مختارة</h3>
+        <button class="pillbtn secondary" type="button" data-jump="#chapters">↩︎</button>
+      </div>
+      <div class="section-body">
+        <div class="chapters">
+          <div class="chapter" id="haqaiq">
+            <div class="ch-head">
+              <div class="ch-title">فصل في ثبوت حقائق الأشياء</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <div class="note">حقائق الأشياء ثابتة وهو مذهب عامة العقلاء.</div>
+              <div class="quote">
+                هل لمذهبكم “نفي الحقائق” حقيقة؟ إن قالوا لا، سقط. وإن قالوا نعم، أثبتوا حقيقة شيء.
+              </div>
+              <div class="ref">
+                الرد على اللاأدرية: “لا ندري” إن كانت بلا حقيقة فلا مناظرة، وإن كانت لها حقيقة فقد ثبتت حقيقة شيء.
+              </div>
+            </div>
+          </div>
 
-<section id="proofs" class="section">
-<h2>خلاصة الأدلة</h2>
-<div class="block">
-<p>منهج اللامشي يقوم على بناء الدليل العقلي على أسس معرفية صحيحة، ثم تأييده بالنقل القطعي.</p>
-</div>
-<div class="block">
-<p>وهو منهج وسطي بين تعطيل العقل وتقديمه على النص.</p>
-</div>
-</section>
+          <div class="chapter" id="huduth">
+            <div class="ch-head">
+              <div class="ch-title">فصل في إثبات حدوث العالم وثبوت الصانع وقدمه</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <div class="note">
+                <b>العالم:</b> ما سوى الله تعالى. ويُذكر تقسيمه إلى أعراض وجواهر وأجسام في اصطلاح المتكلمين.
+              </div>
+              <div class="quote">
+                الأعراض تتعاقب (حركة/سكون، سواد/بياض) فهي حادثة، وما لا يخلو عن الحوادث فهو حادث.
+              </div>
+              <div class="ref">
+                إذا ثبت حدوث العالم ثبت احتياجه إلى مُحدِث، وإذا ثبت المُحدِث لزم قِدمه لقطع التسلسل والدور.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</main>
+    <!-- Proofs -->
+    <section class="section" id="proofs">
+      <div class="section-head">
+        <h3>الأدلة (ملخص)</h3>
+        <button class="pillbtn secondary" type="button" data-jump="#proofs">↩︎</button>
+      </div>
+      <div class="section-body">
+        <div class="note">
+          هذا ملخص مرتب يمسك الخيط: ثبوت الحقائق → طرق العلم → حدوث العالم → ثبوت الصانع → قِدمه.
+        </div>
+        <div class="chapters">
+          <div class="chapter" id="proof1">
+            <div class="ch-head">
+              <div class="ch-title">١) ترتيب الاستدلال</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <p>نبدأ بثبوت الحقائق وطرق العلم، ثم الدليل العقلي على حدوث العالم، ثم الصانع وقِدمه.</p>
+            </div>
+          </div>
 
-<footer>
-© مشروع تعليمي – أسلوب أكاديمي هادئ قريب من gold-ar
-</footer>
+          <div class="chapter" id="proof2">
+            <div class="ch-head">
+              <div class="ch-title">٢) حدوث العالم</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <p>الأعراض حادثة لتبدلها، والأعيان لا تخلو عن الأعراض، وما لا يخلو عن الحوادث فهو حادث.</p>
+            </div>
+          </div>
 
-<script>
-document.querySelectorAll('.toggle').forEach(btn=>{
- btn.addEventListener('click',()=>{
-  const ch=btn.closest('.chapter');
-  ch.classList.toggle('active');
-  btn.textContent=ch.classList.contains('active')?'إغلاق':'فتح';
- });
-});
-</script>
+          <div class="chapter" id="proof3">
+            <div class="ch-head">
+              <div class="ch-title">٣) ثبوت الصانع</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <p>الحادث لا بد له من مُحدِث، ويستحيل أن يُحدث الشيء نفسه.</p>
+            </div>
+          </div>
 
+          <div class="chapter" id="proof4">
+            <div class="ch-head">
+              <div class="ch-title">٤) قِدم الصانع</div>
+              <button class="toggle" type="button">فتح</button>
+            </div>
+            <div class="ch-body">
+              <p>لو كان الصانع حادثاً لاحتاج إلى مُحدِث، فيلزم الدور أو التسلسل، وكلاهما باطل.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ref">
+          ملاحظة: عند التعارض يُنظر للقطع والظن، فيُقدم القطعي ويُؤوّل الظني على وجهٍ صحيح.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="footer">
+      <div class="section-head">
+        <h3>ملاحظات سريعة</h3>
+        <button class="pillbtn secondary" type="button" data-jump="#top">⬆︎</button>
+      </div>
+      <div class="section-body">
+        <div class="note">
+          <b>اختصارات:</b> اضغط 🔎 للبحث، 👓 لوضع القراءة، 🌙 لتبديل الثيم. <br/>
+          <b>طباعة:</b> من زر 🖨️ في الشريط السفلي (موبايل) أو Ctrl+P.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom bar -->
+  <nav class="bbar" aria-label="شريط سريع">
+    <button type="button" id="bbTop">⬆︎ <span>فوق</span></button>
+    <button type="button" id="bbSearch">🔎 <span>بحث</span></button>
+    <button type="button" id="bbPrint">🖨️ <span>PDF</span></button>
+    <button type="button" id="bbMenu">☰ <span>قائمة</span></button>
+  </nav>
+
+  <script>
+    // ===== Small utilities =====
+    const $ = (s, root=document) => root.querySelector(s);
+    const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
+    const storage = {
+      get(k, d=null){ try{ return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+      set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+    };
+
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+      el.style.outline = "3px solid rgba(255,215,0,.45)";
+      el.style.outlineOffset = "6px";
+      setTimeout(()=>{ el.style.outline=""; el.style.outlineOffset=""; }, 700);
+    }
+
+    // ===== Jump buttons =====
+    $$("[data-jump]").forEach(btn=>{
+      btn.addEventListener("click", e=>{
+        e.preventDefault();
+        const hash = btn.getAttribute("data-jump") || "#top";
+        const id = hash.replace("#","");
+        scrollToId(id);
+      });
+    });
+
+    // ===== Accordion behavior (button only) =====
+    const chapters = $$(".chapter");
+    function syncToggle(ch){
+      const btn = $(".toggle", ch);
+      if(!btn) return;
+      btn.textContent = ch.classList.contains("active") ? "إغلاق" : "فتح";
+    }
+    function saveOpenChapters(){
+      const open = chapters.filter(ch=>ch.classList.contains("active")).map(ch=>ch.id).filter(Boolean);
+      storage.set("openChapters", open);
+    }
+    function restoreOpenChapters(){
+      const open = new Set(storage.get("openChapters", []));
+      chapters.forEach(ch=>{
+        if(open.has(ch.id)) ch.classList.add("active");
+        syncToggle(ch);
+      });
+    }
+
+    chapters.forEach(ch=>{
+      const btn = $(".toggle", ch);
+      if(!btn) return;
+      btn.addEventListener("click", (e)=>{
+        e.stopPropagation();
+        ch.classList.toggle("active");
+        syncToggle(ch);
+        saveOpenChapters();
+      });
+      syncToggle(ch);
+    });
+    restoreOpenChapters();
+
+    // ===== Open all =====
+    const btnOpenAll = $("#btnOpenAll");
+    btnOpenAll.addEventListener("click", ()=>{
+      const isAllOpen = chapters.every(ch=>ch.classList.contains("active"));
+      chapters.forEach(ch=>ch.classList.toggle("active", !isAllOpen));
+      chapters.forEach(syncToggle);
+      saveOpenChapters();
+    });
+
+    // ===== Theme / Modes =====
+    const btnTheme = $("#btnTheme");
+    const btnReading = $("#btnReading");
+    const btnSimple = $("#btnSimple");
+
+    function applyTheme(mode){
+      document.documentElement.dataset.theme = mode;
+      storage.set("theme", mode);
+      btnTheme.textContent = mode === "dark" ? "☀️" : "🌙";
+    }
+    function toggleTheme(){
+      const cur = document.documentElement.dataset.theme || "light";
+      applyTheme(cur === "light" ? "dark" : "light");
+    }
+    btnTheme.addEventListener("click", toggleTheme);
+    applyTheme(storage.get("theme","light"));
+
+    function applyReading(on){
+      document.body.classList.toggle("reading", !!on);
+      storage.set("reading", !!on);
+      btnReading.textContent = on ? "📖" : "👓";
+      btnReading.title = on ? "إلغاء وضع القراءة" : "وضع القراءة";
+    }
+    function toggleReading(){ applyReading(!document.body.classList.contains("reading")); }
+    btnReading.addEventListener("click", toggleReading);
+    applyReading(storage.get("reading", false));
+
+    function applySimple(on){
+      document.body.classList.toggle("simple", !!on);
+      storage.set("simple", !!on);
+      btnSimple.textContent = on ? "✅" : "✨";
+      btnSimple.title = on ? "مظهر عادي" : "مظهر بسيط";
+    }
+    function toggleSimple(){ applySimple(!document.body.classList.contains("simple")); }
+    btnSimple.addEventListener("click", toggleSimple);
+    applySimple(storage.get("simple", true)); // default simple ON for comfort
+
+    // ===== Highlight helpers =====
+    function clearHighlights(root){
+      $$("mark.hl", root).forEach(m=>{
+        m.replaceWith(document.createTextNode(m.textContent));
+      });
+    }
+    function highlight(root, term){
+      if(!term) return;
+      const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const re = new RegExp(escaped, "gi");
+
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node){
+          if(!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          const p = node.parentElement;
+          if(!p) return NodeFilter.FILTER_REJECT;
+          if(["SCRIPT","STYLE"].includes(p.tagName)) return NodeFilter.FILTER_REJECT;
+          if(p.closest(".bbar")) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      const nodes = [];
+      while(walker.nextNode()) nodes.push(walker.currentNode);
+
+      nodes.forEach(tn=>{
+        const val = tn.nodeValue;
+        if(!re.test(val)) return;
+        const frag = document.createDocumentFragment();
+        let last = 0;
+        val.replace(re, (m, off)=>{
+          frag.appendChild(document.createTextNode(val.slice(last, off)));
+          const mk = document.createElement("mark");
+          mk.className = "hl";
+          mk.textContent = m;
+          frag.appendChild(mk);
+          last = off + m.length;
+          return m;
+        });
+        frag.appendChild(document.createTextNode(val.slice(last)));
+        tn.parentNode.replaceChild(frag, tn);
+      });
+    }
+
+    function snippet(el, term, max=160){
+      const txt = (el.textContent||"").replace(/\s+/g," ").trim();
+      const i = txt.toLowerCase().indexOf(term.toLowerCase());
+      if(i < 0) return txt.slice(0, max) + (txt.length>max?"…":"");
+      const s = Math.max(0, i-50);
+      const e = Math.min(txt.length, i+max);
+      return (s>0?"…":"") + txt.slice(s,e) + (e<txt.length?"…":"");
+    }
+
+    // ===== Search =====
+    const q = $("#q");
+    const btnClear = $("#btnClear");
+    const results = $("#results");
+    const rlist = $("#rlist");
+    const rmeta = $("#rmeta");
+
+    function resetVisibility(){
+      $$(".section").forEach(sec=>sec.style.display="");
+      chapters.forEach(ch=>ch.style.display="");
+    }
+
+    function applySearch(){
+      const term = (q.value||"").trim();
+      clearHighlights(document.body);
+      resetVisibility();
+
+      rlist.innerHTML = "";
+      results.style.display = "none";
+      rmeta.textContent = "—";
+
+      if(!term) return;
+
+      highlight(document.body, term);
+
+      // show only sections with hits
+      const secs = $$(".section");
+      const visibleSecs = secs.filter(sec=>sec.querySelector("mark.hl"));
+      secs.forEach(sec=>sec.style.display = visibleSecs.includes(sec) ? "" : "none");
+
+      const found = [];
+      visibleSecs.forEach(sec=>{
+        const chs = $$(".chapter", sec);
+        if(chs.length){
+          chs.forEach(ch=>{
+            const has = ch.querySelector("mark.hl");
+            if(!has){ ch.style.display="none"; return; }
+            ch.style.display="";
+            ch.classList.add("active");
+            syncToggle(ch);
+            found.push({
+              title: $(".ch-title", ch)?.textContent?.trim() || "نتيجة",
+              targetId: ch.id || sec.id,
+              snippet: snippet(ch, term)
+            });
+          });
+        } else {
+          found.push({
+            title: $(".section-head h3", sec)?.textContent?.trim() || "نتيجة",
+            targetId: sec.id,
+            snippet: snippet(sec, term)
+          });
+        }
+      });
+
+      saveOpenChapters();
+
+      results.style.display = "";
+      rmeta.textContent = `${found.length} نتيجة`;
+      found.slice(0, 25).forEach((r, idx)=>{
+        const div = document.createElement("div");
+        div.className = "r-item";
+        div.innerHTML = `<p class="rt">${r.title} <span style="opacity:.7">#${idx+1}</span></p><p class="rs">${r.snippet}</p>`;
+        div.addEventListener("click", ()=>{
+          scrollToId(r.targetId);
+        });
+        rlist.appendChild(div);
+      });
+      if(found.length > 25){
+        const more = document.createElement("div");
+        more.className = "ref";
+        more.textContent = "أُظهرت أول 25 نتيجة فقط — ضيّق البحث لنتائج أدق.";
+        rlist.appendChild(more);
+      }
+    }
+
+    q.addEventListener("input", applySearch);
+    btnClear.addEventListener("click", ()=>{
+      q.value = "";
+      applySearch();
+      q.focus();
+    });
+
+    // ===== Bottom bar actions =====
+    $("#bbTop").addEventListener("click", ()=>scrollToId("top"));
+    $("#bbSearch").addEventListener("click", ()=>{
+      scrollToId("top");
+      setTimeout(()=>q.focus(), 350);
+    });
+    $("#bbPrint").addEventListener("click", ()=>window.print());
+    $("#bbMenu").addEventListener("click", ()=>{
+      // quick menu: cycle modes
+      // 1st click: theme, 2nd: reading, 3rd: simple
+      const n = storage.get("menuCycle", 0);
+      if(n === 0) toggleTheme();
+      if(n === 1) toggleReading();
+      if(n === 2) toggleSimple();
+      storage.set("menuCycle", (n+1)%3);
+    });
+
+    // Keyboard shortcuts (desktop friendly)
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "/" && !e.metaKey && !e.ctrlKey){
+        e.preventDefault();
+        scrollToId("top");
+        setTimeout(()=>q.focus(), 200);
+      }
+      if(e.key === "Escape"){
+        q.value = "";
+        applySearch();
+      }
+      if(e.key.toLowerCase() === "t") toggleTheme();
+      if(e.key.toLowerCase() === "r") toggleReading();
+      if(e.key.toLowerCase() === "s") toggleSimple();
+    });
+
+  </script>
 </body>
 </html>
