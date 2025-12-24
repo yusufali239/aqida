@@ -233,6 +233,13 @@
       flex-wrap: wrap;
       margin: 0.8rem 0 1.2rem;
     }
+    <div class="search-results" id="searchResults" aria-live="polite">
+  <div class="search-results-head">
+    <div class="sr-title">نتائج البحث</div>
+    <div class="sr-meta" id="srMeta">—</div>
+  </div>
+  <div class="sr-list" id="srList"></div>
+</div>
     .btn {
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       color: white;
@@ -337,7 +344,46 @@
   color: #fff;
   border-color: rgba(255,215,0,0.6);
 }
-
+.search-results{
+  background: rgba(255,255,255,0.96);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 1rem;
+  margin: 1rem auto 1.8rem;
+  max-width: 980px;
+  display: none;
+}
+.search-results-head{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: .8rem;
+  border-bottom: 2px dashed rgba(0,0,0,0.12);
+  margin-bottom: .8rem;
+}
+.sr-title{ font-weight: 900; color: #1e3c72; font-size: 1.15rem; }
+.sr-meta{ opacity: .75; font-weight: 800; }
+.sr-item{
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 12px;
+  padding: .9rem 1rem;
+  margin: .6rem 0;
+  border-right: 5px solid #1e3c72;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+.sr-item:hover{ transform: translateX(-4px); box-shadow: 0 8px 18px rgba(0,0,0,0.12); }
+.sr-item h4{ margin: 0 0 .3rem; color:#1e3c72; font-weight: 900; font-size: 1.05rem; }
+.sr-item p{ margin: 0; opacity: .9; }
+.sr-pill{
+  display:inline-block;
+  padding: .15rem .55rem;
+  border-radius: 999px;
+  font-weight: 900;
+  background: #ffd700;
+  margin-inline-start: .4rem;
+}
   </style>
 </head>
 <body>
@@ -781,42 +827,97 @@
     const searchInput = document.getElementById("searchInput");
     const clearBtn = document.getElementById("clearSearchBtn");
 
-    function applySearch() {
-      const term = (searchInput.value || "").trim();
-      const root = document.body;
+    const searchResults = document.getElementById("searchResults");
+const srList = document.getElementById("srList");
+const srMeta = document.getElementById("srMeta");
 
-      // clear old highlights first
-      clearHighlights(root);
+function getSnippet(el, term, maxLen = 160){
+  const txt = (el.textContent || "").replace(/\s+/g, " ").trim();
+  const idx = txt.toLowerCase().indexOf(term.toLowerCase());
+  if (idx < 0) return txt.slice(0, maxLen) + (txt.length > maxLen ? "…" : "");
+  const start = Math.max(0, idx - 50);
+  const end = Math.min(txt.length, idx + maxLen);
+  return (start > 0 ? "…" : "") + txt.slice(start, end) + (end < txt.length ? "…" : "");
+}
 
-      if (!term) {
-        // show everything
-        document.querySelectorAll(".section").forEach(sec => sec.style.display = "");
-        chapters.forEach(ch => ch.style.display = "");
-        return;
-      }
+function applySearch() {
+  const term = (searchInput.value || "").trim();
+  const root = document.body;
 
-      // highlight and filter
-      highlightTerm(root, term);
+  // clear old highlights
+  clearHighlights(root);
 
-      // Filter sections: show section if it contains highlight
-      document.querySelectorAll(".section").forEach(sec => {
-        const has = sec.querySelector("mark.hl");
-        sec.style.display = has ? "" : "none";
-      });
+  // reset visibility
+  document.querySelectorAll(".section").forEach(sec => sec.style.display = "");
+  chapters.forEach(ch => ch.style.display = "");
 
-      // Inside visible sections: filter chapters (if any)
-      document.querySelectorAll(".section").forEach(sec => {
-        if (sec.style.display === "none") return;
-        const secCh = Array.from(sec.querySelectorAll(".chapter"));
-        if (secCh.length === 0) return;
+  srList.innerHTML = "";
+  searchResults.style.display = "none";
+  srMeta.textContent = "—";
 
-        secCh.forEach(ch => {
-          const has = ch.querySelector("mark.hl");
-          ch.style.display = has ? "" : "none";
-          if (has) setChapterOpen(ch, true);
+  if (!term) return;
+
+  // highlight first (so we can detect hits)
+  highlightTerm(root, term);
+
+  // filter sections by hits
+  const visibleSections = Array.from(document.querySelectorAll(".section")).filter(sec => sec.querySelector("mark.hl"));
+  document.querySelectorAll(".section").forEach(sec => sec.style.display = visibleSections.includes(sec) ? "" : "none");
+
+  // build results
+  const results = [];
+  visibleSections.forEach(sec => {
+    // chapters inside section
+    const secCh = Array.from(sec.querySelectorAll(".chapter"));
+    if (secCh.length) {
+      secCh.forEach(ch => {
+        const hit = ch.querySelector("mark.hl");
+        if (!hit) { ch.style.display = "none"; return; }
+        ch.style.display = "";
+        setChapterOpen(ch, true);
+
+        const title = ch.querySelector(".chapter-title span")?.textContent?.trim() || "نتيجة";
+        results.push({
+          title,
+          snippet: getSnippet(ch, term),
+          targetId: ch.id || sec.id
         });
       });
+    } else {
+      // section without chapters but contains hit
+      const title = sec.querySelector(".section-title")?.textContent?.trim() || "نتيجة";
+      results.push({
+        title,
+        snippet: getSnippet(sec, term),
+        targetId: sec.id
+      });
     }
+  });
+
+  // show results panel
+  searchResults.style.display = "";
+  srMeta.textContent = `${results.length} نتيجة`;
+  results.slice(0, 20).forEach((r, i) => {
+    const item = document.createElement("div");
+    item.className = "sr-item";
+    item.innerHTML = `<h4>${r.title} <span class="sr-pill">#${i+1}</span></h4><p>${r.snippet}</p>`;
+    item.addEventListener("click", () => {
+      scrollToSection(r.targetId);
+      const ch = document.getElementById(r.targetId);
+      if (ch && ch.classList.contains("chapter")) setChapterOpen(ch, true);
+    });
+    srList.appendChild(item);
+  });
+
+  // if too many, hint
+  if (results.length > 20) {
+    const more = document.createElement("div");
+    more.className = "reference";
+    more.textContent = `أُظهرت أول 20 نتيجة فقط — ضيّق البحث لنتائج أدق.`;
+    srList.appendChild(more);
+  }
+}
+
 
     searchInput.addEventListener("input", () => applySearch());
     clearBtn.addEventListener("click", () => {
