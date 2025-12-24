@@ -3,441 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كتاب التمهيد | الإمام اللامشي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
-    
+    <title>كتاب التمهيد - الإمام اللامشي | المنهج الكامل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-body: #fdfbf7;      /* لون الورق القديم */
-            --bg-sidebar: #1a252f;   /* لون القائمة الجانبية */
-            --text-main: #2c3e50;    /* لون النص الأساسي */
-            --accent: #b03a2e;       /* لون العناوين المميزة (أحمر داكن) */
-            --gold: #d4ac0d;         /* لون ذهبي للزخرفة */
-            --sidebar-width: 280px;
+            --primary: #1a252f;
+            --accent: #8e44ad;
+            --gold: #d4ac0d;
+            --bg: #f4f7f6;
+            --text: #2c3e50;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
             font-family: 'Amiri', serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
+            background-color: var(--bg);
+            color: var(--text);
             display: flex;
             min-height: 100vh;
-            line-height: 2;
         }
-
-        /* القائمة الجانبية (Sidebar) */
+        /* Sidebar */
         aside {
-            width: var(--sidebar-width);
-            background-color: var(--bg-sidebar);
-            color: #ecf0f1;
+            width: 320px;
+            background: var(--primary);
+            color: white;
             position: fixed;
             right: 0;
-            top: 0;
             height: 100%;
             overflow-y: auto;
-            z-index: 100;
-            box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--gold);
         }
-
-        .sidebar-header {
-            padding: 2rem 1rem;
+        .sidebar-title {
+            padding: 20px;
+            background: #111;
             text-align: center;
-            background: #151e26;
-            border-bottom: 3px solid var(--gold);
-        }
-
-        .sidebar-header h1 {
             font-family: 'Tajawal', sans-serif;
-            font-size: 1.6rem;
-            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--gold);
         }
-
-        .sidebar-header p {
-            font-size: 0.9rem;
-            color: #bdc3c7;
-            font-family: 'Tajawal', sans-serif;
-        }
-
-        .menu {
-            list-style: none;
-            padding: 0;
-        }
-
-        .menu li {
-            border-bottom: 1px solid #2c3e50;
-        }
-
-        .menu button {
+        .nav-link {
             width: 100%;
+            padding: 15px 20px;
             background: none;
             border: none;
-            color: #bdc3c7;
-            padding: 15px 20px;
+            color: #ccc;
             text-align: right;
             font-family: 'Tajawal', sans-serif;
-            font-size: 1.1rem;
             cursor: pointer;
+            border-bottom: 1px solid #2c3e50;
             transition: 0.3s;
-            display: block;
+            font-size: 1rem;
         }
-
-        .menu button:hover, .menu button.active {
-            background-color: #34495e;
-            color: #fff;
-            border-right: 5px solid var(--gold);
-            padding-right: 15px; /* تعويض الحافة */
+        .nav-link:hover, .nav-link.active {
+            background: var(--accent);
+            color: white;
         }
-
-        /* المحتوى الرئيسي */
+        /* Main Content */
         main {
-            margin-right: var(--sidebar-width);
-            width: calc(100% - var(--sidebar-width));
-            padding: 3rem 5rem;
+            margin-right: 320px;
+            padding: 40px;
+            width: 100%;
         }
-
-        article {
-            display: none; /* إخفاء جميع الفصول افتراضياً */
-            animation: fadeIn 0.6s ease;
-            max-width: 900px;
+        section {
+            display: none;
+            max-width: 1000px;
             margin: 0 auto;
-        }
-
-        article.active {
-            display: block; /* إظهار الفصل النشط */
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* تنسيقات النصوص */
-        h2 {
-            font-family: 'Tajawal', sans-serif;
-            font-size: 2.2rem;
-            color: var(--accent);
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 10px;
-            margin-bottom: 1.5rem;
-        }
-
-        h3 {
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1.6rem;
-            color: #1a252f;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        h3::after {
-            content: '';
-            display: block;
-            width: 50%;
-            height: 3px;
-            background: var(--gold);
-            margin-top: 5px;
-        }
-
-        p {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            text-align: justify;
-        }
-
-        /* صناديق مميزة للتعريفات والاقتباسات */
-        .box {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-right: 5px solid var(--accent);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .box strong {
-            color: var(--accent);
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1.2rem;
-        }
-
-        .quote-box {
-            background-color: #f4f6f7;
-            padding: 1rem 2rem;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border-radius: 8px;
-            font-style: italic;
-            border-right: 4px solid var(--gold);
-            margin: 1.5rem 0;
-            color: #555;
+            animation: fadeIn 0.5s;
         }
+        section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        ul, ol {
-            margin-right: 2.5rem;
-            margin-bottom: 2rem;
-            font-size: 1.2rem;
+        h1 { color: var(--accent); margin-bottom: 20px; font-family: 'Tajawal', sans-serif; font-size: 2.2rem; }
+        h2 { color: var(--primary); margin: 30px 0 15px; border-right: 5px solid var(--gold); padding-right: 15px; }
+        p { font-size: 1.4rem; line-height: 2; margin-bottom: 20px; text-align: justify; }
+        
+        .info-box {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
         }
-
-        li {
-            margin-bottom: 0.5rem;
+        .source-tag {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 10px;
         }
-
-        /* التجاوب مع الجوال */
-        @media (max-width: 850px) {
+        .note { color: #c0392b; font-weight: bold; }
+        
+        @media (max-width: 900px) {
             body { flex-direction: column; }
-            aside { position: relative; width: 100%; height: auto; }
-            main { margin-right: 0; width: 100%; padding: 1.5rem; }
-            h2 { font-size: 1.8rem; }
+            aside { width: 100%; position: relative; height: auto; border-left: none; border-bottom: 4px solid var(--gold); }
+            main { margin-right: 0; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <aside>
-        <div class="sidebar-header">
-            <h1>كتاب التمهيد</h1>
-            <p>في أصول الدين</p>
-            <p style="color: var(--gold); margin-top:5px;">للإمام اللامشي (ت ٥٢٢ هـ)</p>
+<aside>
+    <div class="sidebar-title">
+        <h2>كتاب التمهيد</h2>
+        <p>المنهج الدراسي الشامل</p>
+    </div>
+    <button class="nav-link active" onclick="showTab('tab1')">1. ترجمة المؤلف (Биография)</button>
+    <button class="nav-link" onclick="showTab('tab2')">2. تعريف علم الكلام (О науке Калам)</button>
+    <button class="nav-link" onclick="showTab('tab3')">3. أدلة الأحكام وعلم الكلام (Логика и доводы)</button>
+    <button class="nav-link" onclick="showTab('tab4')">4. أسباب العلم (Теория познания)</button>
+    <button class="nav-link" onclick="showTab('tab5')">5. حدوث العالم (Сотворенность мира)</button>
+    <button class="nav-link" onclick="showTab('tab6')">6. إثبات الصانع والوحدانية (Бог и Единство)</button>
+    <button class="nav-link" onclick="showTab('tab7')">7. الصفات والأسماء (Атрибуты и Имена)</button>
+    <button class="nav-link" onclick="showTab('tab8')">8. كلام الله والتكوين (Речь и Творение)</button>
+</aside>
+
+<main>
+    <section id="tab1" class="active">
+        <h1>ترجمة المؤلف (Сведения об авторе)</h1>
+        <h2>نسبه ونشأته</h2>
+        <p>هو الشيخ الإمام الأستاذ الجليل سيف الحق ناصر الشريعة، أبو الثناء محمود بن زيد اللامشي.</p>
+        <div class="info-box">
+            <p><strong>نشأته:</strong> نشأ وترعرع في بلاد ما وراء النهر، في قرية «لامش» بفرغانة، وهي من المراكز الكبرى لعلماء الماتريدية. تلقى فيها ثروة العلم الماتريدي عن مشايخ ما وراء النهر وسمرقند.</p>
         </div>
-        <ul class="menu">
-            <li><button class="active" onclick="showLesson('intro')">١. التعريف بالمؤلف وعلم الكلام</button></li>
-            <li><button onclick="showLesson('epistemology')">٢. أسباب العلم وحقائق الأشياء</button></li>
-            <li><button onclick="showLesson('logic')">٣. الدليل والحكم العقلي</button></li>
-            <li><button onclick="showLesson('creation')">٤. حدوث العالم</button></li>
-            <li><button onclick="showLesson('creator')">٥. إثبات الصانع والوحدانية</button></li>
-            <li><button onclick="showLesson('tanzih')">٦. التنزيه (نفي الجسم والمكان)</button></li>
-            <li><button onclick="showLesson('attributes')">٧. إثبات الصفات والأسماء</button></li>
-            <li><button onclick="showLesson('kalam')">٨. صفة الكلام والتكوين</button></li>
+        <h2>شيوخه ومذهبه</h2>
+        <p>كان يقارن بين أقوال فقهاء سمرقند (رأسهم أبو منصور الماتريدي) وفقهاء العراق (مثل الكرخي والجصاص). يظهر في كتابه تأثره العميق بمدرسة أبي حنيفة وأبي منصور الماتريدي.</p>
+    </section>
+
+    <section id="tab2">
+        <h1>تعريف علم الكلام وموضوعه</h1>
+        <h2>التعريف</h2>
+        <p>يعرف علم الكلام بحسب موضوعه وبحسب غايته:</p>
+        <div class="info-box">
+            <p><strong>باعتبار الموضوع:</strong> هو علم يبحث فيه عن ذات الله تعالى وصفاته، وأحوال الممكنات من المبدأ والمعاد على قانون الإسلام.</p>
+            <p><strong>باعتبار الغاية:</strong> هو العلم الذي يقتدر معه على إثبات العقائد الدينية بإيراد الحجج ودفع الشبه (كما قال الإيجي).</p>
+        </div>
+        <h2>الموضوع والغرض</h2>
+        <p>الغرض منه هو الترقي من حضيض التقليد إلى ذروة الإيقان، وإرشاد المسترشدين بالحجة، وحفظ قواعد الدين عن شبه المبطلين.</p>
+    </section>
+
+    <section id="tab3">
+        <h1>أدلة الأحكام وأقسامها</h1>
+        <h2>تعريف الدليل</h2>
+        <p>الدليل في اللغة هو المرشد. وفي عرف الأصوليين: هو ما يمكن التوصل بصحيح النظر فيه إلى العلم بمطلوب خبري.</p>
+        <h2>أقسام الدليل</h2>
+        <p>1. <strong>الدليل العقلي المحض:</strong> ما كانت مقدماته عقلية صرفة (مثل حدوث العالم).</p>
+        <p>2. <strong>الدليل السمعي المحض:</strong> ما استند إلى الوحي (مثل تفاصيل الآخرة).</p>
+        <p>3. <strong>المركب:</strong> ما يجمع بين العقل والسمع.</p>
+        <div class="info-box">
+            <p><span class="note">أقسام الدليل السمعي:</span> قطعي الثبوت والدلالة، قطعي الثبوت ظني الدلالة، ظني الثبوت قطعي الدلالة، وظني الثبوت والدلالة.</p>
+        </div>
+    </section>
+
+    <section id="tab4">
+        <h1>أسباب العلم (Теория познания)</h1>
+        <p>حقائق الأشياء ثابتة، والعلم بها متحقق خلافاً للسوفسطائية. أسباب العلم للخلق ثلاثة:</p>
+        <ol>
+            <li><strong>الحواس السليمة:</strong> وهي السمع، البصر، الشم، الذوق، واللمس.</li>
+            <li><strong>الخبر الصادق:</strong> وهو على نوعين: الخبر المتواتر (الذي يوجب العلم الضروري) وخبر الرسول المؤيد بالمعجزة.</li>
+            <li><strong>العقل:</strong> وهو آلة للعلم، وما ثبت به ينقسم إلى بديهي (ضروري) واستدلالي.</li>
+        </ol>
+        <div class="info-box">
+            <p><strong>الرد على السوفسطائية:</strong> هم ثلاث فرق (العنادية، العلمية، واللاأدرية). الرد عليهم بأن إنكار العلم هو في حد ذاته ادعاء لعلم، مما ينقض مذهبهم.</p>
+        </div>
+    </section>
+
+    <section id="tab5">
+        <h1>حدوث العالم (Сотворенность мира)</h1>
+        <p>العالم بجميع أجزائه حادث، أي كان بعد أن لم يكن. وينقسم إلى:</p>
+        <ul>
+            <li><strong>الأعيان:</strong> وهي ما لها قيام بذاتها، وتنقسم إلى جواهر (أجزاء لا تتجزأ) وأجسام (مركبة).</li>
+            <li><strong>الأعراض:</strong> وهي ما لا قيام لها بذاتها وتحدث في الأجسام والجواهر (كالألوان والطعم والحركة والسكون).</li>
         </ul>
-    </aside>
+        <h2>دليل الحدوث</h2>
+        <p>الأجسام لا تخلو عن الحوادث (كالحركة والسكون)، وما لا يخلو عن الحوادث فهو حادث. إذن العالم بكل ما فيه حادث.</p>
+    </section>
 
-    <main>
+    <section id="tab6">
+        <h1>إثبات الصانع والوحدانية</h1>
+        <p>بما أن العالم حادث، فلا بد له من محدث (صانع). لا يجوز أن يكون العالم قد وجد بلا محدث، لأن الترجيح من غير مرجح محال.</p>
+        <h2>دليل الوحدانية (التمانع)</h2>
+        <p>لو كان في الوجود إلهان، لتمانعا. فلو أراد أحدهما إحياء جسم وأراد الآخر إماتته:</p>
+        <ul>
+            <li>إن نفذ مرادهما معاً: اجتمع المتضادان (محال).</li>
+            <li>إن لم ينفذ مرادهما: كانا عاجزين (والعاجز لا يكون إلهاً).</li>
+            <li>إن نفذ مراد أحدهما: كان الآخر عاجزاً، والعجز ينفي الإلوهية.</li>
+        </ul>
+        <p class="note">قال تعالى: "لو كان فيهما آلهة إلا الله لفسدتا".</p>
+    </section>
 
-        <article id="intro" class="active">
-            <h2>١. التعريف بالمؤلف وعلم الكلام</h2>
-            
-            <div class="box">
-                [cite_start]<strong>المؤلف [cite: 2-5]:</strong>
-                هو الشيخ الإمام الأستاذ الجليل سيف الحق، أبو الثناء محمود بن زيد اللامشي.
-                نشأ في بلاد ما وراء النهر في قرية «لامش» بفرغانة، وهي من المراكز الكبرى لعلماء الماتريدية.
-            </div>
+    <section id="tab7">
+        <h1>صفات الله تعالى وأسماؤه</h1>
+        <p>الله تعالى موصوف بصفات أزلية قائمة بذاته. وهي تنقسم إلى صفات ذات وصفات فعل.</p>
+        <div class="info-box">
+            <p><strong>صفات الذات:</strong> الحياة، العلم، القدرة، السمع، البصر، الإرادة، الكلام.</p>
+            <p><strong>التنزيه:</strong> الله تعالى ليس بعرض، ولا جسم، ولا جوهر، ولا يحده مكان ولا زمان، ولا يشبهه شيء من خلقه.</p>
+        </div>
+        <h2>الاسم والمسمى</h2>
+        <p>ذهب أصحابنا (الماتريدية) إلى أن الاسم هو المسمى، وخالفت المعتزلة في ذلك.</p>
+    </section>
 
-            [cite_start]<h3>تعريف علم الكلام [cite: 23-24]</h3>
-            <p>
-                <strong>بحسب موضوعه:</strong> هو علم يبحث فيه عن ذات الله تعالى، وصفاته، وأحوال الممكنات من المبدأ والمعاد على قانون الإسلام.
-            </p>
-            <p>
-                [cite_start]<strong>بحسب غايته [cite: 41-45]:</strong>
-                <ul>
-                    <li>الترقي من التقليد إلى الإيقان.</li>
-                    <li>إرشاد المسترشدين وإلزام المعاندين.</li>
-                    <li>حفظ قواعد الدين عن شبه المبطلين.</li>
-                    <li>الفوز بسعادة الدارين.</li>
-                </ul>
-            </p>
+    <section id="tab8">
+        <h1>كلام الله وصفة التكوين</h1>
+        <h2>كلام الله</h2>
+        <p>كلام الله تعالى صفة واحدة أزلية قائمة بذاته، ليس من جنس الحروف ولا الأصوات. ما نسمعه ونقرأه (القرآن المكتوب) هو دلالات وحكاية عن ذلك الكلام الأزلي غير المخلوق.</p>
+        <h2>صفة التكوين</h2>
+        <div class="info-box">
+            <p><strong>الماتريدية:</strong> التكوين صفة أزلية قائمة بذات الله، وهي غير المكوّن (المخلوق).</p>
+            <p><strong>الأشاعرة والمعتزلة:</strong> التكوين هو عين المكوّن، فالفعل والمفعول عندهم واحد.</p>
+        </div>
+        <p>يرى اللامشي أن الله خالق في الأزل بصفة التكوين، وإن كان الخلق (المكوّن) حادثاً في وقته.</p>
+    </section>
+</main>
 
-            [cite_start]<h3>موضوع علم الكلام [cite: 36]</h3>
-            <p>
-                موضوعه عند القاضي الأرموي هو: <strong>ذات الله تعالى</strong>، لأنه يحمل فيه على الله تعالى الصفات الثبوتية والسلبية، وإرسال الرسل، وخلق الأفعال.
-            </p>
-        </article>
+<script>
+    function showTab(tabId) {
+        // Hide all sections
+        const sections = document.querySelectorAll('section');
+        sections.forEach(s => s.classList.remove('active'));
+        
+        // Deactivate all buttons
+        const buttons = document.querySelectorAll('.nav-link');
+        buttons.forEach(b => b.classList.remove('active'));
+        
+        // Show selected
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+        
+        window.scrollTo(0,0);
+    }
+</script>
 
-        <article id="epistemology">
-            <h2>٢. أسباب العلم وحقائق الأشياء</h2>
-
-            <div class="quote-box">
-                [cite_start]"حقائق الأشياء ثابتة، وهو مذهب عامة العقلاء." [cite: 188]
-            </div>
-
-            [cite_start]<h3>أسباب العلم الثلاثة[cite: 227]:</h3>
-            <ol>
-                <li><strong>الحواس السليمة:</strong> كالسمع والبصر، والعلم الواقع بها ضروري.</li>
-                <li><strong>العقول المستقيمة:</strong> يُدرك بها ما لا يُدرك بالحس (مثل: الكل أعظم من الجزء).</li>
-                <li><strong>الأخبار الصادرة عن الصدق:</strong> كخبر الرسل والخبر المتواتر.</li>
-            </ol>
-
-            <div class="box">
-                [cite_start]<strong>الرد على السوفسطائية [cite: 202-204]:</strong>
-                <br>هم الذين ينكرون حقائق الأشياء. نقول لهم: "هل لنفيكم حقائق الأشياء حقيقة؟"
-                <br>فإن قالوا: لا، فقد أبطلوا مذهبهم.
-                <br>وإن قالوا: نعم، فقد أثبتوا حقيقة، ومن أثبت حقيقة شيء فقد نقض قولهم "لا حقيقة للأشياء".
-            </div>
-        </article>
-
-        <article id="logic">
-            <h2>٣. الدليل والحكم العقلي</h2>
-
-            [cite_start]<h3>تعريف الدليل [cite: 56]</h3>
-            <p>
-                في العرف الأصولي: ما يمكن التوصل به إلى العلم بمطلوب خبري.
-            </p>
-
-            [cite_start]<h3>أقسام الدليل السمعي [cite: 66-72]:</h3>
-            <ul>
-                <li><strong>قطعي الثبوت والدلالة:</strong> كالآيات المحكمة (يفيد اليقين).</li>
-                <li><strong>قطعي الثبوت ظني الدلالة:</strong> كالآيات المؤولة.</li>
-                <li><strong>ظني الثبوت قطعي الدلالة:</strong> كخبر الآحاد واضح المعنى.</li>
-                <li><strong>ظني الثبوت والدلالة.</strong></li>
-            </ul>
-
-            [cite_start]<h3>أقسام الحكم العقلي [cite: 114-119]:</h3>
-            <div class="box">
-                <ol>
-                    <li><strong>الواجب:</strong> ما لا يقبل الانتفاء في ذاته (مثل وجود الله).</li>
-                    <li><strong>المستحيل:</strong> ما لا يقبل الثبوت في ذاته (كشريك الباري).</li>
-                    <li><strong>الممكن:</strong> ما يقبل الثبوت والانتفاء (كالمخلوقات).</li>
-                </ol>
-            </div>
-        </article>
-
-        <article id="creation">
-            <h2>٤. إثبات حدوث العالم</h2>
-            
-            <p>
-                [cite_start]<strong>العالم:</strong> هو ما سوى الله تعالى من السموات والأرضين[cite: 318].
-                [cite_start]وهو ينقسم إلى: أعيان (جواهر وأجسام) وأعراض[cite: 320].
-            </p>
-
-            [cite_start]<h3>المصطلحات [cite: 321-334]:</h3>
-            <ul>
-                <li><strong>العرض:</strong> ما يقوم بغيره ولا يبقى زمانين (كالحركة واللون).</li>
-                <li><strong>الجوهر:</strong> الجزء الذي لا يتجزأ.</li>
-                <li><strong>الجسم:</strong> المركب المؤلف من جزئين أو أكثر.</li>
-            </ul>
-
-            [cite_start]<h3>دليل الحدوث [cite: 370-394]:</h3>
-            <p>
-                العالم متغير؛ نراه يتحرك ثم يسكن. والحركة والسكون حوادث (أعراض).
-                <br>والقاعدة: <strong>"ما لا يخلو عن الحوادث فهو حادث"</strong>.
-                <br>إذن العالم حادث، وكل حادث لا بد له من محدث (صانع).
-            </p>
-        </article>
-
-        <article id="creator">
-            <h2>٥. إثبات الصانع والوحدانية</h2>
-            
-            <p>
-                بما أن العالم حادث، فلا بد له من محدث، لأن الترجيح بلا مرجح محال. [cite_start]وهذا الصانع يجب أن يكون قديماً، وإلا لتسلسل الأمر إلى ما لا نهاية[cite: 429].
-            </p>
-
-            [cite_start]<h3>برهان الوحدانية (دليل التمانع) [cite: 482-494]:</h3>
-            <p>
-                لو كان للعالم إلهان، وأراد أحدهما خلق حياة في جسم، وأراد الآخر موتاً:
-            </p>
-            <ul>
-                <li>إما أن يحصل مرادهما معاً (محال: اجتماع النقيضين).</li>
-                <li>إما ألا يحصل مراد أي منهما (عجز كلاهما).</li>
-                <li>إما أن يحصل مراد أحدهما دون الآخر (فالمغلوب عاجز، والعاجز ليس بإله).</li>
-            </ul>
-            <div class="quote-box">
-                قال تعالى: ﴿لَوْ كَانَ فِيهِمَا آلِهَةٌ إِلَّا اللَّهُ لَفَسَدَتَا﴾ [الأنبياء: 22]
-            </div>
-
-            <div class="box">
-                [cite_start]<strong>الرد على المجوس والثنوية [cite: 496-515]:</strong>
-                قالوا بإلهين: نور (للخير) وظلمة (للشر).
-                <br>نقول: خالق الشر ليس شريراً إذا كان في خلقه حكمة بالغة (كالابتلاء، وإظهار القدرة، والتمييز بين المطيع والعاصي).
-            </div>
-        </article>
-
-        <article id="tanzih">
-            <h2>٦. التنزيه (نفي الجسم والمكان)</h2>
-            
-            [cite_start]<h3>الله ليس بعرض ولا جوهر ولا جسم [cite: 531-558]</h3>
-            <ul>
-                <li>ليس <strong>عرضاً</strong>: لأن العرض لا يقوم بنفسه.</li>
-                <li>ليس <strong>جوهراً</strong>: لأن الجوهر يقبل الأعراض والتغير.</li>
-                <li>ليس <strong>جسماً</strong>: لأن الجسم مركب، وكل مركب محتاج إلى أجزائه، والله غني عن العالمين.</li>
-            </ul>
-
-            [cite_start]<h3>نفي المكان والجهة [cite: 709-720]</h3>
-            <p>
-                الله تعالى لا يوصف بالمكان، لأنه كان قبل خلق المكان. لو كان في مكان لكان:
-                <br>إما أن المكان قديم (تعدد القدماء).
-                <br>أو أن الله تغير بحلوله في المكان الحادث (والتغير محال على القديم).
-            </p>
-
-            <div class="box">
-                [cite_start]<strong>شبهة "الاستواء" و "اليد" [cite: 616-623]:</strong>
-                أهل السنة في النصوص المتشابهة على فريقين:
-                <br>1. <strong>المفوضة:</strong> يؤمنون بها ولا يشتغلون بتأويلها مع تنزيه الله عن الظاهر.
-                <br>2. <strong>المؤولة:</strong> يحملونها على وجه يوافق الدليل العقلي (الاستواء = الاستيلاء، اليد = القدرة) دفعاً للتناقض.
-            </div>
-        </article>
-
-        <article id="attributes">
-            <h2>٧. إثبات الصفات والأسماء</h2>
-            
-            <p>
-                [cite_start]قال أهل السنة والجماعة: إن لصانع العالم حياة وعلماً وقدرة وسمعاً وبصراً وإرادة[cite: 761].
-            </p>
-
-            [cite_start]<h3>الرد على المعتزلة [cite: 766-786]:</h3>
-            <p>
-                المعتزلة قالوا: هو عالم بذاته لا بصفة علم، وقادر بذاته لا بصفة قدرة.
-                <br>أهل السنة يقولون: لا يعقل عالم بلا علم. وصفاته تعالى <strong>"لا هي هو ولا هي غيره"</strong> (أي لا تنفك عنه).
-            </p>
-
-            [cite_start]<h3>الاسم والمسمى[cite: 819]:</h3>
-            <p>
-                الاسم والمسمى واحد عند أهل السنة (بمعنى أن الاسم يدل على الذات نفسها). والدليل قوله تعالى: ﴿سَبِّحِ اسْمَ رَبِّكَ الْأَعْلَى﴾، فالتسبيح لله لا للفظ الاسم.
-            </p>
-        </article>
-
-        <article id="kalam">
-            <h2>٨. صفة الكلام والتكوين</h2>
-
-            [cite_start]<h3>أزلية كلام الله [cite: 846-856]</h3>
-            <p>
-                كلام الله تعالى صفة أزلية قائمة بذاته، ليس من جنس الحروف والأصوات (الكلام النفسي).
-                <br>العبارات (العربية، العبرية) دالة على ذلك الكلام الأزلي الواحد.
-            </p>
-            <div class="quote-box">
-                [cite_start]خلافاً للمعتزلة الذين قالوا إن القرآن مخلوق[cite: 847].
-            </div>
-
-            [cite_start]<h3>صفة التكوين [cite: 899-914]</h3>
-            <p>
-                عند الماتريدية (والإمام اللامشي منهم): <strong>التكوين غير المكون</strong>.
-                <br>التكوين: هو صفة الله الأزلية (صفة الفعل) كالخلق والرزق والإحياء.
-                <br>المكون: هو العالم المخلوق الحادث.
-                <br>فالله خالق في الأزل (بصفة التكوين) قبل أن يخلق الخلق.
-            </p>
-        </article>
-
-    </main>
-
-    <script>
-        function showLesson(lessonId) {
-            // إخفاء جميع الفصول
-            const articles = document.querySelectorAll('article');
-            articles.forEach(art => {
-                art.classList.remove('active');
-                art.style.display = 'none';
-            });
-
-            // إزالة التنشيط من جميع الأزرار
-            const buttons = document.querySelectorAll('.menu button');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            // إظهار الفصل المطلوب وتنشيط الزر
-            const selectedArticle = document.getElementById(lessonId);
-            selectedArticle.style.display = 'block';
-            setTimeout(() => selectedArticle.classList.add('active'), 10);
-            
-            // تحديد الزر الذي تم ضغطه
-            event.currentTarget.classList.add('active');
-
-            // الصعود للأعلى في الجوال
-            if (window.innerWidth <= 850) {
-                window.scrollTo(0, document.querySelector('aside').offsetHeight);
-            } else {
-                window.scrollTo(0, 0);
-            }
-        }
-    </script>
 </body>
 </html>
