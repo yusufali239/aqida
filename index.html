@@ -1,43 +1,400 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>التمهيد — Guide (حتى قبل 82)</title>
-  <link rel="stylesheet" href="assets/style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Китаб ат-Тамхид | Полный курс</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #fdfbf7;
+            --bg-sidebar: #1a252f;
+            --text-main: #2c3e50;
+            --accent: #c0392b;
+            --gold: #d4ac0d;
+            --sidebar-width: 300px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Amiri', serif;
+            background: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Боковая панель (Меню уроков) */
+        aside {
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            color: #ecf0f1;
+            position: fixed;
+            right: 0;
+            height: 100%;
+            overflow-y: auto;
+            z-index: 10;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+
+        aside h2 {
+            font-family: 'Tajawal', sans-serif;
+            text-align: center;
+            padding: 2rem 1rem;
+            background: #151e26;
+            border-bottom: 3px solid var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-item {
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .menu-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #bdc3c7;
+            padding: 1.2rem 1.5rem;
+            text-align: right;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .menu-btn:hover, .menu-btn.active {
+            background: #34495e;
+            color: #fff;
+            border-right: 5px solid var(--accent);
+        }
+
+        /* Основной контент */
+        main {
+            margin-right: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            padding: 3rem 5rem;
+        }
+
+        article {
+            display: none; /* Скрываем все главы по умолчанию */
+            animation: fadeIn 0.6s ease;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        article.active {
+            display: block; /* Показываем активную главу */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Типографика контента */
+        h1 {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        h3 {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h3::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 25px;
+            background: var(--gold);
+            margin-left: 10px;
+            border-radius: 4px;
+        }
+
+        p {
+            font-size: 1.4rem;
+            line-height: 2;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        /* Специальные блоки */
+        .definition-box {
+            background: #fff;
+            border-right: 5px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 8px 0 0 8px;
+        }
+
+        .definition-box strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .quote {
+            background: #fdf2e9;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-style: italic;
+            color: #d35400;
+            margin: 1.5rem 0;
+            border: 1px dashed #e67e22;
+        }
+
+        ul, ol {
+            margin-right: 2rem;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Адаптив для мобильных */
+        @media (max-width: 850px) {
+            body { flex-direction: column; }
+            aside { position: relative; width: 100%; height: auto; overflow: visible; }
+            main { margin-right: 0; width: 100%; padding: 1.5rem; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="title">التمهيد لقواعد التوحيد</div>
-      <div class="sub">من بداية الكتاب إلى قبل: <strong>82- وأما التكوين</strong></div>
-    </div>
-    <div class="search">
-      <input id="q" type="search" placeholder="ابحث في العناوين والنص..." />
-      <button id="clearBtn" title="مسح">✕</button>
-    </div>
-  </header>
 
-  <div class="layout">
-    <aside class="sidebar">
-      <div class="sideTop">
-        <div class="sideTitle">الفهرس</div>
-        <div class="sideHint">اضغط لفتح القسم</div>
-      </div>
-      <nav id="toc" class="toc"></nav>
+    <aside>
+        <h2>فهرس الكتاب<br><span style="font-size: 0.8em; color: var(--gold)">Оглавление</span></h2>
+        <ul class="menu-list">
+            <li class="menu-item"><button class="menu-btn active" onclick="openTab('bio')">1. Автор и Введение</button></li>
+            <li class="menu-item"><button class="menu-btn" onclick="openTab('logic')">2. Логика и Доказательство</button></li>
+            <li class="menu-item"><button class="menu-btn" onclick="openTab('hukm')">3. Суждение (Хукм)</button></li>
+            <li class="menu-item"><button class="menu-btn" onclick="openTab('epistemology')">4. Теория Познания</button></li>
+            <li class="menu-item"><button class="menu-btn" onclick="openTab('world')">5. Сотворенность Мира</button></li>
+            <li class="menu-item"><button class="menu-btn" onclick="openTab('tawhid')">6. Единственность Творца</button></li>
+            <li class="menu-item"><button class="menu-btn" onclick="openTab('sifat')">7. Атрибуты и Танзих</button></li>
+            <li class="menu-item"><button class="menu-btn" onclick="openTab('kalam')">8. Речь Аллаха и Таквин</button></li>
+        </ul>
     </aside>
 
-    <main class="main">
-      <article id="content" class="card">
-        <div class="skeleton">جارٍ التحميل…</div>
-      </article>
+    <main>
 
-      <footer class="footer">
-        <span id="meta"></span>
-      </footer>
+        <article id="bio" class="active">
+            <h1>1. Биография автора и Введение в Калам</h1>
+            
+            <div class="definition-box">
+                [cite_start]<strong>Кто автор? [cite: 2-5]</strong>
+                Это Шейх, Имам Сейф аль-Хакк Насир аш-Шариа, Махмуд ибн Зейд аль-Ламиши. Он вырос в Мавераннахре, в селении «Ламиш» (Фергана), центре ученых-матуридитов. [cite_start]Умер около 522 г.х.[cite: 12].
+            </div>
+
+            <h3>Определение науки Калам (تَعْرِيفُ عِلْمِ الكَلَام)</h3>
+            <p>
+                [cite_start]<strong>По предмету:</strong> Наука, изучающая сущность Аллаха, Его атрибуты и состояния возможного бытия (от начала творения до Судного дня) на основе Ислама[cite: 24].
+            </p>
+            <p>
+                [cite_start]<strong>По цели (Ибн Халдун):</strong> Наука, включающая аргументацию вероубеждений (Акиды) разумными доводами и опровержение нововведенцев[cite: 30].
+            </p>
+        </article>
+
+        <article id="logic">
+            <h1>2. Доказательство (ад-Далиль)</h1>
+            
+            <p>
+                [cite_start]<strong>В терминологии усулиев:</strong> То, посредством чего можно достичь знания о требуемом (искомом)[cite: 56].
+            </p>
+
+            <div class="definition-box">
+                [cite_start]<strong>Виды доказательств [cite: 57-61]:</strong>
+                <ul>
+                    <li><strong>Рациональное (Акли):</strong> Его посылки основаны только на разуме (Например: Мир изменяем -> Всё изменяемое сотворено -> Мир сотворен).</li>
+                    <li><strong>Слуховое/Текстовое (Сам'и):</strong> Сочетает разум и текст (Например: Ангелы двигаются [текст] -> Всё движущееся сотворено [разум] -> Ангелы сотворены).</li>
+                </ul>
+            </div>
+
+            <h3>Категоричность и Предположительность (Кат'и и Занни)</h3>
+            <p>
+                [cite_start]Доказательство делится на 4 вида [cite: 65-72]:
+                <br>1. <strong>Кат'и ус-субут ва Кат'и ад-далаля:</strong> (Коран, мухкам аяты) - даёт уверенность.
+                <br>2. <strong>Кат'и ус-субут ва Занни ад-далаля:</strong> (Аяты, допускающие толкование).
+                <br>3. <strong>Занни ус-субут ва Кат'и ад-далаля:</strong> (Хадисы ахад с ясным смыслом).
+                <br>4. <strong>Занни ус-субут ва Занни ад-далаля.</strong>
+            </p>
+        </article>
+
+        <article id="hukm">
+            <h1>3. Виды Суждений (Аксам аль-Хукм)</h1>
+            <p>
+                Понимание Калама зависит от знания суждений. [cite_start]Кто не различает их, тот не разумен [cite: 106-109].
+            </p>
+
+            <div class="definition-box">
+                [cite_start]<strong>Три вида суждений [cite: 114-119]:</strong>
+                <ol>
+                    <li><strong>Ваджиб (Обязательное):</strong> То, небытие чего невозможно само по себе.</li>
+                    <li><strong>Мустахиль (Невозможное):</strong> То, бытие чего невозможно само по себе.</li>
+                    <li><strong>Мумкин (Возможное):</strong> То, что принимает и бытие, и небытие.</li>
+                </ol>
+            </div>
+
+            [cite_start]<h3>Разница между Разумным и Обычным суждением [cite: 148-151]</h3>
+            <ul>
+                <li><strong>Обычное (Ади):</strong> Связь между вещами, основанная на повторении (огонь сжигает, вода утоляет жажду). Это законы физики.</li>
+                <li><strong>Разумное (Акли):</strong> Постигается разумом без привычки (1 - половина 2, часть меньше целого).</li>
+            </ul>
+        </article>
+
+        <article id="epistemology">
+            <h1>4. Источники Знания</h1>
+            <p class="quote">
+                [cite_start]«Истины вещей установлены (существуют), и это мнение всех разумных людей»[cite: 188].
+            </p>
+
+            [cite_start]<h3>Причины знания (Асбаб аль-Ильм)[cite: 227]:</h3>
+            <ol>
+                <li><strong>Здоровые чувства (الحواس السليمة):</strong> Пять чувств.</li>
+                <li><strong>Прямой разум (العقول المستقيمة):</strong> Дедукция и аксиомы.</li>
+                <li><strong>Правдивые сообщения (الخبر الصادق):</strong> Пророчество и Мутаватир.</li>
+            </ol>
+
+            <div class="definition-box">
+                [cite_start]<strong>Опровержение Софистов [cite: 190-204]:</strong>
+                Софисты (Суфустаийя) отрицают истину. Мы спрашиваем их: «Есть ли у вашего отрицания истина?»
+                <br>- Если скажут "Нет", они опровергли свой мазхаб.
+                <br>- Если скажут "Да", они признали наличие истины.
+            </div>
+        </article>
+
+        <article id="world">
+            <h1>5. Доказательство Сотворенности Мира</h1>
+            <p>
+                Мир (аль-Алам) — это всё, кроме Аллаха. [cite_start]Он состоит из А'ян (Сущностей) и А'рад (Акциденций) [cite: 318-320].
+            </p>
+            <ul>
+                [cite_start]<li><strong>А'рад (Акциденция):</strong> Свойства, которые не существуют сами по себе (цвет, движение) и меняются[cite: 321].</li>
+                [cite_start]<li><strong>Джаухар (Субстанция/Атом):</strong> Частица, которая не делится[cite: 332].</li>
+                [cite_start]<li><strong>Джисм (Тело):</strong> Составное из двух и более частиц[cite: 334].</li>
+            </ul>
+
+            [cite_start]<h3>Доказательство (Далиль аль-Худус) [cite: 370-394]:</h3>
+            <p>
+                Тела не свободны от акциденций (движение/покой). Акциденции сотворены (так как меняются). То, что не свободно от сотворенного — само сотворено. Значит, мир сотворен. А у всего сотворенного есть Творец.
+            </p>
+        </article>
+
+        <article id="tawhid">
+            <h1>6. Единственность Творца</h1>
+            
+            [cite_start]<h3>Доказательство взаимного препятствия (Бурхан ат-Таману') [cite: 482-494]</h3>
+            <p>
+                Если бы было два Бога, и они разошлись бы в желаниях (один хочет создать жизнь, другой смерть):
+            </p>
+            <ul>
+                <li>Либо исполнятся желания обоих (невозможно - слияние противоположностей).</li>
+                <li>Либо не исполнится ничье (оба бессильны).</li>
+                <li>Либо исполнится желание одного (тот, кто проиграл - не Бог).</li>
+            </ul>
+
+            <div class="definition-box">
+                [cite_start]<strong>Против Маджус (Зороастрийцев)[cite: 496]:</strong>
+                Они говорят о двух началах: Свет (добро) и Тьма (зло). [cite_start]Мы говорим: Зло создано с мудростью (испытание, воздаяние), и Творец один[cite: 514].
+            </div>
+        </article>
+
+        <article id="sifat">
+            <h1>7. Отрицание подобия (Танзих) и Атрибуты</h1>
+            
+            [cite_start]<h3>Аллах не тело и не в месте [cite: 531-559]</h3>
+            <p>
+                <strong>Не Акциденция:</strong> Потому что акциденция не существует сама по себе.
+                <br><strong>Не Тело:</strong> Тело — это составное, нуждающееся в частях. Аллах един.
+                <br><strong>Нет Места (Макан):</strong> Место — это то, что окружает тело. [cite_start]Аллах был до места и сейчас такой же[cite: 713].
+            </p>
+
+            [cite_start]<h3>Ответ Муджассима (Антропоморфистам) [cite: 606-616]</h3>
+            <p>
+                Они берут аяты про "Руку" или "Глаза" буквально. Мы говорим: Это <em>Муташабихат</em> (неясные аяты). Их нужно понимать в свете ясного аята: <strong>«Нет ничего подобного Ему» (42:11)</strong>.
+                [cite_start]<br>Ученые либо оставляют знание смысла Аллаху (Тафвид), либо толкуют (Тавиль) как Могущество или Милость, чтобы избежать противоречий [cite: 618-623].
+            </p>
+
+            [cite_start]<h3>Утверждение Атрибутов (Сыфат) [cite: 761]</h3>
+            <p>
+                Ахлю-Сунна подтверждают: Жизнь, Знание, Могущество, Слух, Зрение, Волю, Речь.
+                [cite_start]<br>В отличие от <strong>Мутазилитов</strong>, которые отрицают вечные атрибуты, говоря, что Аллах знает Своей сущностью[cite: 766].
+            </p>
+        </article>
+
+        <article id="kalam">
+            <h1>8. Речь Аллаха (Калям) и Творение (Таквин)</h1>
+            
+            [cite_start]<h3>Калям (Речь) [cite: 846-856]</h3>
+            <p>
+                Коран — речь Аллаха, вечная, несотворенная.
+                <br>Мы различаем:
+                <br>1. <strong>Калям Нафси:</strong> Вечный смысл в Сущности Аллаха (без букв и звуков).
+                <br>2. <strong>Выражение (Ибара):</strong> То, что мы читаем и слышим (буквы и звуки созданы, но указывают на вечное).
+                [cite_start]<br>Мутазилиты ошибочно считают Коран сотворенным[cite: 870].
+            </p>
+
+            <div class="definition-box">
+                [cite_start]<strong>Таквин (Творение) [cite: 899-912]</strong>
+                <br>У матуридитов (Ахлю-Сунна): <strong>Таквин</strong> (Действие творения) — это вечный атрибут Аллаха, отличный от <strong>Мукавван</strong> (Сотворенного).
+                <br>То есть Аллах вечно является Творцом, даже когда мир еще не был создан (как меч в ножнах способен резать до удара).
+            </div>
+        </article>
+
     </main>
-  </div>
 
-  <script src="assets/app.js"></script>
+    <script>
+        function openTab(tabName) {
+            // Скрыть все статьи
+            var i, article, menuBtns;
+            article = document.getElementsByTagName("article");
+            for (i = 0; i < article.length; i++) {
+                article[i].style.display = "none";
+                article[i].classList.remove("active");
+            }
+
+            // Убрать активный класс с кнопок
+            menuBtns = document.getElementsByClassName("menu-btn");
+            for (i = 0; i < menuBtns.length; i++) {
+                menuBtns[i].className = menuBtns[i].className.replace(" active", "");
+            }
+
+            // Показать текущую и добавить класс кнопке
+            document.getElementById(tabName).style.display = "block";
+            setTimeout(() => document.getElementById(tabName).classList.add("active"), 10);
+            
+            // Найти кнопку, которая вызвала эту функцию (через event)
+            event.currentTarget.classList.add("active");
+
+            // Прокрутка наверх на мобильных
+            window.scrollTo(0,0);
+        }
+    </script>
 </body>
 </html>
