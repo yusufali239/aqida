@@ -1,2877 +1,1127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EBLAN Brand Guidelines 2024</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0B0B0B;
-            color: #F2F2EE;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Cursor Effect */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #C9C2B8;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            mix-blend-mode: difference;
-        }
-        
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(201, 194, 184, 0.3);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transition: all 0.3s ease;
-            mix-blend-mode: difference;
-        }
-        
-        /* Language Switcher */
-        .lang-switcher {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 1000;
-            display: flex;
-            gap: 10px;
-            background: rgba(20, 20, 20, 0.95);
-            padding: 12px;
-            border-radius: 12px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(201, 194, 184, 0.1);
-        }
-        
-        .lang-btn {
-            background: transparent;
-            color: #8C8C8C;
-            border: 1px solid #8C8C8C;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .lang-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: #C9C2B8;
-            transition: all 0.5s ease;
-            transform: translate(-50%, -50%);
-        }
-        
-        .lang-btn:hover::before {
-            width: 200px;
-            height: 200px;
-        }
-        
-        .lang-btn:hover {
-            color: #0B0B0B;
-            border-color: #C9C2B8;
-            transform: translateY(-3px);
-        }
-        
-        .lang-btn span {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .lang-btn.active {
-            background: #F2F2EE;
-            color: #0B0B0B;
-            border-color: #F2F2EE;
-            transform: scale(1.05);
-        }
-        
-        /* Download & Dark Mode Buttons */
-        .action-buttons {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            display: flex;
-            gap: 15px;
-        }
-        
-        .action-btn {
-            background: rgba(242, 242, 238, 0.95);
-            color: #0B0B0B;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 32px rgba(242, 242, 238, 0.4);
-            backdrop-filter: blur(10px);
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(242, 242, 238, 0.6);
-            background: #C9C2B8;
-        }
-        
-        .dark-mode-btn {
-            width: 50px;
-            height: 50px;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-        
-        /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #C9C2B8, #F2F2EE, #C9C2B8);
-            background-size: 200% 100%;
-            z-index: 1001;
-            transition: width 0.3s ease;
-            animation: shimmer 3s infinite;
-            box-shadow: 0 0 20px rgba(201, 194, 184, 0.5);
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        
-        /* Scroll to Top Button */
-        .scroll-top {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: rgba(201, 194, 184, 0.9);
-            border: none;
-            border-radius: 50%;
-            color: #0B0B0B;
-            font-size: 24px;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(100px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1000;
-            box-shadow: 0 8px 32px rgba(201, 194, 184, 0.4);
-        }
-        
-        .scroll-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .scroll-top:hover {
-            background: #F2F2EE;
-            transform: translateY(-5px);
-        }
-        
-        /* Particle Background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(201, 194, 184, 0.3);
-            border-radius: 50%;
-            animation: float 20s infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px);
-                opacity: 0;
-            }
-        }
-        
-        .page {
-            min-height: 100vh;
-            padding: 80px 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .cover {
-            text-align: center;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 120px;
-            font-weight: 300;
-            letter-spacing: 20px;
-            margin-bottom: 60px;
-            color: #F2F2EE;
-            animation: logoAppear 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-            text-shadow: 0 0 40px rgba(242, 242, 238, 0.1);
-        }
-        
-        @keyframes logoAppear {
-            0% {
-                opacity: 0;
-                letter-spacing: 80px;
-                transform: scale(1.5);
-            }
-            100% {
-                opacity: 1;
-                letter-spacing: 20px;
-                transform: scale(1);
-            }
-        }
-        
-        .subtitle {
-            font-size: 18px;
-            font-weight: 300;
-            letter-spacing: 4px;
-            color: #8C8C8C;
-            margin-bottom: 100px;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
-        
-        .year {
-            font-size: 16px;
-            color: #8C8C8C;
-            font-weight: 300;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        h1 {
-            font-size: 48px;
-            font-weight: 300;
-            letter-spacing: 8px;
-            margin-bottom: 40px;
-            color: #F2F2EE;
-            position: relative;
-            display: inline-block;
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #C9C2B8, transparent);
-            animation: lineGrow 1s ease forwards;
-        }
-        
-        @keyframes lineGrow {
-            to { width: 100%; }
-        }
-        
-        h2 {
-            font-size: 32px;
-            font-weight: 400;
-            letter-spacing: 4px;
-            margin-bottom: 30px;
-            margin-top: 60px;
-            color: #F2F2EE;
-        }
-        
-        h3 {
-            font-size: 20px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            color: #C9C2B8;
-        }
-        
-        p {
-            font-size: 16px;
-            font-weight: 300;
-            line-height: 1.8;
-            color: #8C8C8C;
-            margin-bottom: 20px;
-            max-width: 800px;
-        }
-        
-        .quote {
-            font-size: 32px;
-            font-weight: 300;
-            font-style: italic;
-            letter-spacing: 2px;
-            color: #F2F2EE;
-            text-align: center;
-            margin: 60px auto;
-            padding: 40px;
-            border-left: 3px solid #C9C2B8;
-            max-width: 900px;
-            position: relative;
-            background: linear-gradient(135deg, rgba(20, 20, 20, 0.5), transparent);
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .quote::before {
-            content: '"';
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            font-size: 120px;
-            color: rgba(201, 194, 184, 0.1);
-            font-family: Georgia, serif;
-        }
-        
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .image-item {
-            aspect-ratio: 1;
-            overflow: hidden;
-            border-radius: 12px;
-            background: #141414;
-            position: relative;
-            cursor: pointer;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .image-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        
-        .image-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .image-item:hover img {
-            transform: scale(1.15) rotate(2deg);
-        }
-        
-        .image-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(11, 11, 11, 0.95), transparent);
-            padding: 30px 20px 20px;
-            color: #F2F2EE;
-            font-size: 12px;
-            letter-spacing: 3px;
-            font-weight: 600;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .image-item:hover .image-caption {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .hero-image {
-            width: 100%;
-            max-height: 70vh;
-            object-fit: cover;
-            border-radius: 16px;
-            margin: 40px 0;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .hero-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-        }
-        
-        .full-width-image {
-            width: 100%;
-            height: 60vh;
-            object-fit: cover;
-            border-radius: 16px;
-            margin: 40px 0;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        
-        .product-showcase {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .product-image {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 16px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-        }
-        
-        .product-image:hover {
-            transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
-        }
-        
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .color-swatch {
-            aspect-ratio: 1;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 20px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .color-swatch::before {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(transparent, rgba(255, 255, 255, 0.1));
-            transition: all 0.5s ease;
-        }
-        
-        .color-swatch:hover::before {
-            top: 0;
-        }
-        
-        .color-swatch:hover {
-            transform: translateY(-10px) scale(1.05);
-            border-color: #C9C2B8;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        
-        .color-name {
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .color-hex {
-            font-size: 12px;
-            font-weight: 400;
-            opacity: 0.7;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .typography-sample {
-            margin: 30px 0;
-            padding: 40px;
-            background: linear-gradient(135deg, #141414, #1a1a1a);
-            border-radius: 16px;
-            border: 1px solid rgba(201, 194, 184, 0.1);
-            transition: all 0.4s ease;
-        }
-        
-        .typography-sample:hover {
-            border-color: rgba(201, 194, 184, 0.3);
-            transform: translateX(10px);
-        }
-        
-        .font-name {
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            color: #C9C2B8;
-            margin-bottom: 15px;
-        }
-        
-        .font-display {
-            font-size: 48px;
-            font-weight: 300;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-        }
-        
-        .principles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .principle {
-            padding: 35px;
-            background: linear-gradient(135deg, #141414, #1a1a1a);
-            border-radius: 16px;
-            border-left: 4px solid #C9C2B8;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .principle::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(90deg, rgba(201, 194, 184, 0.05), transparent);
-            transition: all 0.5s ease;
-        }
-        
-        .principle:hover::before {
-            width: 100%;
-        }
-        
-        .principle:hover {
-            transform: translateX(10px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            border-left-width: 6px;
-        }
-        
-        .principle-title {
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            color: #F2F2EE;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .principle-text {
-            font-size: 14px;
-            color: #8C8C8C;
-            line-height: 1.8;
-            position: relative;
-            z-index: 1;
-        }
-        
-        ul {
-            list-style: none;
-            margin: 20px 0;
-        }
-        
-        li {
-            font-size: 16px;
-            font-weight: 300;
-            color: #8C8C8C;
-            margin-bottom: 15px;
-            padding-left: 30px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        li:hover {
-            color: #F2F2EE;
-            padding-left: 40px;
-        }
-        
-        li:before {
-            content: "—";
-            position: absolute;
-            left: 0;
-            color: #C9C2B8;
-            transition: all 0.3s ease;
-        }
-        
-        li:hover:before {
-            left: 10px;
-            color: #F2F2EE;
-        }
-        
-        .divider {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #C9C2B8, transparent);
-            margin: 40px 0;
-            position: relative;
-        }
-        
-        .divider::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, #F2F2EE, transparent);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-        
-        .lang-content {
-            display: none;
-        }
-        
-        .lang-content.active {
-            display: block;
-            animation: fadeIn 0.8s ease;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 40px 30px;
-            background: linear-gradient(135deg, #141414, #1a1a1a);
-            border-radius: 16px;
-            border: 2px solid transparent;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-        
-        .stat-item:hover {
-            transform: translateY(-10px) scale(1.05);
-            border-color: #C9C2B8;
-            box-shadow: 0 20px 60px rgba(201, 194, 184, 0.2);
-        }
-        
-        .stat-number {
-            font-size: 56px;
-            font-weight: 300;
-            letter-spacing: 4px;
-            color: #C9C2B8;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .stat-item:hover .stat-number {
-            color: #F2F2EE;
-            transform: scale(1.1);
-        }
-        
-        .stat-label {
-            font-size: 13px;
-            letter-spacing: 3px;
-            color: #8C8C8C;
-            font-weight: 600;
-        }
-        
-        /* Modal for full-screen images */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 11, 11, 0.98);
-            backdrop-filter: blur(20px);
-        }
-        
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .modal img {
-            max-width: 90%;
-            max-height: 90vh;
-            border-radius: 16px;
-            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8);
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 40px;
-            color: #F2F2EE;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .modal-close:hover {
-            color: #C9C2B8;
-            transform: rotate(90deg);
-        }
-        
-        @media print {
-            .lang-switcher, .action-buttons, .scroll-top, .progress-bar, .particles, .cursor, .cursor-follower {
-                display: none !important;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .page {
-                padding: 60px 30px;
-            }
-            
-            .logo {
-                font-size: 50px;
-                letter-spacing: 10px;
-            }
-            
-            h1 {
-                font-size: 28px;
-                letter-spacing: 4px;
-            }
-            
-            h2 {
-                font-size: 22px;
-            }
-            
-            .quote {
-                font-size: 18px;
-                padding: 30px 20px;
-            }
-            
-            .lang-switcher {
-                top: 15px;
-                right: 15px;
-                flex-wrap: wrap;
-                padding: 8px;
-            }
-            
-            .lang-btn {
-                padding: 8px 12px;
-                font-size: 10px;
-            }
-            
-            .action-buttons {
-                bottom: 15px;
-                right: 15px;
-                flex-direction: column;
-            }
-            
-            .action-btn {
-                padding: 12px 20px;
-                font-size: 10px;
-            }
-            
-            .product-showcase {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .cursor, .cursor-follower {
-                display: none;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark">
+  <title>تمهيد الدلائل في تحقيق مسائل علم الكلام - الإمام اللامشي</title>
+
+  <!-- Optional: Use local fonts if available; otherwise fallback -->
+  <style>
+    /* =========================================================
+       Base reset + global settings
+       ========================================================= */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
+      line-height: 2;
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: #333;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* =========================================================
+       Header
+       ========================================================= */
+    .header {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      opacity: 0.12;
+    }
+    .header h1 {
+      font-size: 2.6rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative; z-index: 1;
+    }
+    .header .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 0.5rem;
+      position: relative; z-index: 1;
+    }
+    .header .author {
+      font-size: 1.4rem;
+      color: #ffd700;
+      margin-top: 1rem;
+      font-weight: bold;
+      position: relative; z-index: 1;
+    }
+
+    /* =========================================================
+       Navigation
+       ========================================================= */
+    .nav {
+      background: rgba(255,255,255,0.98);
+      padding: 0.85rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+    }
+    .nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .nav a {
+      color: #1e3c72;
+      text-decoration: none;
+      padding: 0.6rem 1.05rem;
+      border-radius: 999px;
+      transition: all 0.25s;
+      font-weight: 800;
+      border: 2px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+    }
+    .nav a:hover {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(30,60,114,0.3);
+    }
+
+    /* =========================================================
+       Layout
+       ========================================================= */
+    .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.2rem; }
+    .section {
+      background: white;
+      margin: 2rem 0;
+      padding: 2.2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .section:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.18); }
+
+    .section-title {
+      color: #1e3c72;
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 3px solid #ffd700;
+      display: inline-block;
+    }
+
+    .content-box {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 1.6rem;
+      border-radius: 10px;
+      margin: 1.2rem 0;
+      border-right: 5px solid #1e3c72;
+      line-height: 2.15;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #ffd700 0%, #ffed4e 100%);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-weight: 900;
+    }
+
+    /* =========================================================
+       Chapters (accordion)
+       ========================================================= */
+    .chapter {
+      background: white;
+      padding: 1.2rem;
+      margin: 1rem 0;
+      border-radius: 10px;
+      border-right: 4px solid #2a5298;
+      transition: all 0.25s;
+      cursor: pointer;
+      position: relative;
+      outline: none;
+    }
+    .chapter:hover {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      transform: translateX(-4px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .chapter:focus-visible {
+      box-shadow: 0 0 0 4px rgba(255,215,0,0.45), 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .chapter-title {
+      font-size: 1.35rem;
+      color: #1e3c72;
+      font-weight: 900;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .chapter-title small {
+      font-size: 0.95rem;
+      font-weight: 800;
+      opacity: 0.75;
+    }
+
+    .chapter-content {
+      display: none;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px dashed #ddd;
+      line-height: 2.15;
+    }
+    .chapter.active .chapter-content { display: block; animation: fadeIn 0.35s; }
+    @keyframes fadeIn { from {opacity:0; transform: translateY(-8px);} to {opacity:1; transform: translateY(0);} }
+
+    /* =========================================================
+       Blocks
+       ========================================================= */
+    .definition {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      padding: 1.2rem;
+      margin: 1rem 0;
+      border-radius: 10px;
+      border-right: 5px solid #2196f3;
+    }
+    .definition-title {
+      font-weight: 900;
+      color: #1565c0;
+      font-size: 1.15rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .quote {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      padding: 1.2rem;
+      margin: 1.2rem 0;
+      border-right: 5px solid #ff9800;
+      border-radius: 10px;
+      font-style: italic;
+      position: relative;
+    }
+    .quote::before {
+      content: '❝';
+      font-size: 3rem;
+      position: absolute;
+      top: -12px;
+      right: 12px;
+      color: #ff9800;
+      opacity: 0.28;
+    }
+
+    .reference {
+      background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 10px;
+      border-right: 4px solid #9c27b0;
+      font-size: 0.98rem;
+    }
+
+    /* =========================================================
+       Search / Toolbar
+       ========================================================= */
+    .search-box { margin: 1.6rem 0 0.8rem; text-align: center; }
+    .search-box input {
+      padding: 1rem 1.6rem;
+      font-size: 1.1rem;
+      border: 2px solid #1e3c72;
+      border-radius: 999px;
+      width: 100%;
+      max-width: 760px;
+      font-family: inherit;
+      transition: all 0.2s;
+      background: rgba(255,255,255,0.98);
+    }
+    .search-box input:focus {
+      outline: none;
+      box-shadow: 0 0 20px rgba(30,60,114,0.25);
+      transform: scale(1.01);
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0.8rem 0 1.2rem;
+    }
+    .btn {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border: none;
+      border-radius: 999px;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      font-weight: 900;
+    }
+    .btn:hover { transform: scale(1.03); box-shadow: 0 6px 18px rgba(30,60,114,0.35); }
+    .btn.secondary {
+      background: white;
+      color: #1e3c72;
+      border: 2px solid #1e3c72;
+    }
+
+    /* =========================================================
+       Search results panel
+       ========================================================= */
+    .search-results{
+      background: rgba(255,255,255,0.96);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      padding: 1rem;
+      margin: 0.6rem auto 1.8rem;
+      max-width: 980px;
+      display: none;
+    }
+    .search-results-head{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: .8rem;
+      border-bottom: 2px dashed rgba(0,0,0,0.12);
+      margin-bottom: .8rem;
+    }
+    .sr-title{ font-weight: 900; color: #1e3c72; font-size: 1.15rem; }
+    .sr-meta{ opacity: .75; font-weight: 900; }
+    .sr-item{
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 12px;
+      padding: .9rem 1rem;
+      margin: .6rem 0;
+      border-right: 5px solid #1e3c72;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .sr-item:hover{ transform: translateX(-4px); box-shadow: 0 8px 18px rgba(0,0,0,0.12); }
+    .sr-item h4{ margin: 0 0 .3rem; color:#1e3c72; font-weight: 900; font-size: 1.05rem; }
+    .sr-item p{ margin: 0; opacity: .9; }
+    .sr-pill{
+      display:inline-block;
+      padding: .15rem .55rem;
+      border-radius: 999px;
+      font-weight: 900;
+      background: #ffd700;
+      margin-inline-start: .4rem;
+    }
+
+    /* =========================================================
+       Cards / Grid
+       ========================================================= */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin: 1.2rem 0;
+    }
+    .card {
+      background: white;
+      padding: 1.4rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.25s;
+      border-top: 4px solid #1e3c72;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+    .card-title { color: #1e3c72; font-size: 1.35rem; margin-bottom: 0.7rem; font-weight: 900; }
+
+    /* =========================================================
+       TOC (definitions)
+       ========================================================= */
+    .toc {
+      background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+      padding: 1.6rem;
+      border-radius: 12px;
+      margin: 1.4rem 0;
+      border: 3px solid #fdd835;
+    }
+    .toc-title {
+      font-size: 1.55rem;
+      color: #f57f17;
+      margin-bottom: 1rem;
+      font-weight: 900;
+    }
+    .toc ul { list-style: none; }
+    .toc li {
+      padding: 0.75rem 0.9rem;
+      margin: 0.5rem 0;
+      background: white;
+      border-radius: 8px;
+      transition: all 0.25s;
+      cursor: pointer;
+      border-right: 4px solid transparent;
+      font-weight: 900;
+    }
+    .toc li:hover {
+      background: #fffde7;
+      border-right-color: #f57f17;
+      transform: translateX(-4px);
+    }
+
+    /* =========================================================
+       Highlight mark for search
+       ========================================================= */
+    mark.hl {
+      background: #ffed4e;
+      padding: 0 0.15rem;
+      border-radius: 4px;
+    }
+
+    /* =========================================================
+       Footer
+       ========================================================= */
+    .footer {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+    .muted { opacity: 0.85; font-size: 0.95rem; }
+
+    /* =========================================================
+       Reading mode + print
+       ========================================================= */
+    body.reading .container{ max-width: 860px; }
+    body.reading .section{ padding: 2.6rem; }
+    body.reading{ font-size: 1.12rem; }
+    body.reading .section-title{ font-size: 2.1rem; }
+
+    @media print{
+      .nav, .toolbar, .search-box, .search-results, .footer a, .kbd-hint { display:none !important; }
+      body{ background: white !important; }
+      .section{ box-shadow:none !important; margin: 0.8rem 0 !important; }
+      .chapter-content{ display:block !important; }
+    }
+
+    /* =========================================================
+       Dark theme overrides (toggle)
+       ========================================================= */
+    :root[data-theme="dark"] body { color: #e7eef7; }
+    :root[data-theme="dark"] .section { background: rgba(20,28,36,0.92); }
+    :root[data-theme="dark"] .content-box,
+    :root[data-theme="dark"] .definition,
+    :root[data-theme="dark"] .quote,
+    :root[data-theme="dark"] .reference,
+    :root[data-theme="dark"] .toc,
+    :root[data-theme="dark"] .card,
+    :root[data-theme="dark"] .search-results {
+      background: rgba(255,255,255,0.06);
+      border-right-color: rgba(255,215,0,0.55);
+    }
+    :root[data-theme="dark"] .nav { background: rgba(10,14,18,0.85); }
+    :root[data-theme="dark"] .nav a { color: #ffd700; }
+    :root[data-theme="dark"] .search-box input {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border-color: rgba(255,215,0,0.6);
+    }
+    :root[data-theme="dark"] .btn.secondary { background: rgba(255,255,255,0.08); color: #ffd700; border-color: rgba(255,215,0,0.6); }
+    :root[data-theme="dark"] .sr-item { background: rgba(255,255,255,0.08); }
+
+    /* =========================================================
+       Responsive tweaks
+       ========================================================= */
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.9rem; }
+      .section { padding: 1.4rem; }
+      .nav a { padding: 0.55rem 0.95rem; }
+      .chapter-title { font-size: 1.2rem; }
+    }
+
+    /* Small keyboard hints */
+    .kbd-hint{
+      text-align:center;
+      margin-top: .4rem;
+      font-weight: 900;
+      opacity: .75;
+      font-size: .92rem;
+    }
+    .kbd {
+      display:inline-block;
+      padding: .1rem .45rem;
+      border-radius: .5rem;
+      border: 2px solid rgba(30,60,114,.25);
+      background: rgba(255,255,255,.85);
+      font-weight: 900;
+      margin: 0 .2rem;
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Custom Cursors -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-    
-    <!-- Particles Background -->
-    <div class="particles" id="particles"></div>
-    
-    <!-- Progress Bar -->
-    <div class="progress-bar" id="progressBar"></div>
-    
-    <!-- Language Switcher -->
-    <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="en"><span>EN</span></button>
-        <button class="lang-btn" data-lang="ru"><span>RU</span></button>
-        <button class="lang-btn" data-lang="fr"><span>FR</span></button>
-        <button class="lang-btn" data-lang="it"><span>IT</span></button>
+  <div class="header" id="top">
+    <h1>تمهيد الدلائل في تحقيق مسائل علم الكلام</h1>
+    <div class="subtitle">وتأصيل معالم دلائل الإيمان</div>
+    <div class="author">
+      الشيخ الإمام الأستاذ الجليل سيف الحق ناصر الشريعة<br/>
+      أبو الثناء محمود بن زيد اللامشي
     </div>
-    
-    <!-- Action Buttons -->
-    <div class="action-buttons">
-        <button class="action-btn" onclick="window.print()">DOWNLOAD PDF</button>
-        <button class="action-btn dark-mode-btn" onclick="toggleDarkMode()" title="Toggle Theme">☀️</button>
-    </div>
-    
-    <!-- Scroll to Top -->
-    <button class="scroll-top" id="scrollTop">↑</button>
-    
-    <!-- Image Modal -->
-    <div class="modal" id="imageModal">
-        <span class="modal-close" onclick="closeModal()">×</span>
-        <img id="modalImage" src="" alt="">
+  </div>
+
+  <nav class="nav" aria-label="التنقل">
+    <ul>
+      <li><a href="#biography">📜 ترجمة المؤلف</a></li>
+      <li><a href="#introduction">🚪 المدخل</a></li>
+      <li><a href="#definitions">📚 التعريفات</a></li>
+      <li><a href="#chapters">🧩 الفصول</a></li>
+      <li><a href="#proofs">🧠 الأدلة</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="search-box">
+      <input type="text" placeholder="ابحث في الكتاب... (مثال: الدليل، الحكم، حدوث العالم)" id="searchInput" autocomplete="off">
+      <div class="kbd-hint">
+        اختصارات: <span class="kbd">/</span> للبحث • <span class="kbd">Esc</span> لمسح • <span class="kbd">Ctrl</span>+<span class="kbd">K</span> فتح/إغلاق الكل
+      </div>
     </div>
 
-    <!-- ENGLISH VERSION -->
-    <div class="lang-content active" data-lang-content="en">
-        <div class="page cover">
-            <div class="logo">EBLAN</div>
-            <div class="subtitle">BRAND GUIDELINES</div>
-            <div class="year">2024</div>
-        </div>
-
-        <div class="page">
-            <h1>PHILOSOPHY</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN was founded in 2024 in Paris as a response to visual noise and excessive complexity of contemporary fashion. We create clothing that speaks through form, not words.</p>
-            
-            <img src="images/Storefront.jpg" alt="EBLAN Paris Storefront" class="hero-image" onclick="openModal(this.src)">
-            
-            <div class="quote">"Form before noise"</div>
-            
-            <h2>BRAND DNA</h2>
-            
-            <div class="principles">
-                <div class="principle">
-                    <div class="principle-title">FORM</div>
-                    <div class="principle-text">Every line, every silhouette is thought through to the smallest detail. We believe in the power of pure geometry and precision tailoring.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">MATERIAL</div>
-                    <div class="principle-text">Fabric quality defines product longevity. We choose materials that age with dignity.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">SILENCE</div>
-                    <div class="principle-text">In an era of information overload, we choose minimalism and restraint. Our clothing doesn't shout—it speaks with quiet confidence.</div>
-                </div>
-            </div>
-            
-            <h2>OUR VALUES</h2>
-            <ul>
-                <li>Longevity over trends</li>
-                <li>Quality over quantity</li>
-                <li>Form over noise</li>
-                <li>Confidence through simplicity</li>
-            </ul>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">2024</div>
-                    <div class="stat-label">FOUNDED</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">01</div>
-                    <div class="stat-label">COLLECTIONS</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">ORGANIC</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>PRODUCTS</h1>
-            <div class="divider"></div>
-            
-            <p>Each piece is designed to be worn for years, not seasons. Premium materials, meticulous construction, timeless design.</p>
-            
-            <div class="product-showcase">
-                <img src="images/Hoodie - product1.jpg" alt="EBLAN Hoodie Product" class="product-image" onclick="openModal(this.src)">
-                <img src="images/Hoodie - product2.jpg" alt="EBLAN Hoodie Detail" class="product-image" onclick="openModal(this.src)">
-            </div>
-            
-            <h2>SIGNATURE PIECES</h2>
-            <p>The EBLAN hoodie embodies our philosophy: minimal branding, maximum quality. Cut from heavyweight organic cotton, it features our understated logo and a fit designed for all body types.</p>
-            
-            <h3>Materials & Construction</h3>
-            <ul>
-                <li>100% organic cotton, 380 GSM</li>
-                <li>Pre-washed for minimal shrinkage</li>
-                <li>Reinforced seams and heavy-duty stitching</li>
-                <li>Metal-tipped drawstrings</li>
-                <li>Made in Portugal</li>
-            </ul>
-        </div>
-
-        <div class="page">
-            <h1>LIFESTYLE</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN is for those who value substance over spectacle. Our garments fit seamlessly into modern life—from Parisian streets to creative studios.</p>
-            
-            <img src="images/Hoodie-model1.jpg" alt="EBLAN Lifestyle" class="full-width-image" onclick="openModal(this.src)">
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Hoodie-model2.jpg')">
-                    <img src="images/Hoodie-model2.jpg" alt="EBLAN Model">
-                    <div class="image-caption">RUNWAY FW24</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Model - portrait1.jpg')">
-                    <img src="images/Model - portrait1.jpg" alt="EBLAN Portrait">
-                    <div class="image-caption">STUDIO PARIS</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>BRAND ELEMENTS</h1>
-            <div class="divider"></div>
-            
-            <p>From product details to packaging, every touchpoint reflects our commitment to craftsmanship and restraint.</p>
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Ball1.jpg')">
-                    <img src="images/Ball1.jpg" alt="EBLAN Ball Detail">
-                    <div class="image-caption">SIGNATURE BRANDING</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Ball2.jpg')">
-                    <img src="images/Ball2.jpg" alt="EBLAN Ball">
-                    <div class="image-caption">LEATHER GOODS</div>
-                </div>
-            </div>
-            
-            <h2>COLLABORATIONS</h2>
-            <p>We partner with select brands and artisans who share our values of quality and timelessness. Each collaboration is carefully considered and executed with precision.</p>
-        </div>
-
-        <div class="page">
-            <h1>LOGO</h1>
-            <div class="divider"></div>
-            
-            <div style="text-align: center; margin: 60px 0;">
-                <div style="font-size: 72px; letter-spacing: 12px; font-weight: 300;">EBLAN</div>
-            </div>
-            
-            <h3>Usage Guidelines</h3>
-            <ul>
-                <li>Minimum clear space around logo—height of letter "E"</li>
-                <li>Do not alter proportions or letter spacing</li>
-                <li>Use only on black or white backgrounds</li>
-                <li>No effects, shadows, or outlines</li>
-                <li>Maintain aspect ratio in all applications</li>
-            </ul>
-            
-            <h2>TYPOGRAPHY</h2>
-            
-            <div class="typography-sample">
-                <div class="font-name">PRIMARY — HEADLINES</div>
-                <div class="font-display">Canela</div>
-                <p style="color: #8C8C8C;">Used for main headlines, collection names, and key messages. Conveys confidence and calm.</p>
-            </div>
-            
-            <div class="typography-sample">
-                <div class="font-name">SECONDARY — BODY TEXT</div>
-                <div class="font-display" style="font-family: 'Inter', sans-serif;">Inter</div>
-                <p style="color: #8C8C8C;">Used for body text, descriptions, and technical information. Ensures precision and readability.</p>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>COLOR PALETTE</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN's color palette is built on the contrast between deep black and soft neutral tones. This creates visual tension that emphasizes form and texture.</p>
-            
-            <div class="color-grid">
-                <div class="color-swatch" style="background: #0B0B0B;">
-                    <div class="color-name" style="color: #F2F2EE;">ABSOLUTE BLACK</div>
-                    <div class="color-hex" style="color: #8C8C8C;">#0B0B0B</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #141414;">
-                    <div class="color-name" style="color: #F2F2EE;">SOFT BLACK</div>
-                    <div class="color-hex" style="color: #8C8C8C;">#141414</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #8C8C8C;">
-                    <div class="color-name" style="color: #0B0B0B;">WARM GREY</div>
-                    <div class="color-hex" style="color: #0B0B0B;">#8C8C8C</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #F2F2EE; border: 1px solid #8C8C8C;">
-                    <div class="color-name" style="color: #0B0B0B;">OFF WHITE</div>
-                    <div class="color-hex" style="color: #0B0B0B;">#F2F2EE</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #C9C2B8;">
-                    <div class="color-name" style="color: #0B0B0B;">STONE BEIGE</div>
-                    <div class="color-hex" style="color: #0B0B0B;">#C9C2B8</div>
-                </div>
-            </div>
-            
-            <h2>COLOR APPLICATION</h2>
-            <ul>
-                <li>Absolute Black (#0B0B0B) — Primary background for all materials</li>
-                <li>Off White (#F2F2EE) — Primary text and logo color</li>
-                <li>Warm Grey (#8C8C8C) — Secondary text and accents</li>
-                <li>Stone Beige (#C9C2B8) — Decorative elements and dividers</li>
-                <li>Soft Black (#141414) — Cards and elevated surfaces</li>
-            </ul>
-        </div>
-
-        <div class="page">
-            <h1>TONE OF VOICE</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN's voice is that of a confident minimalist. We speak calmly, precisely, and without excess words.</p>
-            
-            <h2>COMMUNICATION PRINCIPLES</h2>
-            
-            <div class="principles">
-                <div class="principle">
-                    <div class="principle-title">CALM</div>
-                    <div class="principle-text">We don't shout or exaggerate. Our voice is always steady and confident.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">PRECISION</div>
-                    <div class="principle-text">Every word is chosen with the same care as every stitch in our clothing.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">HONESTY</div>
-                    <div class="principle-text">We speak only about what truly matters. No marketing clichés.</div>
-                </div>
-            </div>
-            
-            <h2>WHAT WE DON'T DO</h2>
-            <ul>
-                <li>No slogans or catchy phrases</li>
-                <li>No exaggeration or false promises</li>
-                <li>No following communication trends</li>
-                <li>No emojis or exclamation marks</li>
-                <li>No artificial hype</li>
-                <li>No seasonal pressure or FOMO tactics</li>
-            </ul>
-        </div>
-
-        <div class="page cover">
-            <div class="quote">"In creating EBLAN, we sought silence in a world of noise, form in a world of chaos, quality in a world of quantity"</div>
-            <div style="margin-top: 60px; text-align: center; color: #8C8C8C; font-size: 14px; letter-spacing: 2px;">
-                EBLAN PARIS<br>
-                EST. 2024<br><br>
-                contact@eblan.paris
-            </div>
-        </div>
+    <div class="toolbar">
+      <button class="btn" id="openAllBtn" type="button">فتح الكل</button>
+      <button class="btn secondary" id="closeAllBtn" type="button">إغلاق الكل</button>
+      <button class="btn secondary" id="clearSearchBtn" type="button">مسح البحث</button>
+      <button class="btn secondary" id="readingBtn" type="button">وضع القراءة</button>
+      <button class="btn secondary" id="printBtn" type="button">طباعة / PDF</button>
+      <button class="btn secondary" id="themeBtn" type="button" title="تبديل المظهر">🌙/☀️</button>
     </div>
 
-    <!-- RUSSIAN VERSION -->
-    <div class="lang-content" data-lang-content="ru">
-        <div class="page cover">
-            <div class="logo">EBLAN</div>
-            <div class="subtitle">РУКОВОДСТВО ПО БРЕНДУ</div>
-            <div class="year">2024</div>
-        </div>
-
-        <div class="page">
-            <h1>ФИЛОСОФИЯ</h1>
-            <div class="divider"></div>
-            
-            <p>Бренд EBLAN был основан в 2024 году в Париже как ответ на визуальный шум и излишнюю сложность современной моды. Мы создаём одежду, которая говорит через форму, а не через слова.</p>
-            
-            <img src="images/Storefront.jpg" alt="Витрина EBLAN в Париже" class="hero-image" onclick="openModal(this.src)">
-            
-            <div class="quote">«Форма прежде шума»</div>
-            
-            <h2>ДНК БРЕНДА</h2>
-            
-            <div class="principles">
-                <div class="principle card-3d">
-                    <div class="card-3d-inner">
-                        <div class="principle-title">ФОРМА</div>
-                        <div class="principle-text">Каждая линия, каждый силуэт продуман до мельчайших деталей. Мы верим в силу чистой геометрии и точности кроя.</div>
-                    </div>
-                </div>
-                
-                <div class="principle card-3d">
-                    <div class="card-3d-inner">
-                        <div class="principle-title">МАТЕРИАЛ</div>
-                        <div class="principle-text">Качество ткани определяет долговечность изделия. Мы выбираем материалы, которые стареют с достоинством.</div>
-                    </div>
-                </div>
-                
-                <div class="principle card-3d">
-                    <div class="card-3d-inner">
-                        <div class="principle-title">ТИШИНА</div>
-                        <div class="principle-text">В эпоху перенасыщения информацией мы выбираем минимализм и сдержанность. Наша одежда не кричит — она уверенно молчит.</div>
-                    </div>
-                </div>
-            </div>
-            
-            <h2>НАШИ ЦЕННОСТИ</h2>
-            <ul>
-                <li>Долговечность превыше трендов</li>
-                <li>Качество превыше количества</li>
-                <li>Форма превыше шума</li>
-                <li>Уверенность через простоту</li>
-            </ul>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">2024</div>
-                    <div class="stat-label">ОСНОВАН</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">01</div>
-                    <div class="stat-label">КОЛЛЕКЦИЙ</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">ОРГАНИКА</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>ПРОДУКЦИЯ</h1>
-            <div class="divider"></div>
-            
-            <p>Каждая вещь создана, чтобы носиться годами, а не сезонами. Премиальные материалы, тщательная конструкция, вневременной дизайн.</p>
-            
-            <div class="product-showcase">
-                <img src="images/Hoodie - product1.jpg" alt="Худи EBLAN" class="product-image" onclick="openModal(this.src)">
-                <img src="images/Hoodie - product2.jpg" alt="Детали худи EBLAN" class="product-image" onclick="openModal(this.src)">
-            </div>
-            
-            <h2>КЛЮЧЕВЫЕ МОДЕЛИ</h2>
-            <p>Худи EBLAN воплощает нашу философию: минимальный брендинг, максимальное качество. Сшитое из плотного органического хлопка, оно отличается сдержанным логотипом и кроем, подходящим для любого типа фигуры.</p>
-            
-            <h3>Материалы и конструкция</h3>
-            <ul>
-                <li>100% органический хлопок, 380 г/м²</li>
-                <li>Предварительная стирка для минимальной усадки</li>
-                <li>Усиленные швы и прочная строчка</li>
-                <li>Шнурки с металлическими наконечниками</li>
-                <li>Произведено в Португалии</li>
-            </ul>
-        </div>
-
-        <div class="page">
-            <h1>КОЛЛЕКЦИЯ ФУТБОЛОК</h1>
-            <div class="divider"></div>
-            
-            <p>Наши базовые футболки представляют собой чистейшее выражение минималистской философии EBLAN. Каждая модель — чистый холст для повседневной жизни.</p>
-            
-            <div class="grid-3d">
-                <div class="grid-3d-item" onclick="openModal('images/tshirtstock1.jpg')">
-                    <img src="images/tshirtstock1.jpg" alt="Футболка EBLAN чёрная">
-                    <div class="image-caption">ESSENTIAL ЧЁРНАЯ</div>
-                </div>
-                <div class="grid-3d-item" onclick="openModal('images/tshirtstock2.jpg')">
-                    <img src="images/tshirtstock2.jpg" alt="Футболка EBLAN белая">
-                    <div class="image-caption">ESSENTIAL БЕЛАЯ</div>
-                </div>
-                <div class="grid-3d-item" onclick="openModal('images/tshirtstock3.jpg')">
-                    <img src="images/tshirtstock3.jpg" alt="Футболка EBLAN серая">
-                    <div class="image-caption">ESSENTIAL СЕРАЯ</div>
-                </div>
-            </div>
-            
-            <h3>Характеристики футболок</h3>
-            <ul>
-                <li>100% органический хлопок, 220 г/м²</li>
-                <li>Рубчатый вырез</li>
-                <li>Тонкая вышивка логотипа на груди</li>
-                <li>Двойная прошивка подгибов</li>
-                <li>Свободный крой</li>
-            </ul>
-        </div>
-
-        <div class="page">
-            <h1>ОБРАЗ ЖИЗНИ</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN для тех, кто ценит содержание выше зрелища. Наша одежда органично вписывается в современную жизнь — от парижских улиц до творческих студий.</p>
-            
-            <img src="images/Hoodie-model1.jpg" alt="Лайфстайл EBLAN" class="full-width-image" onclick="openModal(this.src)">
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Hoodie-model2.jpg')">
-                    <img src="images/Hoodie-model2.jpg" alt="Модель EBLAN">
-                    <div class="image-caption">ПОДИУМ ОСЕНЬ-ЗИМА 2024</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Model - portrait1.jpg')">
-                    <img src="images/Model - portrait1.jpg" alt="Портрет">
-                    <div class="image-caption">СТУДИЯ ПАРИЖ</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>ЭЛЕМЕНТЫ БРЕНДА</h1>
-            <div class="divider"></div>
-            
-            <p>От деталей продукта до упаковки — каждая точка контакта отражает наше стремление к мастерству и сдержанности.</p>
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Ball1.jpg')">
-                    <img src="images/Ball1.jpg" alt="Детали EBLAN">
-                    <div class="image-caption">ФИРМЕННЫЙ БРЕНДИНГ</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Ball2.jpg')">
-                    <img src="images/Ball2.jpg" alt="Мяч EBLAN">
-                    <div class="image-caption">КОЖАНЫЕ ИЗДЕЛИЯ</div>
-                </div>
-            </div>
-            
-            <h2>КОЛЛАБОРАЦИИ</h2>
-            <p>Мы сотрудничаем с избранными брендами и мастерами, которые разделяют наши ценности качества и вневременности. Каждая коллаборация тщательно продумана и выполнена с точностью.</p>
-        </div>
-
-        <div class="page parallax-section">
-            <h1 class="parallax-content">УПАКОВКА</h1>
-            <div class="divider parallax-content"></div>
-            
-            <p class="parallax-content">Философия нашей упаковки отражает дизайн продуктов: минималистичный, экологичный, изысканный. Каждая распаковка — это продолжение философии EBLAN.</p>
-            
-            <div class="package-showcase">
-                <div class="package-item">
-                    <img src="images/package1.jpg" alt="Дизайн упаковки EBLAN 1">
-                    <div class="package-label">
-                        <div class="package-title">ОСНОВНАЯ УПАКОВКА</div>
-                        <div class="package-desc">Переработанный чёрный картон, тиснённый логотип</div>
-                    </div>
-                </div>
-                <div class="package-item">
-                    <img src="images/package2.jpg" alt="Дизайн упаковки EBLAN 2">
-                    <div class="package-label">
-                        <div class="package-title">ПРЕМИУМ-КОРОБКА</div>
-                        <div class="package-desc">Магнитная застёжка, хлопковый мешок в комплекте</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="glass-card" style="margin-top: 60px;">
-                <h3>Экологичная упаковка</h3>
-                <ul>
-                    <li>100% перерабатываемые и биоразлагаемые материалы</li>
-                    <li>Соевые чернила для всей печати</li>
-                    <li>Многоразовые хлопковые мешки из органической ткани</li>
-                    <li>Минимум пластика — только там, где структурно необходимо</li>
-                    <li>Партнёрство с углеродно-нейтральными доставками</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="page cover logo-final">
-            <img src="images/logoblack.jpg" alt="Логотип EBLAN" class="float-3d">
-        </div>
-
-        <div class="page cover">
-            <div class="quote">«Создавая EBLAN, мы стремились к тишине в мире шума, к форме в мире хаоса, к качеству в мире количества»</div>
-            <div style="margin-top: 60px; text-align: center; color: #8C8C8C; font-size: 14px; letter-spacing: 2px;">
-                EBLAN PARIS<br>
-                ОСНОВАН В 2024<br><br>
-                contact@eblan.paris
-            </div>
-        </div>
+    <!-- ✅ Search results live panel -->
+    <div class="search-results" id="searchResults" aria-live="polite">
+      <div class="search-results-head">
+        <div class="sr-title">نتائج البحث</div>
+        <div class="sr-meta" id="srMeta">—</div>
+      </div>
+      <div class="sr-list" id="srList"></div>
     </div>
 
-    <!-- FRENCH & ITALIAN VERSIONS -->
-    <div class="lang-content" data-lang-content="fr">
-        <div class="page cover">
-            <div class="logo">EBLAN</div>
-            <div class="subtitle">GUIDE DE MARQUE</div>
-            <div class="year">2024</div>
-        </div>
-        <div class="page cover logo-final">
-            <img src="images/logoblack.jpg" alt="Logo EBLAN" class="float-3d">
-        </div>
-        <div class="page cover">
-            <div class="quote">«En créant EBLAN, nous avons cherché le silence dans un monde de bruit»</div>
-            <div style="margin-top: 60px; text-align: center; color: #8C8C8C; font-size: 14px; letter-spacing: 2px;">
-                EBLAN PARIS<br>
-                EST. 2024<br><br>
-                contact@eblan.paris
-            </div>
-        </div>
-    </div>
+    <!-- Biography -->
+    <section id="biography" class="section">
+      <h2 class="section-title">ترجمة المؤلف</h2>
 
-    <div class="lang-content" data-lang-content="it">
-        <div class="page cover">
-            <div class="logo">EBLAN</div>
-            <div class="subtitle">LINEE GUIDA DEL MARCHIO</div>
-            <div class="year">2024</div>
-        </div>
-        <div class="page cover logo-final">
-            <img src="images/logoblack.jpg" alt="Logo EBLAN" class="float-3d">
-        </div>
-        <div class="page cover">
-            <div class="quote">«Creando EBLAN, abbiamo cercato il silenzio nel rumore»</div>
-            <div style="margin-top: 60px; text-align: center; color: #8C8C8C; font-size: 14px; letter-spacing: 2px;">
-                EBLAN PARIS<br>
-                EST. 2024<br><br>
-                contact@eblan.paris
-            </div>
-        </div>
-    </div>
+      <div class="content-box">
+        <p><span class="highlight">هو الشيخ الإمام الأستاذ الجليل</span> سيف الحق ناصر الشريعة، أبو الثناء محمود بن زيد اللامشي.</p>
+      </div>
 
-    <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 100);
+      <div class="definition">
+        <div class="definition-title">نشأته</div>
+        <p>
+          نشأ الإمام اللامشي في بلاد ما وراء النهر، في القرية التي ينسب إليها وهي
+          <span class="highlight">«لامش»</span> من قرى فَرْغَانَةَ، وتلقى عن مشايخ دياره
+          ويشير إليهم أحياناً بـ«مشايخ ما وراء النهر» أو «مشايخ سمرقند» أو «مشايخ ديارنا». 
+        </p>
+      </div>
+
+      <div class="quote">
+        كان يُقارن أحياناً بين أقوال فقهاء سمرقند وفقهاء العراق، ويذكر اختلاف مناهجهم في بعض مسائل الأصول.
+      </div>
+
+      <div class="content-box">
+        <h3>تأريخ ولادته ووفاته</h3>
+        <p>لم تذكر كتب التراجم تاريخ ولادته ووفاته على وجهٍ قاطع.</p>
+        <p>
+          ورد في بعض النسخ أنه توفي فجر يوم الاثنين في رمضان سنة
+          <span class="highlight">522هـ</span>، وكان ابن إحدى وثمانين سنة (مع اختلاف في ضبط اليوم داخل بعض النقول).
+        </p>
+        <p>ويرجّح بعض المحققين أنه عاش في أواخر القرن الخامس وأوائل السادس الهجري.</p>
+      </div>
+    </section>
+
+    <!-- Introduction -->
+    <section id="introduction" class="section">
+      <h2 class="section-title">مدخل</h2>
+
+      <div class="content-box">
+        <p>
+          قبل الشروع لا بد من الوقوف عند المصطلحات: تعريف علم الكلام، موضوعه، غايته؛
+          حتى لا يضيع الطالب في البحر قبل ما يلبس سترة النجاة.
+        </p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3 class="card-title">تعريف علم الكلام بحسب موضوعه</h3>
+          <p>هو علم يبحث فيه عن ذات الله تعالى، وصفاته، وأحوال الممكنات؛ من المبدأ والمعاد على قانون الإسلام.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">تعريف علم الكلام بحسب غايته</h3>
+          <p>هو علم يقتدر معه على إثبات العقائد الدينية بإيراد الحجج ودفع الشبه.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">موضوع علم الكلام</h3>
+          <p>قيل: ذات الله تعالى من حيث ما يُحمل عليه من الصفات وإرسال الرسل وخلق الأفعال.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">غاية علم الكلام</h3>
+          <p>
+            <strong>١</strong> الترقي من التقليد إلى الإيقان<br/>
+            <strong>٢</strong> إرشاد المسترشدين وإلزام المعاندين بالحجة<br/>
+            <strong>٣</strong> حفظ قواعد الدين من شبه المبطلين<br/>
+            <strong>٤</strong> كونه أساس العلوم الشرعية
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Definitions -->
+    <section id="definitions" class="section">
+      <h2 class="section-title">التعريفات الأساسية</h2>
+
+      <div class="toc" aria-label="فهرس">
+        <div class="toc-title">فهرس التعريفات</div>
+        <ul>
+          <li data-goto="dalil">الدليل</li>
+          <li data-goto="hukm">الحكم</li>
+          <li data-goto="wajib">الواجب والمستحيل والممكن</li>
+          <li data-goto="ilm">العلم (تمهيد)</li>
+        </ul>
+      </div>
+
+      <div class="chapter" id="dalil" tabindex="0" role="button" aria-expanded="false">
+        <div class="chapter-title">
+          <span>الدليل</span>
+          <small>اضغط للفتح/الإغلاق</small>
+        </div>
+        <div class="chapter-content">
+          <div class="definition">
+            <div class="definition-title">لغة</div>
+            <p>المرشد. وقد يُطلق بمعنى الدال.</p>
+          </div>
+
+          <div class="definition">
+            <div class="definition-title">اصطلاحاً</div>
+            <p><strong>قيل:</strong> ما يُرشد إلى معرفة الغائب عن الحواس وما لا يعرف باضطرار.</p>
+            <p><strong>وتحقيقاً:</strong> هو ما يُتوصل به من معلوم إلى مطلوب بإحكام النظر.</p>
+          </div>
+
+          <div class="content-box">
+            <h4>أقسام الدليل</h4>
+            <p><strong>الدليل العقلي:</strong> مقدماته عقلية (لا يتوقف على السمع).</p>
+            <p><strong>الدليل السمعي:</strong> مركب من مقدمات عقلية وسمعية.</p>
+          </div>
+
+          <div class="reference">
+            <strong>من حيث القطع والظن (خاصة في السمعي):</strong><br/>
+            ١) قطعي الثبوت قطعي الدلالة<br/>
+            ٢) قطعي الثبوت ظني الدلالة<br/>
+            ٣) ظني الثبوت قطعي الدلالة<br/>
+            ٤) ظني الثبوت ظني الدلالة
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter" id="hukm" tabindex="0" role="button" aria-expanded="false">
+        <div class="chapter-title">
+          <span>الحكم</span>
+          <small>اضغط للفتح/الإغلاق</small>
+        </div>
+        <div class="chapter-content">
+          <div class="definition">
+            <div class="definition-title">تعريف الحكم</div>
+            <p><strong>عند أهل الفن:</strong> إثبات أمر لأمر أو نفيه عنه، مثل: العلم واجب لله تعالى، وشريك الباري محال.</p>
+            <p><strong>عند المناطقة:</strong> إدراك أن النسبة واقعة أو ليست بواقعة.</p>
+            <p><strong>عند الأصوليين:</strong> خطاب الله تعالى المتعلق بأفعال المكلفين: اقتضاء أو تخييراً أو وضعاً.</p>
+          </div>
+
+          <div class="content-box">
+            <h4>أقسام الحكم (العقلي هنا)</h4>
+            <p><strong>الوجوب:</strong> ما لم يقبل الانتفاء في ذاته.</p>
+            <p><strong>الاستحالة:</strong> ما لم يقبل الثبوت في ذاته.</p>
+            <p><strong>الإمكان:</strong> ما يقبل الثبوت والانتفاء لذاته.</p>
+          </div>
+
+          <div class="reference">
+            <strong>مصادر الحكم:</strong> وضعي (كالشرع والقوانين) — عقلي (كالمنطق) — عادي (كالاقتران المشاهد). 
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter" id="wajib" tabindex="0" role="button" aria-expanded="false">
+        <div class="chapter-title">
+          <span>الواجب والمستحيل والممكن</span>
+          <small>اضغط للفتح/الإغلاق</small>
+        </div>
+        <div class="chapter-content">
+          <div class="definition">
+            <div class="definition-title">تعريفات مختصرة</div>
+            <p><strong>الواجب:</strong> ما لم يقبل الانتفاء في ذاته.</p>
+            <p><strong>المستحيل:</strong> ما لم يقبل الثبوت في ذاته.</p>
+            <p><strong>الممكن:</strong> ما يقبل الثبوت والانتفاء لذاته.</p>
+          </div>
+
+          <div class="content-box">
+            <h4>تقسيم الواجب والمستحيل: لذاته ولغيره</h4>
+            <p>
+              <strong>الواجب لذاته:</strong> كوجود الله تعالى.<br/>
+              <strong>الواجب لغيره:</strong> ما صار واجباً بالنظر إلى تعلّق العلم/الإرادة به من الممكنات (مثال: وجودنا بعد تخصيصه).<br/>
+              <strong>الامتناع لذاته:</strong> كالشريك لله تعالى.<br/>
+              <strong>الامتناع لغيره:</strong> ممكن بالذات لكن تعلّق العلم بعدم وقوعه (مثل أمثلة افتراضية تُذكر في الشروح).
+            </p>
+          </div>
+
+          <div class="reference">
+            تنبيه مهم: الواجب بالغير والممتنع بالغير <strong>ممكنان بالذات</strong> أصلاً، فلا ينقلب الممكن ذاتاً إلى واجب ذاتاً أو ممتنع ذاتاً. 
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter" id="ilm" tabindex="0" role="button" aria-expanded="false">
+        <div class="chapter-title">
+          <span>العلم (تمهيد سريع)</span>
+          <small>اضغط للفتح/الإغلاق</small>
+        </div>
+        <div class="chapter-content">
+          <div class="definition">
+            <div class="definition-title">لماذا نبدأ به؟</div>
+            <p>
+              لأن كثيراً من مباحث الكلام مبني على: هل هذا يُعلم ضرورة أم نظراً؟ وهل طريقه حس أم عقل أم خبر؟
+            </p>
+          </div>
+
+          <div class="content-box">
+            <h4>أسباب العلم بالحقائق (مختصر)</h4>
+            <p>ذُكر أن أسباب العلم ثلاثة: <strong>الحواس السليمة</strong>، و<strong>العقول المستقيمة</strong>، و<strong>الخبر الصادق</strong>.</p>
+          </div>
+
+          <div class="quote">
+            إذا حاولت تلغي العقل كله… فبأي شيء ستثبت أن “العقل لا ينفع”؟ (نعم، هذا نفس الفخّ القديم… ولا يزال يعمل بكفاءة.)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapters -->
+    <section id="chapters" class="section">
+      <h2 class="section-title">فصول الكتاب</h2>
+
+      <div class="chapter" id="ch1" tabindex="0" role="button" aria-expanded="false">
+        <div class="chapter-title">
+          <span>فصل في ثبوت حقائق الأشياء</span>
+          <small>اضغط للفتح/الإغلاق</small>
+        </div>
+        <div class="chapter-content">
+          <div class="content-box">
+            <p>حقائق الأشياء ثابتة، وهو مذهب عامة العقلاء.</p>
+
+            <h4>العنادية وشبهتهم</h4>
+            <p>قالت طائفة: لا حقيقة للأشياء، واحتجوا باختلاف الإدراك: كالأحول يرى الشيء شيئين…</p>
+
+            <div class="quote">
+              يُجاب: هل لنفيكم حقيقة؟ إن قالوا لا، سقط. وإن قالوا نعم، أثبتوا حقيقة شيء على الأقل.
+            </div>
+          </div>
+
+          <div class="reference">
+            الرد على اللاأدرية كذلك: “لا ندري” إن كانت لا حقيقة لها فلا كلام، وإن كانت لها حقيقة فقد ثبتت حقيقة شيء.
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter" id="ch2" tabindex="0" role="button" aria-expanded="false">
+        <div class="chapter-title">
+          <span>فصل في إثبات حدوث العالم وثبوت الصانع وقدمه</span>
+          <small>اضغط للفتح/الإغلاق</small>
+        </div>
+        <div class="chapter-content">
+          <div class="definition">
+            <div class="definition-title">تعريف العالم</div>
+            <p>العالم: ما سوى الله تعالى من السموات والأرضين وما فيها.</p>
+          </div>
+
+          <div class="content-box">
+            <h4>أقسام العالم عند المتكلمين</h4>
+            <p><strong>الأعراض:</strong> كاللون والطعم والحركة والسكون…</p>
+            <p><strong>الجواهر:</strong> الجزء الذي لا يتجزأ (بحسب اصطلاحهم).</p>
+            <p><strong>الأجسام:</strong> المركب من جزئين فأكثر.</p>
+          </div>
+
+          <div class="quote">
+            الدليل على حدوث العالم (مختصر): الأعراض تتعاقب (سواد/بياض، حركة/سكون) فهي حادثة، وما لا يخلو عن الحوادث فهو حادث.
+          </div>
+
+          <div class="reference">
+            ومن ثم: إذا ثبت حدوث العالم ثبت احتياجه إلى مُحدِث، وإذا ثبت المُحدِث لزم قِدَمه لقطع التسلسل والدور.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proofs -->
+    <section id="proofs" class="section">
+      <h2 class="section-title">الأدلة (ملخص مرتب)</h2>
+
+      <div class="content-box">
+        <p>
+          هذا قسم “يمسك لك الخيط” بدل ما تظل تجمعه من كل فصل: كيف تُبنى الحجة في الكتاب؟ وما الذي يقدّم على ماذا؟
+        </p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3 class="card-title">١) ترتيب الاستدلال</h3>
+          <p>
+            نثبت أولاً ثبوت الحقائق وطرق العلم (حس/عقل/خبر)، ثم ننتقل لبناء الدليل العقلي على حدوث العالم،
+            ثم نثبت الصانع، ثم قِدمه، ثم ما يتفرع على ذلك.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">٢) حدوث العالم</h3>
+          <p>
+            الأعراض حادثة لتبدلها، والأعيان لا تخلو عن الأعراض، وما لا يخلو عن الحوادث فهو حادث.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">٣) ثبوت الصانع</h3>
+          <p>
+            الحادث لا بد له من مُحدِث، واستحالة أن يُحدث الشيء نفسه؛ لأن العدم لا يفعل، ولأن إيجاد الموجود تحصيل حاصل.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">٤) قِدم الصانع</h3>
+          <p>
+            لو كان الصانع حادثاً لاحتاج إلى مُحدِث، فيلزم الدور أو التسلسل، وكلاهما باطل، فثبت قِدمه.
+          </p>
+        </div>
+      </div>
+
+      <div class="reference">
+        ملاحظة منهجية: عند التعارض بين “عقلي/نقلي” يُنظر للقطع والظن، فيُقدم القطعي، ويُؤوّل الظني أو يُردّ ما كان ظني الثبوت إذا خالف القطعي.
+      </div>
+
+      <div class="quote">
+        خلاصة عملية: لو بنيت الحجة مثل برج جنغا (قطعة فوق قطعة بدون أساس)، لا تلوم الريح إذا أسقطته… لوم هندستك.
+      </div>
+    </section>
+  </div>
+
+  <div class="footer">
+    <div>© صفحة تعليمية لخدمة النص — تصميم واجهة عربية RTL</div>
+    <div class="muted">تلميح: اضغط على عناوين الفصول لفتحها، واستخدم البحث للتصفية والإبراز.</div>
+    <div class="muted"><a href="#top" style="color:#ffd700; font-weight:900; text-decoration:none;">⬆ العودة للأعلى</a></div>
+  </div>
+
+  <script>
+    /* =========================================================
+       Helpers
+       ========================================================= */
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.style.boxShadow = "0 0 0 4px rgba(255, 215, 0, 0.35)";
+      setTimeout(() => el.style.boxShadow = "", 650);
+    }
+
+    function setChapterOpen(chapterEl, open) {
+      if (!chapterEl) return;
+      chapterEl.classList.toggle("active", open);
+      chapterEl.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    function clearHighlights(root) {
+      const marks = root.querySelectorAll("mark.hl");
+      marks.forEach(m => m.replaceWith(document.createTextNode(m.textContent)));
+    }
+
+    function highlightTerm(root, term) {
+      if (!term) return;
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: (node) => {
+          if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          const parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          if (["SCRIPT","STYLE"].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      const texts = [];
+      while (walker.nextNode()) texts.push(walker.currentNode);
+
+      const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const re = new RegExp(escaped, "gi");
+
+      texts.forEach(tn => {
+        const val = tn.nodeValue;
+        if (!re.test(val)) return;
+
+        const frag = document.createDocumentFragment();
+        let lastIndex = 0;
+        val.replace(re, (match, offset) => {
+          frag.appendChild(document.createTextNode(val.slice(lastIndex, offset)));
+          const mark = document.createElement("mark");
+          mark.className = "hl";
+          mark.textContent = match;
+          frag.appendChild(mark);
+          lastIndex = offset + match.length;
+          return match;
         });
-        
-        // Parallax Effect
-        window.addEventListener('scroll', () => {
-            const parallaxElements = document.querySelectorAll('.parallax-bg');
-            parallaxElements.forEach(el => {
-                const speed = 0.5;
-                const yPos = -(window.pageYOffset * speed);
-                el.style.transform = `translateY(${yPos}px)`;
-            });
+        frag.appendChild(document.createTextNode(val.slice(lastIndex)));
+        tn.parentNode.replaceChild(frag, tn);
+      });
+    }
+
+    function getSnippet(el, term, maxLen = 180){
+      const txt = (el.textContent || "").replace(/\s+/g, " ").trim();
+      const idx = txt.toLowerCase().indexOf(term.toLowerCase());
+      if (idx < 0) return txt.slice(0, maxLen) + (txt.length > maxLen ? "…" : "");
+      const start = Math.max(0, idx - 60);
+      const end = Math.min(txt.length, idx + maxLen);
+      return (start > 0 ? "…" : "") + txt.slice(start, end) + (end < txt.length ? "…" : "");
+    }
+
+    /* =========================================================
+       Setup DOM references
+       ========================================================= */
+    const chapters = Array.from(document.querySelectorAll(".chapter"));
+    const searchInput = document.getElementById("searchInput");
+    const clearBtn = document.getElementById("clearSearchBtn");
+    const openAllBtn = document.getElementById("openAllBtn");
+    const closeAllBtn = document.getElementById("closeAllBtn");
+    const readingBtn = document.getElementById("readingBtn");
+    const printBtn = document.getElementById("printBtn");
+    const themeBtn = document.getElementById("themeBtn");
+
+    const searchResults = document.getElementById("searchResults");
+    const srList = document.getElementById("srList");
+    const srMeta = document.getElementById("srMeta");
+
+    /* =========================================================
+       Chapter toggle behavior (click + keyboard)
+       ========================================================= */
+    function toggleChapter(ch) {
+      const open = !ch.classList.contains("active");
+      setChapterOpen(ch, open);
+      saveOpenState();
+    }
+
+    chapters.forEach(ch => {
+      ch.addEventListener("click", () => {
+        const sel = window.getSelection && window.getSelection().toString();
+        if (sel && sel.length > 0) return;
+        toggleChapter(ch);
+      });
+      ch.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleChapter(ch);
+        }
+      });
+    });
+
+    /* =========================================================
+       TOC behavior
+       ========================================================= */
+    document.querySelectorAll(".toc [data-goto]").forEach(li => {
+      li.addEventListener("click", () => {
+        const id = li.getAttribute("data-goto");
+        scrollToSection(id);
+        const target = document.getElementById(id);
+        if (target && target.classList.contains("chapter")) setChapterOpen(target, true);
+        saveOpenState();
+      });
+    });
+
+    /* =========================================================
+       Open/Close all
+       ========================================================= */
+    openAllBtn.addEventListener("click", () => {
+      chapters.forEach(ch => setChapterOpen(ch, true));
+      saveOpenState();
+    });
+    closeAllBtn.addEventListener("click", () => {
+      chapters.forEach(ch => setChapterOpen(ch, false));
+      saveOpenState();
+    });
+
+    /* =========================================================
+       Search: highlight + filter + results list
+       ========================================================= */
+    function applySearch() {
+      const term = (searchInput.value || "").trim();
+      const root = document.body;
+
+      clearHighlights(root);
+
+      // reset visibility
+      document.querySelectorAll(".section").forEach(sec => sec.style.display = "");
+      chapters.forEach(ch => ch.style.display = "");
+
+      srList.innerHTML = "";
+      searchResults.style.display = "none";
+      srMeta.textContent = "—";
+
+      if (!term) return;
+
+      highlightTerm(root, term);
+
+      const visibleSections = Array.from(document.querySelectorAll(".section"))
+        .filter(sec => sec.querySelector("mark.hl"));
+
+      document.querySelectorAll(".section").forEach(sec => {
+        sec.style.display = visibleSections.includes(sec) ? "" : "none";
+      });
+
+      const results = [];
+      visibleSections.forEach(sec => {
+        const secCh = Array.from(sec.querySelectorAll(".chapter"));
+        if (secCh.length) {
+          secCh.forEach(ch => {
+            const hit = ch.querySelector("mark.hl");
+            if (!hit) { ch.style.display = "none"; return; }
+            ch.style.display = "";
+            setChapterOpen(ch, true);
+
+            const title = ch.querySelector(".chapter-title span")?.textContent?.trim() || "نتيجة";
+            results.push({ title, snippet: getSnippet(ch, term), targetId: ch.id || sec.id });
+          });
+        } else {
+          const title = sec.querySelector(".section-title")?.textContent?.trim() || "نتيجة";
+          results.push({ title, snippet: getSnippet(sec, term), targetId: sec.id });
+        }
+      });
+
+      searchResults.style.display = "";
+      srMeta.textContent = `${results.length} نتيجة`;
+
+      results.slice(0, 30).forEach((r, i) => {
+        const item = document.createElement("div");
+        item.className = "sr-item";
+        item.innerHTML = `<h4>${r.title} <span class="sr-pill">#${i+1}</span></h4><p>${r.snippet}</p>`;
+        item.addEventListener("click", () => {
+          scrollToSection(r.targetId);
+          const ch = document.getElementById(r.targetId);
+          if (ch && ch.classList.contains("chapter")) setChapterOpen(ch, true);
+          saveOpenState();
         });
-        
-        // 3D Tilt Effect on Mouse Move
-        document.querySelectorAll('.card-3d').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
-                
-                const inner = card.querySelector('.card-3d-inner');
-                inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                const inner = card.querySelector('.card-3d-inner');
-                inner.style.transform = 'rotateX(0) rotateY(0)';
-            });
+        srList.appendChild(item);
+      });
+
+      if (results.length > 30) {
+        const more = document.createElement("div");
+        more.className = "reference";
+        more.textContent = "أُظهرت أول 30 نتيجة فقط — ضيّق البحث لنتائج أدق.";
+        srList.appendChild(more);
+      }
+    }
+
+    searchInput.addEventListener("input", applySearch);
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      applySearch();
+      searchInput.focus();
+    });
+
+    /* =========================================================
+       Persist open state (chapters)
+       ========================================================= */
+    function saveOpenState() {
+      const openIds = Array.from(document.querySelectorAll(".chapter.active"))
+        .map(ch => ch.id || null)
+        .filter(Boolean);
+      localStorage.setItem("openChapters", JSON.stringify(openIds));
+    }
+    function restoreOpenState() {
+      try {
+        const openIds = JSON.parse(localStorage.getItem("openChapters") || "[]");
+        openIds.forEach(id => {
+          const ch = document.getElementById(id);
+          if (ch && ch.classList.contains("chapter")) setChapterOpen(ch, true);
         });
-        
-        // Particle Background
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 20 + 's';
-            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-            particlesContainer.appendChild(particle);
-        }
-        
-        // Language Switcher
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const lang = this.getAttribute('data-lang');
-                
-                document.querySelectorAll('.lang-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                document.querySelector(`[data-lang-content="${lang}"]`).classList.add('active');
-                
-                document.querySelectorAll('.lang-btn').forEach(b => {
-                    b.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                document.documentElement.lang = lang;
-                
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Progress Bar
-        window.addEventListener('scroll', function() {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('progressBar').style.width = scrolled + '%';
-        });
-        
-        // Scroll to Top Button
-        const scrollTopBtn = document.getElementById('scrollTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
-            }
-        });
-        
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Image Modal
-        function openModal(src) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            modal.classList.add('active');
-            modalImg.src = src;
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-        
-        document.getElementById('imageModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-        
-        // Dark Mode Toggle
-        let isDarkMode = true;
-        function toggleDarkMode() {
-            isDarkMode = !isDarkMode;
-            const btn = document.querySelector('.dark-mode-btn');
-            
-            if (isDarkMode) {
-                document.body.style.background = '#0B0B0B';
-                document.body.style.color = '#F2F2EE';
-                btn.textContent = '☀️';
-            } else {
-                document.body.style.background = '#F2F2EE';
-                document.body.style.color = '#0B0B0B';
-                btn.textContent = '🌙';
-            }
-        }
-        
-        // Smooth scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-        
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.page').forEach(page => {
-            page.style.opacity = '0';
-            page.style.transform = 'translateY(30px)';
-            page.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-            observer.observe(page);
-        });
-        
-        // Easter egg: Konami code
-        let konamiCode = [];
-        const pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        
-        document.addEventListener('keydown', (e) => {
-            konamiCode.push(e.key);
-            konamiCode = konamiCode.slice(-pattern.length);
-            
-            if (konamiCode.join(',') === pattern.join(',')) {
-                document.body.style.animation = 'rainbow 2s linear infinite';
-                setTimeout(() => {
-                    document.body.style.animation = '';
-                }, 5000);
-            }
-        });
-    </script>
-</body>
-</html>
-    <div class="lang-content" data-lang-content="ru">
-        <div class="page cover">
-            <div class="logo">EBLAN</div>
-            <div class="subtitle">РУКОВОДСТВО ПО БРЕНДУ</div>
-            <div class="year">2024</div>
-        </div>
+      } catch {}
+    }
+    restoreOpenState();
 
-        <div class="page">
-            <h1>ФИЛОСОФИЯ</h1>
-            <div class="divider"></div>
-            
-            <p>Бренд EBLAN был основан в 2024 году в Париже как ответ на визуальный шум и излишнюю сложность современной моды. Мы создаём одежду, которая говорит через форму, а не через слова.</p>
-            
-            <img src="images/Storefront.jpg" alt="Витрина EBLAN в Париже" class="hero-image" onclick="openModal(this.src)">
-            
-            <div class="quote">«Форма прежде шума»</div>
-            
-            <h2>ДНК БРЕНДА</h2>
-            
-            <div class="principles">
-                <div class="principle">
-                    <div class="principle-title">ФОРМА</div>
-                    <div class="principle-text">Каждая линия, каждый силуэт продуман до мельчайших деталей. Мы верим в силу чистой геометрии и точности кроя.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">МАТЕРИАЛ</div>
-                    <div class="principle-text">Качество ткани определяет долговечность изделия. Мы выбираем материалы, которые стареют с достоинством.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">ТИШИНА</div>
-                    <div class="principle-text">В эпоху перенасыщения информацией мы выбираем минимализм и сдержанность. Наша одежда не кричит — она уверенно молчит.</div>
-                </div>
-            </div>
-            
-            <h2>НАШИ ЦЕННОСТИ</h2>
-            <ul>
-                <li>Долговечность превыше трендов</li>
-                <li>Качество превыше количества</li>
-                <li>Форма превыше шума</li>
-                <li>Уверенность через простоту</li>
-            </ul>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">2024</div>
-                    <div class="stat-label">ОСНОВАН</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">01</div>
-                    <div class="stat-label">КОЛЛЕКЦИЙ</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">ОРГАНИКА</div>
-                </div>
-            </div>
-        </div>
+    /* =========================================================
+       Theme toggle
+       ========================================================= */
+    function applyTheme(mode){
+      document.documentElement.dataset.theme = mode;
+      localStorage.setItem("theme", mode);
+    }
+    function toggleTheme(){
+      const cur = document.documentElement.dataset.theme || "light";
+      applyTheme(cur === "light" ? "dark" : "light");
+    }
+    themeBtn.addEventListener("click", toggleTheme);
+    applyTheme(localStorage.getItem("theme") || "light");
 
-        <div class="page">
-            <h1>ПРОДУКЦИЯ</h1>
-            <div class="divider"></div>
-            
-            <p>Каждая вещь создана, чтобы носиться годами, а не сезонами. Премиальные материалы, тщательная конструкция, вневременной дизайн.</p>
-            
-            <div class="product-showcase">
-                <img src="images/Hoodie - product1.jpg" alt="Худи EBLAN" class="product-image" onclick="openModal(this.src)">
-                <img src="images/Hoodie - product2.jpg" alt="Детали худи EBLAN" class="product-image" onclick="openModal(this.src)">
-            </div>
-            
-            <h2>КЛЮЧЕВЫЕ МОДЕЛИ</h2>
-            <p>Худи EBLAN воплощает нашу философию: минимальный брендинг, максимальное качество. Сшитое из плотного органического хлопка, оно отличается сдержанным логотипом и кроем, подходящим для любого типа фигуры.</p>
-            
-            <h3>Материалы и конструкция</h3>
-            <ul>
-                <li>100% органический хлопок, 380 г/м²</li>
-                <li>Предварительная стирка для минимальной усадки</li>
-                <li>Усиленные швы и прочная строчка</li>
-                <li>Шнурки с металлическими наконечниками</li>
-                <li>Произведено в Португалии</li>
-            </ul>
-        </div>
+    /* =========================================================
+       Reading mode + print
+       ========================================================= */
+    function applyReadingMode(on){
+      document.body.classList.toggle("reading", on);
+      localStorage.setItem("readingMode", on ? "1" : "0");
+      readingBtn.textContent = on ? "إلغاء وضع القراءة" : "وضع القراءة";
+    }
+    readingBtn.addEventListener("click", () => {
+      applyReadingMode(!document.body.classList.contains("reading"));
+    });
+    printBtn.addEventListener("click", () => window.print());
+    applyReadingMode(localStorage.getItem("readingMode") === "1");
 
-        <div class="page">
-            <h1>ОБРАЗ ЖИЗНИ</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN для тех, кто ценит содержание выше зрелища. Наша одежда органично вписывается в современную жизнь — от парижских улиц до творческих студий.</p>
-            
-            <img src="images/Hoodie-model1.jpg" alt="Лайфстайл EBLAN" class="full-width-image" onclick="openModal(this.src)">
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Hoodie-model2.jpg')">
-                    <img src="images/Hoodie-model2.jpg" alt="Модель EBLAN">
-                    <div class="image-caption">ПОДИУМ ОСЕНЬ-ЗИМА 2024</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Model - portrait1.jpg')">
-                    <img src="images/Model - portrait1.jpg" alt="Портрет">
-                    <div class="image-caption">СТУДИЯ ПАРИЖ</div>
-                </div>
-            </div>
-        </div>
+    /* =========================================================
+       Keyboard shortcuts
+       ========================================================= */
+    document.addEventListener("keydown", (e) => {
+      const isMac = navigator.platform.toUpperCase().includes("MAC");
+      const ctrlOrCmd = isMac ? e.metaKey : e.ctrlKey;
 
-        <div class="page">
-            <h1>ЭЛЕМЕНТЫ БРЕНДА</h1>
-            <div class="divider"></div>
-            
-            <p>От деталей продукта до упаковки — каждая точка контакта отражает наше стремление к мастерству и сдержанности.</p>
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Ball1.jpg')">
-                    <img src="images/Ball1.jpg" alt="Детали EBLAN">
-                    <div class="image-caption">ФИРМЕННЫЙ БРЕНДИНГ</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Ball2.jpg')">
-                    <img src="images/Ball2.jpg" alt="Мяч EBLAN">
-                    <div class="image-caption">КОЖАНЫЕ ИЗДЕЛИЯ</div>
-                </div>
-            </div>
-            
-            <h2>КОЛЛАБОРАЦИИ</h2>
-            <p>Мы сотрудничаем с избранными брендами и мастерами, которые разделяют наши ценности качества и вневременности. Каждая коллаборация тщательно продумана и выполнена с точностью.</p>
-        </div>
+      // "/" focus search
+      if (e.key === "/" && !e.target.matches("input, textarea")) {
+        e.preventDefault();
+        searchInput.focus();
+        return;
+      }
 
-        <div class="page">
-            <h1>ЛОГОТИП</h1>
-            <div class="divider"></div>
-            
-            <div style="text-align: center; margin: 60px 0;">
-                <div style="font-size: 72px; letter-spacing: 12px; font-weight: 300;">EBLAN</div>
-            </div>
-            
-            <h3>Правила использования</h3>
-            <ul>
-                <li>Минимальная свободная зона вокруг логотипа — высота буквы «E»</li>
-                <li>Не изменять пропорции и межбуквенное расстояние</li>
-                <li>Использовать только на чёрном или белом фоне</li>
-                <li>Не добавлять эффекты, тени или контуры</li>
-                <li>Сохранять пропорции во всех применениях</li>
-            </ul>
-            
-            <h2>ТИПОГРАФИКА</h2>
-            
-            <div class="typography-sample">
-                <div class="font-name">ОСНОВНОЙ — ЗАГОЛОВКИ</div>
-                <div class="font-display">Canela</div>
-                <p style="color: #8C8C8C;">Используется для основных заголовков, названий коллекций и ключевых сообщений. Передаёт уверенность и спокойствие.</p>
-            </div>
-            
-            <div class="typography-sample">
-                <div class="font-name">ДОПОЛНИТЕЛЬНЫЙ — ОСНОВНОЙ ТЕКСТ</div>
-                <div class="font-display" style="font-family: 'Inter', sans-serif;">Inter</div>
-                <p style="color: #8C8C8C;">Используется для основного текста, описаний и технической информации. Обеспечивает точность и читаемость.</p>
-            </div>
-        </div>
+      // Esc clears search (if focused or if term exists)
+      if (e.key === "Escape") {
+        if ((document.activeElement === searchInput) || (searchInput.value || "").trim()) {
+          searchInput.value = "";
+          applySearch();
+          searchInput.blur();
+        }
+        return;
+      }
 
-        <div class="page">
-            <h1>ЦВЕТОВАЯ ПАЛИТРА</h1>
-            <div class="divider"></div>
-            
-            <p>Цветовая палитра EBLAN построена на контрасте между глубоким чёрным и мягкими нейтральными оттенками. Это создаёт визуальное напряжение, которое подчёркивает форму и текстуру.</p>
-            
-            <div class="color-grid">
-                <div class="color-swatch" style="background: #0B0B0B;">
-                    <div class="color-name" style="color: #F2F2EE;">АБСОЛЮТНЫЙ ЧЁРНЫЙ</div>
-                    <div class="color-hex" style="color: #8C8C8C;">#0B0B0B</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #141414;">
-                    <div class="color-name" style="color: #F2F2EE;">МЯГКИЙ ЧЁРНЫЙ</div>
-                    <div class="color-hex" style="color: #8C8C8C;">#141414</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #8C8C8C;">
-                    <div class="color-name" style="color: #0B0B0B;">ТЁПЛЫЙ СЕРЫЙ</div>
-                    <div class="color-hex" style="color: #0B0B0B;">#8C8C8C</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #F2F2EE; border: 1px solid #8C8C8C;">
-                    <div class="color-name" style="color: #0B0B0B;">НЕБЕЛЁНЫЙ БЕЛЫЙ</div>
-                    <div class="color-hex" style="color: #0B0B0B;">#F2F2EE</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #C9C2B8;">
-                    <div class="color-name" style="color: #0B0B0B;">КАМЕННЫЙ БЕЖ</div>
-                    <div class="color-hex" style="color: #0B0B0B;">#C9C2B8</div>
-                </div>
-            </div>
-            
-            <h2>ПРИМЕНЕНИЕ ЦВЕТОВ</h2>
-            <ul>
-                <li>Абсолютный чёрный (#0B0B0B) — Основной фон для всех материалов</li>
-                <li>Небелёный белый (#F2F2EE) — Основной цвет текста и логотипа</li>
-                <li>Тёплый серый (#8C8C8C) — Вторичный текст и акценты</li>
-                <li>Каменный беж (#C9C2B8) — Декоративные элементы и разделители</li>
-                <li>Мягкий чёрный (#141414) — Карточки и приподнятые поверхности</li>
-            </ul>
-        </div>
+      // Ctrl/Cmd + K => toggle open/close all
+      if (ctrlOrCmd && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        const anyClosed = chapters.some(ch => !ch.classList.contains("active"));
+        chapters.forEach(ch => setChapterOpen(ch, anyClosed));
+        saveOpenState();
+        return;
+      }
+    });
 
-        <div class="page">
-            <h1>ТОНАЛЬНОСТЬ ОБЩЕНИЯ</h1>
-            <div class="divider"></div>
-            
-            <p>Голос EBLAN — это голос уверенного минималиста. Мы говорим спокойно, точно и без лишних слов.</p>
-            
-            <h2>ПРИНЦИПЫ КОММУНИКАЦИИ</h2>
-            
-            <div class="principles">
-                <div class="principle">
-                    <div class="principle-title">СПОКОЙСТВИЕ</div>
-                    <div class="principle-text">Мы не кричим и не преувеличиваем. Наш голос всегда ровный и уверенный.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">ТОЧНОСТЬ</div>
-                    <div class="principle-text">Каждое слово выбрано с той же тщательностью, что и каждая строчка на нашей одежде.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">ЧЕСТНОСТЬ</div>
-                    <div class="principle-text">Мы говорим только о том, что действительно важно. Никаких маркетинговых клише.</div>
-                </div>
-            </div>
-            
-            <h2>ЧТО МЫ НЕ ДЕЛАЕМ</h2>
-            <ul>
-                <li>Не используем слоганы и кричащие фразы</li>
-                <li>Не преувеличиваем и не даём ложных обещаний</li>
-                <li>Не следуем за коммуникационными трендами</li>
-                <li>Не используем эмодзи и восклицательные знаки</li>
-                <li>Не создаём искусственный ажиотаж</li>
-                <li>Не давим сезонностью и тактикой упущенной выгоды</li>
-            </ul>
-        </div>
-
-        <div class="page cover">
-            <div class="quote">«Создавая EBLAN, мы стремились к тишине в мире шума, к форме в мире хаоса, к качеству в мире количества»</div>
-            <div style="margin-top: 60px; text-align: center; color: #8C8C8C; font-size: 14px; letter-spacing: 2px;">
-                EBLAN PARIS<br>
-                ОСНОВАН В 2024<br><br>
-                contact@eblan.paris
-            </div>
-        </div>
-    </div>
-
-    <!-- FRENCH VERSION -->
-    <div class="lang-content" data-lang-content="fr">
-        <div class="page cover">
-            <div class="logo">EBLAN</div>
-            <div class="subtitle">GUIDE DE MARQUE</div>
-            <div class="year">2024</div>
-        </div>
-
-        <div class="page">
-            <h1>PHILOSOPHIE</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN a été fondé en 2024 à Paris en réponse au bruit visuel et à la complexité excessive de la mode contemporaine. Nous créons des vêtements qui parlent par la forme, pas par les mots.</p>
-            
-            <img src="images/Storefront.jpg" alt="Boutique EBLAN Paris" class="hero-image" onclick="openModal(this.src)">
-            
-            <div class="quote">«La forme avant le bruit»</div>
-            
-            <h2>ADN DE LA MARQUE</h2>
-            
-            <div class="principles">
-                <div class="principle">
-                    <div class="principle-title">FORME</div>
-                    <div class="principle-text">Chaque ligne, chaque silhouette est pensée dans les moindres détails. Nous croyons au pouvoir de la géométrie pure et de la coupe précise.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">MATIÈRE</div>
-                    <div class="principle-text">La qualité du tissu définit la longévité du produit. Nous choisissons des matériaux qui vieillissent avec dignité.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">SILENCE</div>
-                    <div class="principle-text">À l'ère de la surcharge d'information, nous choisissons le minimalisme et la retenue. Nos vêtements ne crient pas—ils parlent avec une confiance tranquille.</div>
-                </div>
-            </div>
-            
-            <h2>NOS VALEURS</h2>
-            <ul>
-                <li>Longévité plutôt que tendances</li>
-                <li>Qualité plutôt que quantité</li>
-                <li>Forme plutôt que bruit</li>
-                <li>Confiance par la simplicité</li>
-            </ul>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">2024</div>
-                    <div class="stat-label">FONDÉ</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">01</div>
-                    <div class="stat-label">COLLECTIONS</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">BIOLOGIQUE</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>PRODUITS</h1>
-            <div class="divider"></div>
-            
-            <p>Chaque pièce est conçue pour être portée pendant des années, pas des saisons. Matériaux premium, construction méticuleuse, design intemporel.</p>
-            
-            <div class="product-showcase">
-                <img src="images/Hoodie - product1.jpg" alt="Sweat EBLAN" class="product-image" onclick="openModal(this.src)">
-                <img src="images/Hoodie - product2.jpg" alt="Détails sweat EBLAN" class="product-image" onclick="openModal(this.src)">
-            </div>
-            
-            <h2>PIÈCES SIGNATURE</h2>
-            <p>Le sweat EBLAN incarne notre philosophie: branding minimal, qualité maximale. Taillé dans du coton biologique épais, il arbore notre logo discret et une coupe conçue pour tous les types de corps.</p>
-            
-            <h3>Matériaux et construction</h3>
-            <ul>
-                <li>100% coton biologique, 380 g/m²</li>
-                <li>Prélavé pour un rétrécissement minimal</li>
-                <li>Coutures renforcées et couture robuste</li>
-                <li>Cordons à embouts métalliques</li>
-                <li>Fabriqué au Portugal</li>
-            </ul>
-        </div>
-
-        <div class="page">
-            <h1>LIFESTYLE</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN s'adresse à ceux qui valorisent la substance plutôt que le spectacle. Nos vêtements s'intègrent parfaitement dans la vie moderne—des rues parisiennes aux studios créatifs.</p>
-            
-            <img src="images/Hoodie-model1.jpg" alt="Lifestyle EBLAN" class="full-width-image" onclick="openModal(this.src)">
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Hoodie-model2.jpg')">
-                    <img src="images/Hoodie-model2.jpg" alt="Modèle EBLAN">
-                    <div class="image-caption">DÉFILÉ AH24</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Model - portrait1.jpg')">
-                    <img src="images/Model - portrait1.jpg" alt="Portrait">
-                    <div class="image-caption">STUDIO PARIS</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>ÉLÉMENTS DE MARQUE</h1>
-            <div class="divider"></div>
-            
-            <p>Des détails du produit à l'emballage, chaque point de contact reflète notre engagement envers l'artisanat et la retenue.</p>
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Ball1.jpg')">
-                    <img src="images/Ball1.jpg" alt="Détails EBLAN">
-                    <div class="image-caption">BRANDING SIGNATURE</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Ball2.jpg')">
-                    <img src="images/Ball2.jpg" alt="Ballon EBLAN">
-                    <div class="image-caption">MAROQUINERIE</div>
-                </div>
-            </div>
-            
-            <h2>COLLABORATIONS</h2>
-            <p>Nous nous associons à des marques et artisans sélectionnés qui partagent nos valeurs de qualité et d'intemporalité. Chaque collaboration est soigneusement réfléchie et exécutée avec précision.</p>
-        </div>
-
-        <div class="page cover">
-            <div class="quote">«En créant EBLAN, nous avons cherché le silence dans un monde de bruit, la forme dans un monde de chaos, la qualité dans un monde de quantité»</div>
-            <div style="margin-top: 60px; text-align: center; color: #8C8C8C; font-size: 14px; letter-spacing: 2px;">
-                EBLAN PARIS<br>
-                EST. 2024<br><br>
-                contact@eblan.paris
-            </div>
-        </div>
-    </div>
-
-    <!-- ITALIAN VERSION -->
-    <div class="lang-content" data-lang-content="it">
-        <div class="page cover">
-            <div class="logo">EBLAN</div>
-            <div class="subtitle">LINEE GUIDA DEL MARCHIO</div>
-            <div class="year">2024</div>
-        </div>
-
-        <div class="page">
-            <h1>FILOSOFIA</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN è stato fondato nel 2024 a Parigi come risposta al rumore visivo e alla complessità eccessiva della moda contemporanea. Creiamo abbigliamento che parla attraverso la forma, non attraverso le parole.</p>
-            
-            <img src="images/Storefront.jpg" alt="Negozio EBLAN Parigi" class="hero-image" onclick="openModal(this.src)">
-            
-            <div class="quote">«La forma prima del rumore»</div>
-            
-            <h2>DNA DEL MARCHIO</h2>
-            
-            <div class="principles">
-                <div class="principle">
-                    <div class="principle-title">FORMA</div>
-                    <div class="principle-text">Ogni linea, ogni silhouette è pensata nei minimi dettagli. Crediamo nel potere della geometria pura e della sartoria precisa.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">MATERIALE</div>
-                    <div class="principle-text">La qualità del tessuto definisce la longevità del prodotto. Scegliamo materiali che invecchiano con dignità.</div>
-                </div>
-                
-                <div class="principle">
-                    <div class="principle-title">SILENZIO</div>
-                    <div class="principle-text">In un'era di sovraccarico informativo, scegliamo il minimalismo e la moderazione. I nostri abiti non gridano—parlano con tranquilla sicurezza.</div>
-                </div>
-            </div>
-            
-            <h2>I NOSTRI VALORI</h2>
-            <ul>
-                <li>Longevità piuttosto che tendenze</li>
-                <li>Qualità piuttosto che quantità</li>
-                <li>Forma piuttosto che rumore</li>
-                <li>Sicurezza attraverso la semplicità</li>
-            </ul>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">2024</div>
-                    <div class="stat-label">FONDATO</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">01</div>
-                    <div class="stat-label">COLLEZIONI</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">BIOLOGICO</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>PRODOTTI</h1>
-            <div class="divider"></div>
-            
-            <p>Ogni pezzo è progettato per essere indossato per anni, non stagioni. Materiali premium, costruzione meticolosa, design senza tempo.</p>
-            
-            <div class="product-showcase">
-                <img src="images/Hoodie - product1.jpg" alt="Felpa EBLAN" class="product-image" onclick="openModal(this.src)">
-                <img src="images/Hoodie - product2.jpg" alt="Dettagli felpa EBLAN" class="product-image" onclick="openModal(this.src)">
-            </div>
-            
-            <h2>PEZZI SIGNATURE</h2>
-            <p>La felpa EBLAN incarna la nostra filosofia: branding minimale, qualità massima. Tagliata in cotone biologico pesante, presenta il nostro logo discreto e una vestibilità progettata per tutti i tipi di corpo.</p>
-            
-            <h3>Materiali e costruzione</h3>
-            <ul>
-                <li>100% cotone biologico, 380 g/m²</li>
-                <li>Pre-lavato per ridurre il restringimento</li>
-                <li>Cuciture rinforzate e cuciture robuste</li>
-                <li>Lacci con puntali metallici</li>
-                <li>Prodotto in Portogallo</li>
-            </ul>
-        </div>
-
-        <div class="page">
-            <h1>LIFESTYLE</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN è per coloro che apprezzano la sostanza piuttosto che lo spettacolo. I nostri capi si adattano perfettamente alla vita moderna—dalle strade parigine agli studi creativi.</p>
-            
-            <img src="images/Hoodie-model1.jpg" alt="Lifestyle EBLAN" class="full-width-image" onclick="openModal(this.src)">
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Hoodie-model2.jpg')">
-                    <img src="images/Hoodie-model2.jpg" alt="Modello EBLAN">
-                    <div class="image-caption">SFILATA AI24</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Model - portrait1.jpg')">
-                    <img src="images/Model - portrait1.jpg" alt="Ritratto">
-                    <div class="image-caption">STUDIO PARIGI</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>ELEMENTI DEL MARCHIO</h1>
-            <div class="divider"></div>
-            
-            <p>Dai dettagli del prodotto al packaging, ogni punto di contatto riflette il nostro impegno verso l'artigianalità e la moderazione.</p>
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Ball1.jpg')">
-                    <img src="images/Ball1.jpg" alt="Dettagli EBLAN">
-                    <div class="image-caption">BRANDING SIGNATURE</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Ball2.jpg')">
-                    <img src="images/Ball2.jpg" alt="Pallone EBLAN">
-                    <div class="image-caption">PELLETTERIA</div>
-                </div>
-            </div>
-            
-            <h2>COLLABORAZIONI</h2>
-            <p>Collaboriamo con brand e artigiani selezionati che condividono i nostri valori di qualità e intemporalità. Ogni collaborazione è attentamente considerata ed eseguita con precisione.</p>
-        </div>
-
-        <div class="page cover">
-            <div class="quote">«Creando EBLAN, abbiamo cercato il silenzio in un mondo di rumore, la forma in un mondo di caos, la qualità in un mondo di quantità»</div>
-            <div style="margin-top: 60px; text-align: center; color: #8C8C8C; font-size: 14px; letter-spacing: 2px;">
-                EBLAN PARIS<br>
-                EST. 2024<br><br>
-                contact@eblan.paris
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 100);
-        });
-        
-        // Particle Background
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 20 + 's';
-            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-            particlesContainer.appendChild(particle);
-        }
-        
-        // Language Switcher
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const lang = this.getAttribute('data-lang');
-                
-                document.querySelectorAll('.lang-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                document.querySelector(`[data-lang-content="${lang}"]`).classList.add('active');
-                
-                document.querySelectorAll('.lang-btn').forEach(b => {
-                    b.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                document.documentElement.lang = lang;
-                
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Progress Bar
-        window.addEventListener('scroll', function() {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('progressBar').style.width = scrolled + '%';
-        });
-        
-        // Scroll to Top Button
-        const scrollTopBtn = document.getElementById('scrollTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
-            }
-        });
-        
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Image Modal
-        function openModal(src) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            modal.classList.add('active');
-            modalImg.src = src;
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-        
-        document.getElementById('imageModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-        
-        // Dark Mode Toggle
-        let isDarkMode = true;
-        function toggleDarkMode() {
-            isDarkMode = !isDarkMode;
-            const btn = document.querySelector('.dark-mode-btn');
-            
-            if (isDarkMode) {
-                document.body.style.background = '#0B0B0B';
-                document.body.style.color = '#F2F2EE';
-                btn.textContent = '☀️';
-            } else {
-                document.body.style.background = '#F2F2EE';
-                document.body.style.color = '#0B0B0B';
-                btn.textContent = '🌙';
-                
-                document.querySelectorAll('h1, h2, .logo, .principle-title').forEach(el => {
-                    el.style.color = '#0B0B0B';
-                });
-                document.querySelectorAll('p, li, .stat-label').forEach(el => {
-                    el.style.color = '#141414';
-                });
-            }
-        }
-        
-        // Smooth scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-        
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.page').forEach(page => {
-            page.style.opacity = '0';
-            page.style.transform = 'translateY(30px)';
-            page.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-            observer.observe(page);
-        });
-        
-        // Easter egg: Konami code
-        let konamiCode = [];
-        const pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        
-        document.addEventListener('keydown', (e) => {
-            konamiCode.push(e.key);
-            konamiCode = konamiCode.slice(-pattern.length);
-            
-            if (konamiCode.join(',') === pattern.join(',')) {
-                document.body.style.animation = 'rainbow 2s linear infinite';
-                setTimeout(() => {
-                    document.body.style.animation = '';
-                }, 5000);
-            }
-        });
-    </script>
-    
-    <style>
-        @keyframes rainbow {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-        
-        /* 3D Effects */
-        .card-3d {
-            perspective: 1000px;
-            transform-style: preserve-3d;
-        }
-        
-        .card-3d-inner {
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-        
-        .card-3d:hover .card-3d-inner {
-            transform: rotateY(10deg) rotateX(-5deg);
-        }
-        
-        /* Parallax Section */
-        .parallax-section {
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-        }
-        
-        .parallax-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 120%;
-            object-fit: cover;
-            transform: translateZ(0);
-            will-change: transform;
-        }
-        
-        .parallax-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* 3D Grid Gallery */
-        .grid-3d {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin: 60px 0;
-            perspective: 1500px;
-        }
-        
-        .grid-3d-item {
-            position: relative;
-            aspect-ratio: 3/4;
-            overflow: hidden;
-            border-radius: 16px;
-            transform-style: preserve-3d;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        .grid-3d-item:nth-child(1) {
-            transform: translateZ(0px) rotateY(0deg);
-        }
-        
-        .grid-3d-item:nth-child(2) {
-            transform: translateZ(50px) rotateY(0deg);
-        }
-        
-        .grid-3d-item:nth-child(3) {
-            transform: translateZ(0px) rotateY(0deg);
-        }
-        
-        .grid-3d-item:hover {
-            transform: translateZ(100px) rotateY(5deg) scale(1.05);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
-            z-index: 10;
-        }
-        
-        .grid-3d-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-        
-        .grid-3d-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        /* Floating Animation */
-        @keyframes float3d {
-            0%, 100% {
-                transform: translateY(0px) translateZ(0px);
-            }
-            50% {
-                transform: translateY(-20px) translateZ(30px);
-            }
-        }
-        
-        .float-3d {
-            animation: float3d 6s ease-in-out infinite;
-        }
-        
-        /* Package Display */
-        .package-showcase {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin: 60px 0;
-            perspective: 1200px;
-        }
-        
-        .package-item {
-            position: relative;
-            aspect-ratio: 3/4;
-            border-radius: 20px;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(135deg, #141414, #1a1a1a);
-        }
-        
-        .package-item:hover {
-            transform: translateY(-30px) rotateX(10deg) scale(1.05);
-            box-shadow: 0 50px 120px rgba(201, 194, 184, 0.3);
-        }
-        
-        .package-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.7s ease;
-        }
-        
-        .package-item:hover img {
-            transform: scale(1.1) translateZ(40px);
-        }
-        
-        .package-label {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            right: 30px;
-            padding: 20px;
-            background: rgba(11, 11, 11, 0.9);
-            backdrop-filter: blur(20px);
-            border-radius: 12px;
-            border: 1px solid rgba(201, 194, 184, 0.2);
-            transform: translateY(100px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .package-item:hover .package-label {
-            transform: translateY(0);
-        }
-        
-        .package-title {
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            color: #F2F2EE;
-            margin-bottom: 8px;
-        }
-        
-        .package-desc {
-            font-size: 13px;
-            color: #8C8C8C;
-            letter-spacing: 1px;
-        }
-        
-        /* Logo Section */
-        .logo-final {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh;
-            position: relative;
-        }
-        
-        .logo-final img {
-            max-width: 600px;
-            width: 80%;
-            filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.8));
-            animation: float3d 8s ease-in-out infinite;
-            transition: all 0.6s ease;
-        }
-        
-        .logo-final img:hover {
-            transform: scale(1.1) translateZ(50px);
-            filter: drop-shadow(0 60px 120px rgba(201, 194, 184, 0.5));
-        }
-        
-        /* Depth Layers */
-        .depth-layer {
-            position: relative;
-            transform-style: preserve-3d;
-        }
-        
-        .layer-1 {
-            transform: translateZ(0px);
-        }
-        
-        .layer-2 {
-            transform: translateZ(50px);
-        }
-        
-        .layer-3 {
-            transform: translateZ(100px);
-        }
-        
-        /* Glassmorphism Effect */
-        .glass-card {
-            background: rgba(20, 20, 20, 0.4);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(201, 194, 184, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        @media (max-width: 768px) {
-            .grid-3d {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .package-showcase {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .grid-3d-item:hover,
-            .package-item:hover {
-                transform: scale(1.02);
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Custom Cursors -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-    
-    <!-- Particles Background -->
-    <div class="particles" id="particles"></div>
-    
-    <!-- Progress Bar -->
-    <div class="progress-bar" id="progressBar"></div>
-    
-    <!-- Language Switcher -->
-    <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="en"><span>EN</span></button>
-        <button class="lang-btn" data-lang="ru"><span>RU</span></button>
-        <button class="lang-btn" data-lang="fr"><span>FR</span></button>
-        <button class="lang-btn" data-lang="it"><span>IT</span></button>
-    </div>
-    
-    <!-- Action Buttons -->
-    <div class="action-buttons">
-        <button class="action-btn" onclick="window.print()">DOWNLOAD PDF</button>
-        <button class="action-btn dark-mode-btn" onclick="toggleDarkMode()" title="Toggle Theme">☀️</button>
-    </div>
-    
-    <!-- Scroll to Top -->
-    <button class="scroll-top" id="scrollTop">↑</button>
-    
-    <!-- Image Modal -->
-    <div class="modal" id="imageModal">
-        <span class="modal-close" onclick="closeModal()">×</span>
-        <img id="modalImage" src="" alt="">
-    </div>
-
-    <!-- ENGLISH VERSION -->
-    <div class="lang-content active" data-lang-content="en">
-        <div class="page cover">
-            <div class="logo">EBLAN</div>
-            <div class="subtitle">BRAND GUIDELINES</div>
-            <div class="year">2024</div>
-        </div>
-
-        <div class="page">
-            <h1>PHILOSOPHY</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN was founded in 2024 in Paris as a response to visual noise and excessive complexity of contemporary fashion. We create clothing that speaks through form, not words.</p>
-            
-            <img src="images/Storefront.jpg" alt="EBLAN Paris Storefront" class="hero-image" onclick="openModal(this.src)">
-            
-            <div class="quote">"Form before noise"</div>
-            
-            <h2>BRAND DNA</h2>
-            
-            <div class="principles">
-                <div class="principle card-3d">
-                    <div class="card-3d-inner">
-                        <div class="principle-title">FORM</div>
-                        <div class="principle-text">Every line, every silhouette is thought through to the smallest detail. We believe in the power of pure geometry and precision tailoring.</div>
-                    </div>
-                </div>
-                
-                <div class="principle card-3d">
-                    <div class="card-3d-inner">
-                        <div class="principle-title">MATERIAL</div>
-                        <div class="principle-text">Fabric quality defines product longevity. We choose materials that age with dignity.</div>
-                    </div>
-                </div>
-                
-                <div class="principle card-3d">
-                    <div class="card-3d-inner">
-                        <div class="principle-title">SILENCE</div>
-                        <div class="principle-text">In an era of information overload, we choose minimalism and restraint. Our clothing doesn't shout—it speaks with quiet confidence.</div>
-                    </div>
-                </div>
-            </div>
-            
-            <h2>OUR VALUES</h2>
-            <ul>
-                <li>Longevity over trends</li>
-                <li>Quality over quantity</li>
-                <li>Form over noise</li>
-                <li>Confidence through simplicity</li>
-            </ul>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">2024</div>
-                    <div class="stat-label">FOUNDED</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">01</div>
-                    <div class="stat-label">COLLECTIONS</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">ORGANIC</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>PRODUCTS</h1>
-            <div class="divider"></div>
-            
-            <p>Each piece is designed to be worn for years, not seasons. Premium materials, meticulous construction, timeless design.</p>
-            
-            <div class="product-showcase">
-                <img src="images/Hoodie - product1.jpg" alt="EBLAN Hoodie Product" class="product-image" onclick="openModal(this.src)">
-                <img src="images/Hoodie - product2.jpg" alt="EBLAN Hoodie Detail" class="product-image" onclick="openModal(this.src)">
-            </div>
-            
-            <h2>SIGNATURE PIECES</h2>
-            <p>The EBLAN hoodie embodies our philosophy: minimal branding, maximum quality. Cut from heavyweight organic cotton, it features our understated logo and a fit designed for all body types.</p>
-            
-            <h3>Materials & Construction</h3>
-            <ul>
-                <li>100% organic cotton, 380 GSM</li>
-                <li>Pre-washed for minimal shrinkage</li>
-                <li>Reinforced seams and heavy-duty stitching</li>
-                <li>Metal-tipped drawstrings</li>
-                <li>Made in Portugal</li>
-            </ul>
-        </div>
-
-        <div class="page">
-            <h1>T-SHIRT COLLECTION</h1>
-            <div class="divider"></div>
-            
-            <p>Our essential t-shirts represent the purest expression of EBLAN's minimalist philosophy. Each piece is a blank canvas for everyday life.</p>
-            
-            <div class="grid-3d">
-                <div class="grid-3d-item" onclick="openModal('images/tshirtstock1.jpg')">
-                    <img src="images/tshirtstock1.jpg" alt="EBLAN T-Shirt Black">
-                    <div class="image-caption">ESSENTIAL BLACK</div>
-                </div>
-                <div class="grid-3d-item" onclick="openModal('images/tshirtstock2.jpg')">
-                    <img src="images/tshirtstock2.jpg" alt="EBLAN T-Shirt White">
-                    <div class="image-caption">ESSENTIAL WHITE</div>
-                </div>
-                <div class="grid-3d-item" onclick="openModal('images/tshirtstock3.jpg')">
-                    <img src="images/tshirtstock3.jpg" alt="EBLAN T-Shirt Grey">
-                    <div class="image-caption">ESSENTIAL GREY</div>
-                </div>
-            </div>
-            
-            <h3>T-Shirt Specifications</h3>
-            <ul>
-                <li>100% organic cotton, 220 GSM</li>
-                <li>Ribbed crew neck</li>
-                <li>Subtle chest logo embroidery</li>
-                <li>Double-stitched hems</li>
-                <li>Relaxed fit</li>
-            </ul>
-        </div>
-
-        <div class="page">
-            <h1>LIFESTYLE</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN is for those who value substance over spectacle. Our garments fit seamlessly into modern life—from Parisian streets to creative studios.</p>
-            
-            <img src="images/Hoodie-model1.jpg" alt="EBLAN Lifestyle" class="full-width-image" onclick="openModal(this.src)">
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Hoodie-model2.jpg')">
-                    <img src="images/Hoodie-model2.jpg" alt="EBLAN Model">
-                    <div class="image-caption">RUNWAY FW24</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Model - portrait1.jpg')">
-                    <img src="images/Model - portrait1.jpg" alt="EBLAN Portrait">
-                    <div class="image-caption">STUDIO PARIS</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>BRAND ELEMENTS</h1>
-            <div class="divider"></div>
-            
-            <p>From product details to packaging, every touchpoint reflects our commitment to craftsmanship and restraint.</p>
-            
-            <div class="image-grid">
-                <div class="image-item" onclick="openModal('images/Ball1.jpg')">
-                    <img src="images/Ball1.jpg" alt="EBLAN Ball Detail">
-                    <div class="image-caption">SIGNATURE BRANDING</div>
-                </div>
-                <div class="image-item" onclick="openModal('images/Ball2.jpg')">
-                    <img src="images/Ball2.jpg" alt="EBLAN Ball">
-                    <div class="image-caption">LEATHER GOODS</div>
-                </div>
-            </div>
-            
-            <h2>COLLABORATIONS</h2>
-            <p>We partner with select brands and artisans who share our values of quality and timelessness. Each collaboration is carefully considered and executed with precision.</p>
-        </div>
-
-        <div class="page parallax-section">
-            <h1 class="parallax-content">PACKAGING</h1>
-            <div class="divider parallax-content"></div>
-            
-            <p class="parallax-content">Our packaging philosophy mirrors our product design: minimal, sustainable, refined. Every unboxing experience is an extension of the EBLAN ethos.</p>
-            
-            <div class="package-showcase">
-                <div class="package-item">
-                    <img src="images/package1.jpg" alt="EBLAN Package Design 1">
-                    <div class="package-label">
-                        <div class="package-title">PRIMARY PACKAGING</div>
-                        <div class="package-desc">Recyclable black cardboard, embossed logo</div>
-                    </div>
-                </div>
-                <div class="package-item">
-                    <img src="images/package2.jpg" alt="EBLAN Package Design 2">
-                    <div class="package-label">
-                        <div class="package-title">PREMIUM BOX</div>
-                        <div class="package-desc">Magnetic closure, cotton dust bag included</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="glass-card" style="margin-top: 60px;">
-                <h3>Sustainable Packaging</h3>
-                <ul>
-                    <li>100% recyclable and biodegradable materials</li>
-                    <li>Soy-based inks for all printing</li>
-                    <li>Reusable cotton bags made from organic fabric</li>
-                    <li>Minimal plastic use - only where structurally necessary</li>
-                    <li>Carbon-neutral shipping partnerships</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>LOGO</h1>
-            <div class="divider"></div>
-            
-            <div style="text-align: center; margin: 60px 0;">
-                <div style="font-size: 72px; letter-spacing: 12px; font-weight: 300;">EBLAN</div>
-            </div>
-            
-            <h3>Usage Guidelines</h3>
-            <ul>
-                <li>Minimum clear space around logo—height of letter "E"</li>
-                <li>Do not alter proportions or letter spacing</li>
-                <li>Use only on black or white backgrounds</li>
-                <li>No effects, shadows, or outlines</li>
-                <li>Maintain aspect ratio in all applications</li>
-            </ul>
-            
-            <h2>TYPOGRAPHY</h2>
-            
-            <div class="typography-sample card-3d">
-                <div class="card-3d-inner">
-                    <div class="font-name">PRIMARY — HEADLINES</div>
-                    <div class="font-display">Canela</div>
-                    <p style="color: #8C8C8C;">Used for main headlines, collection names, and key messages. Conveys confidence and calm.</p>
-                </div>
-            </div>
-            
-            <div class="typography-sample card-3d">
-                <div class="card-3d-inner">
-                    <div class="font-name">SECONDARY — BODY TEXT</div>
-                    <div class="font-display" style="font-family: 'Inter', sans-serif;">Inter</div>
-                    <p style="color: #8C8C8C;">Used for body text, descriptions, and technical information. Ensures precision and readability.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="page">
-            <h1>COLOR PALETTE</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN's color palette is built on the contrast between deep black and soft neutral tones. This creates visual tension that emphasizes form and texture.</p>
-            
-            <div class="color-grid">
-                <div class="color-swatch" style="background: #0B0B0B;">
-                    <div class="color-name" style="color: #F2F2EE;">ABSOLUTE BLACK</div>
-                    <div class="color-hex" style="color: #8C8C8C;">#0B0B0B</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #141414;">
-                    <div class="color-name" style="color: #F2F2EE;">SOFT BLACK</div>
-                    <div class="color-hex" style="color: #8C8C8C;">#141414</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #8C8C8C;">
-                    <div class="color-name" style="color: #0B0B0B;">WARM GREY</div>
-                    <div class="color-hex" style="color: #0B0B0B;">#8C8C8C</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #F2F2EE; border: 1px solid #8C8C8C;">
-                    <div class="color-name" style="color: #0B0B0B;">OFF WHITE</div>
-                    <div class="color-hex" style="color: #0B0B0B;">#F2F2EE</div>
-                </div>
-                
-                <div class="color-swatch" style="background: #C9C2B8;">
-                    <div class="color-name" style="color: #0B0B0B;">STONE BEIGE</div>
-                    <div class="color-hex" style="color: #0B0B0B;">#C9C2B8</div>
-                </div>
-            </div>
-            
-            <h2>COLOR APPLICATION</h2>
-            <ul>
-                <li>Absolute Black (#0B0B0B) — Primary background for all materials</li>
-                <li>Off White (#F2F2EE) — Primary text and logo color</li>
-                <li>Warm Grey (#8C8C8C) — Secondary text and accents</li>
-                <li>Stone Beige (#C9C2B8) — Decorative elements and dividers</li>
-                <li>Soft Black (#141414) — Cards and elevated surfaces</li>
-            </ul>
-        </div>
-
-        <div class="page">
-            <h1>TONE OF VOICE</h1>
-            <div class="divider"></div>
-            
-            <p>EBLAN's voice is that of a confident minimalist. We speak calmly, precisely, and without excess words.</p>
-            
-            <h2>COMMUNICATION PRINCIPLES</h2>
-            
-            <div class="principles">
-                <div class="principle card-3d">
-                    <div class="card-3d-inner">
-                        <div class="principle-title">CALM</div>
-                        <div class="principle-text">We don't shout or exaggerate. Our voice is always steady and confident.</div>
-                    </div>
-                </div>
-                
-                <div class="principle card-3d">
-                    <div class="card-3d-inner">
-                        <div class="principle-title">PRECISION</div>
-                        <div class="principle-text">Every word is chosen with the same care as every stitch in our clothing.</div>
-                    </div>
-                </div>
-                
-                <div class="principle card-3d">
-                    <div class="card-3d-inner">
-                        <div class="principle-title">HONESTY</div>
-                        <div class="principle-text">We speak only about what truly matters. No marketing clichés.</div>
-                    </div>
-                </div>
-            </div>
-            
-            <h2>WHAT WE DON'T DO</h2>
-            <ul>
-                <li>No slogans or catchy phrases</li>
-                <li>No exaggeration or false promises</li>
-                <li>No following communication trends</li>
-                <li>No emojis or exclamation marks</li>
-                <li>No artificial hype</li>
-                <li>No seasonal pressure or FOMO tactics</li>
-            </ul>
-        </div>
-
-        <div class="page cover logo-final">
-            <img src="images/logoblack.jpg" alt="EBLAN Logo" class="float-3d">
-        </div>
-
-        <div class="page cover">
-            <div class="quote">"In creating EBLAN, we sought silence in a world of noise, form in a world of chaos, quality in a world of quantity"</div>
-            <div style="margin-top: 60px; text-align: center; color: #8C8C8C; font-size: 14px; letter-spacing: 2px;">
-                EBLAN PARIS<br>
-                EST. 2024<br><br>
-                contact@eblan.paris
-            </div>
-        </div>
-    </div>
-
-    <!-- RUSSIAN VERSION -->
-    </style>
+    // Expose scrollToSection for compatibility
+    window.scrollToSection = scrollToSection;
+  </script>
 </body>
 </html>
