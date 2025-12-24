@@ -3,238 +3,546 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كتاب التمهيد - الإمام اللامشي | المنهج الكامل</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <title>تمهيد الدلائل في تحقيق مسائل علم الكلام - الإمام اللامشي</title>
     <style>
-        :root {
-            --primary: #1a252f;
-            --accent: #8e44ad;
-            --gold: #d4ac0d;
-            --bg: #f4f7f6;
-            --text: #2c3e50;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Amiri', serif;
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
+            font-family: 'Amiri', 'Traditional Arabic', serif;
+            line-height: 2;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #333;
             min-height: 100vh;
         }
-        /* Sidebar */
-        aside {
-            width: 320px;
-            background: var(--primary);
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            position: fixed;
-            right: 0;
-            height: 100%;
-            overflow-y: auto;
-            border-left: 4px solid var(--gold);
-        }
-        .sidebar-title {
-            padding: 20px;
-            background: #111;
+            padding: 3rem 2rem;
             text-align: center;
-            font-family: 'Tajawal', sans-serif;
-            border-bottom: 1px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
         }
-        .nav-link {
-            width: 100%;
-            padding: 15px 20px;
-            background: none;
-            border: none;
-            color: #ccc;
-            text-align: right;
-            font-family: 'Tajawal', sans-serif;
-            cursor: pointer;
-            border-bottom: 1px solid #2c3e50;
-            transition: 0.3s;
-            font-size: 1rem;
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            opacity: 0.1;
         }
-        .nav-link:hover, .nav-link.active {
-            background: var(--accent);
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .author {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-top: 1rem;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav a {
+            color: #1e3c72;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+
+        .nav a:hover {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 60, 114, 0.3);
         }
-        /* Main Content */
-        main {
-            margin-right: 320px;
-            padding: 40px;
-            width: 100%;
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
         }
-        section {
-            display: none;
-            max-width: 1000px;
-            margin: 0 auto;
+
+        .section {
             background: white;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin: 2rem 0;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+        }
+
+        .section-title {
+            color: #1e3c72;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #ffd700;
+            display: inline-block;
+        }
+
+        .content-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-right: 5px solid #1e3c72;
+            line-height: 2.2;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd700 0%, #ffed4e 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .chapter {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
             border-radius: 8px;
+            border-right: 4px solid #2a5298;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .chapter:hover {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            transform: translateX(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .chapter-title {
+            font-size: 1.4rem;
+            color: #1e3c72;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px dashed #ddd;
+            line-height: 2.2;
+        }
+
+        .chapter.active .chapter-content {
+            display: block;
             animation: fadeIn 0.5s;
         }
-        section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        h1 { color: var(--accent); margin-bottom: 20px; font-family: 'Tajawal', sans-serif; font-size: 2.2rem; }
-        h2 { color: var(--primary); margin: 30px 0 15px; border-right: 5px solid var(--gold); padding-right: 15px; }
-        p { font-size: 1.4rem; line-height: 2; margin-bottom: 20px; text-align: justify; }
-        
-        .info-box {
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .source-tag {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            background: #eee;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-right: 10px;
+
+        .definition {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-right: 5px solid #2196f3;
         }
-        .note { color: #c0392b; font-weight: bold; }
-        
-        @media (max-width: 900px) {
-            body { flex-direction: column; }
-            aside { width: 100%; position: relative; height: auto; border-left: none; border-bottom: 4px solid var(--gold); }
-            main { margin-right: 0; padding: 20px; }
+
+        .definition-title {
+            font-weight: bold;
+            color: #1565c0;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-right: 5px solid #ff9800;
+            border-radius: 8px;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '❝';
+            font-size: 3rem;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            color: #ff9800;
+            opacity: 0.3;
+        }
+
+        .reference {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-right: 4px solid #9c27b0;
+            font-size: 0.95rem;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .search-box {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .search-box input {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border: 2px solid #1e3c72;
+            border-radius: 50px;
+            width: 100%;
+            max-width: 600px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(30, 60, 114, 0.3);
+            transform: scale(1.02);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-top: 4px solid #1e3c72;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
+            color: #1e3c72;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+        }
+
+        .toc {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 3px solid #fdd835;
+        }
+
+        .toc-title {
+            font-size: 1.8rem;
+            color: #f57f17;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 6px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border-right: 4px solid transparent;
+        }
+
+        .toc li:hover {
+            background: #fffde7;
+            border-right-color: #f57f17;
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-
-<aside>
-    <div class="sidebar-title">
-        <h2>كتاب التمهيد</h2>
-        <p>المنهج الدراسي الشامل</p>
+    <div class="header">
+        <h1>تمهيد الدلائل في تحقيق مسائل علم الكلام</h1>
+        <div class="subtitle">وتأصيل معالم دلائل الإيمان</div>
+        <div class="author">الشيخ الإمام الأستاذ الجليل سيف الحق ناصر الشريعة<br>أبو الثناء محمود بن زيد اللامشي</div>
     </div>
-    <button class="nav-link active" onclick="showTab('tab1')">1. ترجمة المؤلف (Биография)</button>
-    <button class="nav-link" onclick="showTab('tab2')">2. تعريف علم الكلام (О науке Калам)</button>
-    <button class="nav-link" onclick="showTab('tab3')">3. أدلة الأحكام وعلم الكلام (Логика и доводы)</button>
-    <button class="nav-link" onclick="showTab('tab4')">4. أسباب العلم (Теория познания)</button>
-    <button class="nav-link" onclick="showTab('tab5')">5. حدوث العالم (Сотворенность мира)</button>
-    <button class="nav-link" onclick="showTab('tab6')">6. إثبات الصانع والوحدانية (Бог и Единство)</button>
-    <button class="nav-link" onclick="showTab('tab7')">7. الصفات والأسماء (Атрибуты и Имена)</button>
-    <button class="nav-link" onclick="showTab('tab8')">8. كلام الله والتكوين (Речь и Творение)</button>
-</aside>
 
-<main>
-    <section id="tab1" class="active">
-        <h1>ترجمة المؤلف (Сведения об авторе)</h1>
-        <h2>نسبه ونشأته</h2>
-        <p>هو الشيخ الإمام الأستاذ الجليل سيف الحق ناصر الشريعة، أبو الثناء محمود بن زيد اللامشي.</p>
-        <div class="info-box">
-            <p><strong>نشأته:</strong> نشأ وترعرع في بلاد ما وراء النهر، في قرية «لامش» بفرغانة، وهي من المراكز الكبرى لعلماء الماتريدية. تلقى فيها ثروة العلم الماتريدي عن مشايخ ما وراء النهر وسمرقند.</p>
-        </div>
-        <h2>شيوخه ومذهبه</h2>
-        <p>كان يقارن بين أقوال فقهاء سمرقند (رأسهم أبو منصور الماتريدي) وفقهاء العراق (مثل الكرخي والجصاص). يظهر في كتابه تأثره العميق بمدرسة أبي حنيفة وأبي منصور الماتريدي.</p>
-    </section>
-
-    <section id="tab2">
-        <h1>تعريف علم الكلام وموضوعه</h1>
-        <h2>التعريف</h2>
-        <p>يعرف علم الكلام بحسب موضوعه وبحسب غايته:</p>
-        <div class="info-box">
-            <p><strong>باعتبار الموضوع:</strong> هو علم يبحث فيه عن ذات الله تعالى وصفاته، وأحوال الممكنات من المبدأ والمعاد على قانون الإسلام.</p>
-            <p><strong>باعتبار الغاية:</strong> هو العلم الذي يقتدر معه على إثبات العقائد الدينية بإيراد الحجج ودفع الشبه (كما قال الإيجي).</p>
-        </div>
-        <h2>الموضوع والغرض</h2>
-        <p>الغرض منه هو الترقي من حضيض التقليد إلى ذروة الإيقان، وإرشاد المسترشدين بالحجة، وحفظ قواعد الدين عن شبه المبطلين.</p>
-    </section>
-
-    <section id="tab3">
-        <h1>أدلة الأحكام وأقسامها</h1>
-        <h2>تعريف الدليل</h2>
-        <p>الدليل في اللغة هو المرشد. وفي عرف الأصوليين: هو ما يمكن التوصل بصحيح النظر فيه إلى العلم بمطلوب خبري.</p>
-        <h2>أقسام الدليل</h2>
-        <p>1. <strong>الدليل العقلي المحض:</strong> ما كانت مقدماته عقلية صرفة (مثل حدوث العالم).</p>
-        <p>2. <strong>الدليل السمعي المحض:</strong> ما استند إلى الوحي (مثل تفاصيل الآخرة).</p>
-        <p>3. <strong>المركب:</strong> ما يجمع بين العقل والسمع.</p>
-        <div class="info-box">
-            <p><span class="note">أقسام الدليل السمعي:</span> قطعي الثبوت والدلالة، قطعي الثبوت ظني الدلالة، ظني الثبوت قطعي الدلالة، وظني الثبوت والدلالة.</p>
-        </div>
-    </section>
-
-    <section id="tab4">
-        <h1>أسباب العلم (Теория познания)</h1>
-        <p>حقائق الأشياء ثابتة، والعلم بها متحقق خلافاً للسوفسطائية. أسباب العلم للخلق ثلاثة:</p>
-        <ol>
-            <li><strong>الحواس السليمة:</strong> وهي السمع، البصر، الشم، الذوق، واللمس.</li>
-            <li><strong>الخبر الصادق:</strong> وهو على نوعين: الخبر المتواتر (الذي يوجب العلم الضروري) وخبر الرسول المؤيد بالمعجزة.</li>
-            <li><strong>العقل:</strong> وهو آلة للعلم، وما ثبت به ينقسم إلى بديهي (ضروري) واستدلالي.</li>
-        </ol>
-        <div class="info-box">
-            <p><strong>الرد على السوفسطائية:</strong> هم ثلاث فرق (العنادية، العلمية، واللاأدرية). الرد عليهم بأن إنكار العلم هو في حد ذاته ادعاء لعلم، مما ينقض مذهبهم.</p>
-        </div>
-    </section>
-
-    <section id="tab5">
-        <h1>حدوث العالم (Сотворенность мира)</h1>
-        <p>العالم بجميع أجزائه حادث، أي كان بعد أن لم يكن. وينقسم إلى:</p>
+    <nav class="nav">
         <ul>
-            <li><strong>الأعيان:</strong> وهي ما لها قيام بذاتها، وتنقسم إلى جواهر (أجزاء لا تتجزأ) وأجسام (مركبة).</li>
-            <li><strong>الأعراض:</strong> وهي ما لا قيام لها بذاتها وتحدث في الأجسام والجواهر (كالألوان والطعم والحركة والسكون).</li>
+            <li><a href="#biography">ترجمة المؤلف</a></li>
+            <li><a href="#introduction">المدخل</a></li>
+            <li><a href="#chapters">الفصول</a></li>
+            <li><a href="#definitions">التعريفات</a></li>
+            <li><a href="#proofs">الأدلة</a></li>
         </ul>
-        <h2>دليل الحدوث</h2>
-        <p>الأجسام لا تخلو عن الحوادث (كالحركة والسكون)، وما لا يخلو عن الحوادث فهو حادث. إذن العالم بكل ما فيه حادث.</p>
-    </section>
+    </nav>
 
-    <section id="tab6">
-        <h1>إثبات الصانع والوحدانية</h1>
-        <p>بما أن العالم حادث، فلا بد له من محدث (صانع). لا يجوز أن يكون العالم قد وجد بلا محدث، لأن الترجيح من غير مرجح محال.</p>
-        <h2>دليل الوحدانية (التمانع)</h2>
-        <p>لو كان في الوجود إلهان، لتمانعا. فلو أراد أحدهما إحياء جسم وأراد الآخر إماتته:</p>
-        <ul>
-            <li>إن نفذ مرادهما معاً: اجتمع المتضادان (محال).</li>
-            <li>إن لم ينفذ مرادهما: كانا عاجزين (والعاجز لا يكون إلهاً).</li>
-            <li>إن نفذ مراد أحدهما: كان الآخر عاجزاً، والعجز ينفي الإلوهية.</li>
-        </ul>
-        <p class="note">قال تعالى: "لو كان فيهما آلهة إلا الله لفسدتا".</p>
-    </section>
-
-    <section id="tab7">
-        <h1>صفات الله تعالى وأسماؤه</h1>
-        <p>الله تعالى موصوف بصفات أزلية قائمة بذاته. وهي تنقسم إلى صفات ذات وصفات فعل.</p>
-        <div class="info-box">
-            <p><strong>صفات الذات:</strong> الحياة، العلم، القدرة، السمع، البصر، الإرادة، الكلام.</p>
-            <p><strong>التنزيه:</strong> الله تعالى ليس بعرض، ولا جسم، ولا جوهر، ولا يحده مكان ولا زمان، ولا يشبهه شيء من خلقه.</p>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" placeholder="ابحث في الكتاب..." id="searchInput">
         </div>
-        <h2>الاسم والمسمى</h2>
-        <p>ذهب أصحابنا (الماتريدية) إلى أن الاسم هو المسمى، وخالفت المعتزلة في ذلك.</p>
-    </section>
 
-    <section id="tab8">
-        <h1>كلام الله وصفة التكوين</h1>
-        <h2>كلام الله</h2>
-        <p>كلام الله تعالى صفة واحدة أزلية قائمة بذاته، ليس من جنس الحروف ولا الأصوات. ما نسمعه ونقرأه (القرآن المكتوب) هو دلالات وحكاية عن ذلك الكلام الأزلي غير المخلوق.</p>
-        <h2>صفة التكوين</h2>
-        <div class="info-box">
-            <p><strong>الماتريدية:</strong> التكوين صفة أزلية قائمة بذات الله، وهي غير المكوّن (المخلوق).</p>
-            <p><strong>الأشاعرة والمعتزلة:</strong> التكوين هو عين المكوّن، فالفعل والمفعول عندهم واحد.</p>
-        </div>
-        <p>يرى اللامشي أن الله خالق في الأزل بصفة التكوين، وإن كان الخلق (المكوّن) حادثاً في وقته.</p>
-    </section>
-</main>
+        <section id="biography" class="section">
+            <h2 class="section-title">ترجمة المؤلف</h2>
+            
+            <div class="content-box">
+                <p><span class="highlight">هو الشيخ الإمام الأستاذ الجليل</span> سيف الحق ناصر الشريعة، أبو الثناء محمود بن زيد اللامشي.</p>
+            </div>
 
-<script>
-    function showTab(tabId) {
-        // Hide all sections
-        const sections = document.querySelectorAll('section');
-        sections.forEach(s => s.classList.remove('active'));
-        
-        // Deactivate all buttons
-        const buttons = document.querySelectorAll('.nav-link');
-        buttons.forEach(b => b.classList.remove('active'));
-        
-        // Show selected
-        document.getElementById(tabId).classList.add('active');
-        event.currentTarget.classList.add('active');
-        
-        window.scrollTo(0,0);
-    }
-</script>
+            <div class="definition">
+                <div class="definition-title">نشأته</div>
+                <p>نشأ الإمام اللامشي وترعرع في بلاد ما وراء النهر، في القرية التي ينسب إليها وهي <span class="highlight">«لامش»</span> إحدى قرى فَرْغَانَةَ، وهي من المراكز الكبرى العلماء الماتريدية. وفيها تلقى الإمام اللامشي ما بقي من ثروة الماتريدية، وأسند إليهم أحياناً بقوله: مشايخ ما وراء النهر، وأحياناً بقوله: مشايخ سمرقند، وأحياناً بقوله: مشايخ ديارنا.</p>
+            </div>
 
-</body>
-</html>
+            <div class="quote">
+                ومما يدل على أنه أخذ من علماء دياره ما قاله في كتابه «أصول الفقه»: ثم اختلف أصحاب العموم في وجوب العمل والاعتقاد به في حق كل فرد؛ قال مشايخ العراق مثل الكرخي والجصاص وهو مذهب أكثر المتأخرين من ديارنا مثل القاضي الدبوسي ومن تابعه وبه أخذ عامة المعتزلة: يثبت به الوجوب في حق كل فرد عملاً واعتقاداً.
+            </div>
+
+            <div class="content-box">
+                <h3>تأريخ ولادته ووفاته</h3>
+                <p>الحق أن اللامشي لم يحظ بترجمة وافية في كتب التراجم والأعلام إذ لم يذكر تاريخ ولادته ووفاته.</p>
+                <p>لكنه ورد في نسخة لاللي: أنه <span class="highlight">توفي فجر يوم الاثنين خامس شهر رمضان، سنة اثنين وعشرين وخمسمائة</span>، وهو ابن إحدى وثمانين سنة.</p>
+                <p>وقد وصل الشيخ عبد المجيد تركي محقق «التمهيد» و«كتاب في أصول الفقه» للإمام اللامشي إلى أنه <span class="highlight">عاش في أواخر الخامس وأوائل السادس الهجري</span>.</p>
+            </div>
+        </section>
+
+        <section id="introduction" class="section">
+            <h2 class="section-title">مدخل</h2>
+            
+            <div class="content-box">
+                <p>وقبل الشروع في الكتاب لا بد من الوقوف عند بعض المصطلحات والتعريفات منها تعريف علم الكلام، وموضوعه وغايته، كيلا يقع طالبه في حيرة فلا يعرف إلى أي جهة يتجه، وإلى أي ساحل ينعطف.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">تعريف علم الكلام بحسب موضوعه</h3>
+                    <p>هو علم يبحث فيه عن ذات الله تعالى، وصفاته، وأحوال الممكنات؛ من المبدأ والمعاد على قانون الإسلام.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">تعريف علم الكلام بحسب غايته</h3>
+                    <p>هو علم يقتدر معه على إثبات العقائد الدينية بإيراد الحُجَجِ، ودفع الشبه.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">موضوع علم الكلام</h3>
+                    <p>عند القاضي الأرموي هو: ذات الله تعالى، لأنه يحمل فيه على الله تعالى الصفات الثبوتية والسلبية، وإرسال الرسل، وخلق الأفعال.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">غاية علم الكلام</h3>
+                    <p><strong>الأول:</strong> الترقي من التقليد إلى الإيقان<br>
+                    <strong>الثاني:</strong> إرشاد المسترشدين بإيضاح المحجة<br>
+                    <strong>الثالث:</strong> حفظ قواعد الدين عن أن تُزلزلها شبه المبطلين<br>
+                    <strong>الرابع:</strong> أن تبنى عليه العلوم الشرعية، فإنه أساسها</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="definitions" class="section">
+            <h2 class="section-title">التعريفات الأساسية</h2>
+
+            <div class="toc">
+                <div class="toc-title">فهرس التعريفات</div>
+                <ul>
+                    <li onclick="scrollToSection('dalil')">الدليل</li>
+                    <li onclick="scrollToSection('hukm')">الحكم</li>
+                    <li onclick="scrollToSection('wajib')">الواجب والمستحيل والممكن</li>
+                    <li onclick="scrollToSection('ilm')">العلم</li>
+                </ul>
+            </div>
+
+            <div class="chapter" id="dalil">
+                <div class="chapter-title">الدليل</div>
+                <div class="chapter-content">
+                    <div class="definition">
+                        <div class="definition-title">لغة</div>
+                        <p>المرشد. وقد يُطلق في اللغة بمعنى الدال، وهو الناصب للدليل.</p>
+                    </div>
+
+                    <div class="definition">
+                        <div class="definition-title">اصطلاحاً</div>
+                        <p><strong>قال الإمام الباقلاني:</strong> هو المرشد إلى معرفة الغائب عن الحواس وما لا يعرف باضطرار.</p>
+                        <p><strong>قال الإمام الرازي:</strong> حاصل الكلام في النظر هو أن يحصل في الذهن علمان، وهما يوجبان علماً آخر، فالتوصل بذلك المُوجِبِ إلى ذلك المُوجَبِ المطلوب هو النظر، وذلك الموجب هو الدليل.</p>
+                    </div>
+
+                    <div class="content-box">
+                        <h4>أقسام الدليل</h4>
+                        <p><strong>الدليل العقلي:</strong> ما كانت كل مقدماته - قريبة أو بعيدة - عقلية، فهذا لا يتوقَّفُ على السمع. مثل: العالم مؤلف وكل مؤلف حادث النتيجة: العالم حادث.</p>
+                        <p><strong>الدليل السمعي:</strong> ما كان مركباً من مقدمات عقلية وسمعية. مثل: الملائكة متحركون كما قال الله تعالى - وكل متحرك مخلوق - النتيجة: فالملائكة مخلوقون.</p>
+                    </div>
+
+                    <div class="reference">
+                        <strong>أقسام الدليل السمعي:</strong><br>
+                        <strong>١.</strong> قطعي الثبوت وقطعي الدلالة - مثل الآيات المحكمة<br>
+                        <strong>٢.</strong> قطعي الثبوت وظني الدلالة - مثل الأخبار المتواترة<br>
+                        <strong>٣.</strong> ظني الثبوت وقطعي الدلالة - مثل خبر الواحد الصحيح<br>
+                        <strong>٤.</strong> ظني الثبوت وظني الدلالة - مثل الأخبار الآحاد
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter" id="hukm">
+                <div class="chapter-title">الحكم</div>
+                <div class="chapter-content">
+                    <div class="definition">
+                        <div class="definition-title">تعريف الحكم</div>
+                        <p><strong>عند أهل الفن:</strong> إثبات أمر لأمر، أو نفيه عنه. مثل: صفة العلم واجبة لله تعالى، وشريك الباري محال.</p>
+                        <p><strong>عند المناطقة:</strong> إدراك أنَّ النسبة واقعة أو ليست بواقعة.</p>
+                        <p><strong>عند الأصوليين:</strong> خطاب الله تعالى المتعلق بأفعال المكلفين: اقتضاء، أو تخييراً، أو وضعاً.</p>
+                    </div>
+
+                    <div class="content-box">
+                        <h4>أقسام الحكم</h4>
+                        <p><strong>الوجوب:</strong> ما لم يقبل الانتفاء في ذاته</p>
+                        <p><strong>الاستحالة:</strong> ما لم يقبل الثبوت في ذاته</p>
+                        <p><strong>الإمكان:</strong> ما يقبل الانتفاء والثبوت لذاته</p>
+                    </div>
+
+                    <div class="reference">
+                        <strong>مصادر الحكم:</strong><br>
+                        <strong>١.</strong> الحكم الوضعي - كالشرع والقوانين<br>
+                        <strong>٢.</strong> الحكم العقلي - كالمنطق والرياضيات<br>
+                        <strong>٣.</strong> الحكم العادي - كعلوم الفيزياء والكيمياء
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="chapters" class="section">
+            <h2 class="section-title">فصول الكتاب</h2>
+
+            <div class="chapter">
+                <div class="chapter-title">فصل في ثبوت حقائق الأشياء</div>
+                <div class="chapter-content">
+                    <div class="content-box">
+                        <p>أما بعد، فإن حقائق الأشياء ثابتة، وهو مذهب عامة العقلاء.</p>
+                        
+                        <h4>العنادية وشبهتهم</h4>
+                        <p>وقالت طائفة من السوفسطائية: لا حقيقة للأشياء.</p>
+                        <p><strong>شبهتهم:</strong> أن الأحول يرى الشيء شيئين، وغيره يراه واحداً، ومن به صفراء غالبة يجد الشَّيء الحلو مراً، وغيره يجده حلواً.</p>
+                        
+                        <div class="quote">
+                            قلنا لهم: هل لمذهبكم هذا حقيقة؟، وهل لنفيكم حقائق الأشياء حقيقة؟ فإن قالوا: لا، فقد تركوا مذهبهم. وإن قالوا: نعم، فقد أقروا بحقيقة مذهبهم، ومتى أقروا بها فقد أثبتوا حقيقة بعض الأشياء.
+                        </div>
+                    </div>
+
+                    <div class="reference">
+                        <strong>الرد على اللاأدرية:</strong> قلنا لهم: هل لقولكم «لا ندري» حقيقة أم لا؟ فإن قالوا: لا، فلا مناظرة معهم. وإن قالوا: نعم، فقد أثبتوا حقيقة شيء من الأشياء.
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <div class="chapter-title">فصل في إثبات حدوث العالم وثبوت الصانع وقدمه</div>
+                <div class="chapter-content">
+                    <div class="definition">
+                        <div class="definition-title">تعريف العالم</div>
+                        <p>العالم: ما سوى الله تعالى من السموات والأرضين وما فيها. وكل ذلك محدث بإحداث الله تعالى.</p>
+                    </div>
+
+                    <div class="content-box">
+                        <h4>أقسام العالم</h4>
+                        <p><strong>الأعراض:</strong> الصفات الثابتة للمحدثات كالأكوان، والألوان، والطعوم، والرائحة، والحرارة، والبرودة.</p>
+                        <p><strong>الجواهر:</strong> الجزء الذي لا يتجزأ فعلاً، ولا وهماً. وحده: أنه القائم بالذات، القابل للصفات المتضادات على سبيل البدل.</p>
+                        <p><strong>الأجسام:</strong> المركب المؤلَّف من جزئين، أو ثلاثة، أو أكثر.</p>
+                    </div>
+
+                    <div class="quote">
+                        الدليل على حدوث العالم: العالم بجميع أقسامه محدث، لأنه ينقسم إلى أعراض وأعيان، والأعراض حادثة لا شك في حدوثها، لأنا نرى ترادف الأضداد على ذات واحد من السواد، والبياض، وال
