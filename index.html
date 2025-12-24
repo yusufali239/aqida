@@ -319,9 +319,27 @@
       .section { padding: 1.4rem; }
       .nav a { padding: 0.55rem 1rem; }
     }
+    :root[data-theme="dark"] body { color: #e7eef7; }
+:root[data-theme="dark"] .section { background: rgba(20,28,36,0.92); }
+:root[data-theme="dark"] .content-box,
+:root[data-theme="dark"] .definition,
+:root[data-theme="dark"] .quote,
+:root[data-theme="dark"] .reference,
+:root[data-theme="dark"] .toc,
+:root[data-theme="dark"] .card {
+  background: rgba(255,255,255,0.06);
+  border-right-color: rgba(255,215,0,0.55);
+}
+:root[data-theme="dark"] .nav { background: rgba(10,14,18,0.85); }
+:root[data-theme="dark"] .nav a { color: #ffd700; }
+:root[data-theme="dark"] .search-box input {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border-color: rgba(255,215,0,0.6);
+}
+
   </style>
 </head>
-
 <body>
   <div class="header" id="top">
     <h1>تمهيد الدلائل في تحقيق مسائل علم الكلام</h1>
@@ -809,6 +827,42 @@
 
     // ===== Expose scrollToSection for inline compatibility (if needed) =====
     window.scrollToSection = scrollToSection;
+    // ===== Persist open chapters =====
+function saveOpenState() {
+  const openIds = Array.from(document.querySelectorAll(".chapter.active"))
+    .map(ch => ch.id || null)
+    .filter(Boolean);
+  localStorage.setItem("openChapters", JSON.stringify(openIds));
+}
+function restoreOpenState() {
+  try {
+    const openIds = JSON.parse(localStorage.getItem("openChapters") || "[]");
+    openIds.forEach(id => {
+      const ch = document.getElementById(id);
+      if (ch && ch.classList.contains("chapter")) ch.classList.add("active");
+    });
+  } catch {}
+}
+chapters.forEach(ch => ch.addEventListener("click", saveOpenState));
+restoreOpenState();
+
+// ===== Simple theme toggle =====
+const themeBtn = document.createElement("button");
+themeBtn.className = "btn secondary";
+themeBtn.type = "button";
+themeBtn.textContent = "🌙/☀️";
+document.querySelector(".toolbar")?.appendChild(themeBtn);
+
+function applyTheme(mode){
+  document.documentElement.dataset.theme = mode;
+  localStorage.setItem("theme", mode);
+}
+function toggleTheme(){
+  const cur = document.documentElement.dataset.theme || "light";
+  applyTheme(cur === "light" ? "dark" : "light");
+}
+themeBtn.addEventListener("click", toggleTheme);
+applyTheme(localStorage.getItem("theme") || "light");
   </script>
 </body>
 </html>
